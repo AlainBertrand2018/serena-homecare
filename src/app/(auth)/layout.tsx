@@ -8,8 +8,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         src="/images/CareGiver.webp"
         alt="Background"
         fill
-        objectFit="cover"
-        className="absolute inset-0 z-0 brightness-50"
+        className="absolute inset-0 z-0 brightness-50 object-cover"
         data-ai-hint="background caregiver"
       />
       <div className="relative z-10 w-full">

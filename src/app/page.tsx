@@ -81,8 +81,7 @@ export default function HomePage() {
             src="/images/CareGiver.webp"
             alt="Caregiver with elderly person"
             fill
-            objectFit="cover"
-            className="absolute inset-0 z-0 brightness-50"
+            className="absolute inset-0 z-0 brightness-50 object-cover"
             data-ai-hint="caregiver elderly"
           />
           <div className="relative z-10 p-4 space-y-4">
