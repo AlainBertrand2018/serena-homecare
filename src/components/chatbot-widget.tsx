@@ -3,7 +3,7 @@
 
 import { useActionState, useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
-import { getChatResponse, getInitialChatResponse } from '@/lib/actions';
+import { getChatResponse } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -33,35 +33,33 @@ function SubmitButton() {
 function ChatInterface() {
     const formRef = useRef<HTMLFormElement>(null);
     const scrollViewportRef = useRef<HTMLDivElement>(null);
-    
-    const [initialState, setInitialState] = useState(initialChatState);
-    const [isLoadingInitial, setIsLoadingInitial] = useState(true);
 
-    const [state, dispatch, isPending] = useActionState(getChatResponse, initialState);
+    const [state, dispatch, isPending] = useActionState(getChatResponse, initialChatState);
 
-    // Fetch initial message when component mounts and on popover open
+    // Fetch initial message when component mounts
     useEffect(() => {
-        setIsLoadingInitial(true);
-        getInitialChatResponse().then(res => {
-            setInitialState(res);
-            setIsLoadingInitial(false);
-        });
+        const fetchInitial = async () => {
+            const initialFormData = new FormData();
+            initialFormData.append('prompt', '');
+            initialFormData.append('history', '[]');
+            dispatch(initialFormData);
+        }
+        if (state.history.length === 0) {
+           fetchInitial();
+        }
     }, []);
     
     useEffect(() => {
-        // This effect runs when either the user sends a message or the initial state is set
         if (scrollViewportRef.current) {
             scrollViewportRef.current.scrollTop = scrollViewportRef.current.scrollHeight;
         }
-    }, [state.history.length, initialState.history.length]);
+    }, [state.history]);
     
     useEffect(() => {
-        if (state.message === 'success') {
+        if (state.message === 'success' && state.history.at(-1)?.role === 'model') {
             formRef.current?.reset();
         }
-    }, [state.message]);
-
-    const currentHistory = state.history.length > 0 ? state.history : initialState.history;
+    }, [state]);
 
     return (
         <Card className="w-full h-full flex flex-col border-0 shadow-none">
@@ -79,7 +77,7 @@ function ChatInterface() {
             <CardContent className="flex-grow overflow-hidden pr-0">
                 <ScrollArea className="h-full pr-4" viewportRef={scrollViewportRef}>
                     <div className="space-y-6">
-                        {isLoadingInitial && (
+                        {state.history.length === 0 && (
                              <div className="flex items-start gap-3 justify-start">
                                 <Avatar className="h-8 w-8">
                                     <AvatarFallback><Bot /></AvatarFallback>
@@ -89,7 +87,7 @@ function ChatInterface() {
                                 </div>
                             </div>
                         )}
-                        {!isLoadingInitial && currentHistory.map((message, index) => (
+                        {state.history.map((message, index) => (
                         <div
                             key={index}
                             className={cn(
@@ -119,7 +117,7 @@ function ChatInterface() {
                             )}
                         </div>
                         ))}
-                         {isPending && state.history.at(-1)?.role === 'user' && (
+                         {isPending && (
                            <div className="flex items-start gap-3 justify-start">
                                 <Avatar className="h-8 w-8">
                                     <AvatarFallback><Bot /></AvatarFallback>
@@ -133,14 +131,21 @@ function ChatInterface() {
                 </ScrollArea>
             </CardContent>
             <CardFooter className="pt-4">
-                <form ref={formRef} action={dispatch} className="flex w-full items-center gap-2">
+                <form 
+                    ref={formRef} 
+                    action={dispatch} 
+                    className="flex w-full items-center gap-2"
+                    onSubmit={(e) => {
+                        if (isPending) e.preventDefault();
+                    }}
+                >
                     <Input
                         name="prompt"
                         placeholder="Type your message..."
                         autoComplete='off'
-                        disabled={isPending || isLoadingInitial}
+                        disabled={isPending || state.history.length === 0}
                     />
-                    <input type="hidden" name="history" value={JSON.stringify(currentHistory)} />
+                    <input type="hidden" name="history" value={JSON.stringify(state.history)} />
                     <SubmitButton />
                 </form>
             </CardFooter>

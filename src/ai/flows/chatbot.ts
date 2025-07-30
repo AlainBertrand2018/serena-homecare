@@ -69,10 +69,9 @@ const chatFlow = ai.defineFlow(
   },
   async (input) => {
     // If history is empty, it's a new conversation.
-    // The model will generate the initial greeting based on the system prompt.
+    // Return the predefined greeting from the system prompt.
     if (input.history.length === 0) {
-        const { output } = await chatPrompt({ prompt: 'Hello', history: [] });
-        return output!;
+      return "Hello! I'm the JOVE HOME CARE assistant. How can I help you today?";
     }
 
     const { output } = await chatPrompt(input);
