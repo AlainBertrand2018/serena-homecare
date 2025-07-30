@@ -33,7 +33,7 @@ export default function VerifyOtpPage() {
             <Input id="otp-6" maxLength={1} className="text-center text-lg bg-background/70" />
           </div>
           <Button type="submit" className="w-full" asChild>
-             <Link href="/onboarding">Verify Code</Link>
+             <Link href="/dashboard">Verify Code</Link>
           </Button>
         </form>
         <div className="mt-4 text-center text-sm">
