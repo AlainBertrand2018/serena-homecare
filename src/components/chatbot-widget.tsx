@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useActionState, useFormStatus } from 'react-dom';
+import { useActionState, useFormStatus } from 'react';
 import { getChatResponse } from '@/lib/actions';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
