@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "JOVE HOME CARE",
   description: "A simple and intuitive app for caregivers.",
   icons: {
-    icon: "/images/siteIcon.png",
+    icon: "/favicon.ico",
   },
 };
 
