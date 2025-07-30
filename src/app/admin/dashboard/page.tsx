@@ -31,10 +31,11 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Line, LineChart as RechartsLineChart, Tooltip } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Line, LineChart as RechartsLineChart } from "recharts"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import Link from "next/link";
 
 
 const lineChartData = [
@@ -70,7 +71,7 @@ const barChartConfig = {
 
 export default function AdminDashboard() {
   return (
-     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8 bg-muted/40">
+    <>
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -258,7 +259,7 @@ export default function AdminDashboard() {
                                 tickMargin={10}
                                 width={100}
                              />
-                            <Tooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
+                            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
                             <Bar dataKey="hours" radius={5} />
                         </BarChart>
                     </ChartContainer>
@@ -308,7 +309,6 @@ export default function AdminDashboard() {
                 </CardContent>
             </Card>
         </div>
-      </main>
+      </>
   )
-
-    
+}
