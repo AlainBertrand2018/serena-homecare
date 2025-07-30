@@ -20,17 +20,41 @@ import { Client } from "@/lib/data";
 interface ClientFormProps {
     client?: Client;
     trigger: React.ReactNode;
+    onAddClient?: (client: Omit<Client, 'id'>) => void;
 }
 
-export function ClientForm({ client, trigger }: ClientFormProps) {
+export function ClientForm({ client, trigger, onAddClient }: ClientFormProps) {
     const [open, setOpen] = useState(false);
     const isEditing = !!client;
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // Here you would handle form submission, e.g., calling an action
-        console.log("Form submitted");
-        setOpen(false); // Close dialog on submit
+        const formData = new FormData(e.currentTarget);
+
+        const newClientData = {
+            name: formData.get('name') as string,
+            address: formData.get('address') as string,
+            avatarUrl: formData.get('avatarUrl') as string,
+            emergencyContact: {
+                name: formData.get('ec-name') as string,
+                relationship: formData.get('ec-relationship') as string,
+                phone: formData.get('ec-phone') as string,
+            },
+            medicalInfo: {
+                allergies: (formData.get('allergies') as string).split(',').map(s => s.trim()).filter(Boolean),
+                conditions: (formData.get('conditions') as string).split(',').map(s => s.trim()).filter(Boolean),
+                medications: client?.medicalInfo.medications || [], // Medication editing not implemented
+            },
+            carePlan: formData.get('care-plan') as string,
+        };
+        
+        if (onAddClient && !isEditing) {
+            onAddClient(newClientData);
+        }
+        
+        // Here you would also handle the editing logic
+        console.log("Client form submitted", newClientData);
+        setOpen(false);
     }
 
   return (
@@ -48,32 +72,32 @@ export function ClientForm({ client, trigger }: ClientFormProps) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="grid gap-2">
                         <Label htmlFor="name">Full Name</Label>
-                        <Input id="name" defaultValue={client?.name} placeholder="John Doe" />
+                        <Input id="name" name="name" defaultValue={client?.name} placeholder="John Doe" />
                     </div>
                     <div className="grid gap-2">
                         <Label htmlFor="address">Address</Label>
-                        <Input id="address" defaultValue={client?.address} placeholder="123 Main St, Anytown, USA" />
+                        <Input id="address" name="address" defaultValue={client?.address} placeholder="123 Main St, Anytown, USA" />
                     </div>
                 </div>
 
                  <div className="grid gap-2">
                     <Label htmlFor="avatarUrl">Avatar URL</Label>
-                    <Input id="avatarUrl" defaultValue={client?.avatarUrl} placeholder="https://placehold.co/100x100.png" />
+                    <Input id="avatarUrl" name="avatarUrl" defaultValue={client?.avatarUrl} placeholder="https://placehold.co/100x100.png" />
                 </div>
                 
                 <h3 className="font-semibold text-lg mt-4 border-t pt-4">Emergency Contact</h3>
                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="grid gap-2">
                         <Label htmlFor="ec-name">Name</Label>
-                        <Input id="ec-name" defaultValue={client?.emergencyContact.name} placeholder="Jane Doe" />
+                        <Input id="ec-name" name="ec-name" defaultValue={client?.emergencyContact.name} placeholder="Jane Doe" />
                     </div>
                      <div className="grid gap-2">
                         <Label htmlFor="ec-relationship">Relationship</Label>
-                        <Input id="ec-relationship" defaultValue={client?.emergencyContact.relationship} placeholder="Spouse" />
+                        <Input id="ec-relationship" name="ec-relationship" defaultValue={client?.emergencyContact.relationship} placeholder="Spouse" />
                     </div>
                      <div className="grid gap-2">
                         <Label htmlFor="ec-phone">Phone</Label>
-                        <Input id="ec-phone" defaultValue={client?.emergencyContact.phone} placeholder="555-123-4567" />
+                        <Input id="ec-phone" name="ec-phone" defaultValue={client?.emergencyContact.phone} placeholder="555-123-4567" />
                     </div>
                 </div>
 
@@ -81,11 +105,11 @@ export function ClientForm({ client, trigger }: ClientFormProps) {
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="grid gap-2">
                         <Label htmlFor="allergies">Allergies (comma-separated)</Label>
-                        <Input id="allergies" defaultValue={client?.medicalInfo.allergies.join(', ')} placeholder="Peanuts, Shellfish" />
+                        <Input id="allergies" name="allergies" defaultValue={client?.medicalInfo.allergies.join(', ')} placeholder="Peanuts, Shellfish" />
                     </div>
                      <div className="grid gap-2">
                         <Label htmlFor="conditions">Conditions (comma-separated)</Label>
-                        <Input id="conditions" defaultValue={client?.medicalInfo.conditions.join(', ')} placeholder="Hypertension, Diabetes" />
+                        <Input id="conditions" name="conditions" defaultValue={client?.medicalInfo.conditions.join(', ')} placeholder="Hypertension, Diabetes" />
                     </div>
                 </div>
                 
@@ -99,7 +123,7 @@ export function ClientForm({ client, trigger }: ClientFormProps) {
                 
                 <h3 className="font-semibold text-lg mt-4 border-t pt-4">Care Plan</h3>
                 <div className="grid gap-2">
-                    <Textarea id="care-plan" defaultValue={client?.carePlan} rows={4} placeholder="Client preferences, daily routines, etc."/>
+                    <Textarea id="care-plan" name="care-plan" defaultValue={client?.carePlan} rows={4} placeholder="Client preferences, daily routines, etc."/>
                 </div>
 
             </div>
