@@ -24,6 +24,12 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs"
+import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
@@ -67,6 +73,9 @@ const revenueByServiceConfig = {
 
 
 export default function FinancialsPage() {
+    const customerTransactions = recentTransactions.filter(t => t.type === 'Invoice');
+    const caregiverTransactions = recentTransactions.filter(t => t.type === 'Payroll');
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -174,58 +183,91 @@ export default function FinancialsPage() {
         </div>
 
          <Card>
-             <CardHeader className="flex flex-row items-center">
-              <div className="grid gap-2">
-                <CardTitle>Recent Transactions</CardTitle>
-                <CardDescription>
-                  Invoices paid and payments issued this month.
-                </CardDescription>
-              </div>
-              <Button asChild size="sm" className="ml-auto gap-1">
-                <Link href="#">
-                  View All
-                  <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </Button>
-            </CardHeader>
-            <CardContent>
-               <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Client/Caregiver</TableHead>
-                    <TableHead>Type</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Date</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {recentTransactions.map((transaction) => (
-                    <TableRow key={transaction.id}>
-                      <TableCell>
-                        <div className="font-medium">{transaction.name}</div>
-                        <div className="hidden text-sm text-muted-foreground md:inline">
-                          {transaction.description}
-                        </div>
-                      </TableCell>
-                       <TableCell>
-                         {transaction.type}
-                      </TableCell>
-                       <TableCell>
-                        <Badge 
-                            variant={transaction.status === 'Paid' || transaction.status === 'Sent' ? 'default' : 'destructive'} 
-                            className={transaction.status === 'Pending' ? 'bg-yellow-500' : ''}
-                        >
-                            {transaction.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>{transaction.date}</TableCell>
-                       <TableCell className="text-right">{transaction.amount}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </CardContent>
+            <Tabs defaultValue="customer">
+                 <CardHeader className="flex flex-row items-center">
+                    <div className="grid gap-2">
+                        <CardTitle>Recent Transactions</CardTitle>
+                        <CardDescription>
+                            Invoices paid and payments issued this month.
+                        </CardDescription>
+                    </div>
+                    <div className="ml-auto flex items-center gap-2">
+                         <TabsList>
+                            <TabsTrigger value="customer">Customer Invoices</TabsTrigger>
+                            <TabsTrigger value="caregiver">Caregiver Payroll</TabsTrigger>
+                        </TabsList>
+                    </div>
+                </CardHeader>
+                <CardContent>
+                    <TabsContent value="customer">
+                        <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Customer</TableHead>
+                                    <TableHead>Invoice #</TableHead>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead>Date</TableHead>
+                                    <TableHead className="text-right">Amount</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                            {customerTransactions.map((transaction) => (
+                                <TableRow key={transaction.id}>
+                                <TableCell>
+                                    <div className="font-medium">{transaction.name}</div>
+                                </TableCell>
+                                <TableCell>
+                                    {transaction.description}
+                                </TableCell>
+                                <TableCell>
+                                    <Badge 
+                                        variant={transaction.status === 'Paid' ? 'default' : 'destructive'} 
+                                        className={transaction.status === 'Pending' ? 'bg-yellow-500' : ''}
+                                    >
+                                        {transaction.status}
+                                    </Badge>
+                                </TableCell>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell className="text-right">{transaction.amount}</TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                    </TabsContent>
+                    <TabsContent value="caregiver">
+                          <Table>
+                            <TableHeader>
+                                <TableRow>
+                                    <TableHead>Caregiver</TableHead>
+                                    <TableHead>Description</TableHead>
+                                    <TableHead>Status</TableHead>
+                                    <TableHead>Date</TableHead>
+                                    <TableHead className="text-right">Amount</TableHead>
+                                </TableRow>
+                            </TableHeader>
+                            <TableBody>
+                            {caregiverTransactions.map((transaction) => (
+                                <TableRow key={transaction.id}>
+                                <TableCell>
+                                    <div className="font-medium">{transaction.name}</div>
+                                </TableCell>
+                                <TableCell>
+                                    {transaction.description}
+                                </TableCell>
+                                <TableCell>
+                                    <Badge variant={transaction.status === 'Sent' ? 'default' : 'destructive'}>
+                                        {transaction.status}
+                                    </Badge>
+                                </TableCell>
+                                <TableCell>{transaction.date}</TableCell>
+                                <TableCell className="text-right">{transaction.amount}</TableCell>
+                                </TableRow>
+                            ))}
+                            </TableBody>
+                        </Table>
+                    </TabsContent>
+                </CardContent>
+            </Tabs>
           </Card>
     </>
   );
