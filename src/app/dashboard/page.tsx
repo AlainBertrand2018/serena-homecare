@@ -1,3 +1,4 @@
+
 import Link from "next/link";
 import {
   Card,
@@ -32,9 +33,9 @@ export default function DashboardPage() {
                   </Avatar>
                   <div>
                     <CardTitle>{visit.clientName}</CardTitle>
-                    <CardDescription>
-                       <Badge variant={visit.status === 'Upcoming' ? 'secondary' : 'default'} className="mt-1">{visit.status}</Badge>
-                    </CardDescription>
+                    <div className="mt-1">
+                        <Badge variant={visit.status === 'Upcoming' ? 'secondary' : 'default'}>{visit.status}</Badge>
+                    </div>
                   </div>
                 </div>
               </CardHeader>
