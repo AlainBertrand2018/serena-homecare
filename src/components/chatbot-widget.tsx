@@ -33,36 +33,35 @@ function SubmitButton() {
 function ChatInterface() {
     const formRef = useRef<HTMLFormElement>(null);
     const scrollViewportRef = useRef<HTMLDivElement>(null);
+    
+    const [initialState, setInitialState] = useState(initialChatState);
+    const [isLoadingInitial, setIsLoadingInitial] = useState(true);
 
-    const [state, dispatch, isPending] = useActionState(getChatResponse, initialChatState);
+    const [state, dispatch, isPending] = useActionState(getChatResponse, initialState);
 
-    // Fetch initial message when component mounts
+    // Fetch initial message when component mounts and on popover open
     useEffect(() => {
-        if(state.history.length === 0 && !isPending) {
-            getInitialChatResponse().then(initialState => {
-                // This is a bit of a hack to set the initial state from an async call
-                // A more complex state management library might handle this more gracefully
-                // @ts-ignore
-                dispatch({
-                    type: 'SET_INITIAL_STATE',
-                    payload: initialState
-                });
-            });
+        setIsLoadingInitial(true);
+        getInitialChatResponse().then(res => {
+            setInitialState(res);
+            setIsLoadingInitial(false);
+        });
+    }, []);
+    
+    useEffect(() => {
+        // This effect runs when either the user sends a message or the initial state is set
+        if (scrollViewportRef.current) {
+            scrollViewportRef.current.scrollTop = scrollViewportRef.current.scrollHeight;
         }
-    }, [isPending, state.history.length, dispatch]);
-
+    }, [state.history.length, initialState.history.length]);
+    
     useEffect(() => {
         if (state.message === 'success') {
             formRef.current?.reset();
         }
     }, [state.message]);
-    
-    useEffect(() => {
-        if (scrollViewportRef.current) {
-            scrollViewportRef.current.scrollTop = scrollViewportRef.current.scrollHeight;
-        }
-    }, [state.history.length]);
 
+    const currentHistory = state.history.length > 0 ? state.history : initialState.history;
 
     return (
         <Card className="w-full h-full flex flex-col border-0 shadow-none">
@@ -80,7 +79,17 @@ function ChatInterface() {
             <CardContent className="flex-grow overflow-hidden pr-0">
                 <ScrollArea className="h-full pr-4" viewportRef={scrollViewportRef}>
                     <div className="space-y-6">
-                        {state.history.map((message, index) => (
+                        {isLoadingInitial && (
+                             <div className="flex items-start gap-3 justify-start">
+                                <Avatar className="h-8 w-8">
+                                    <AvatarFallback><Bot /></AvatarFallback>
+                                </Avatar>
+                                <div className="bg-muted rounded-xl p-3 flex items-center">
+                                    <Loader2 className="animate-spin h-4 w-4" />
+                                </div>
+                            </div>
+                        )}
+                        {!isLoadingInitial && currentHistory.map((message, index) => (
                         <div
                             key={index}
                             className={cn(
@@ -129,9 +138,9 @@ function ChatInterface() {
                         name="prompt"
                         placeholder="Type your message..."
                         autoComplete='off'
-                        disabled={isPending}
+                        disabled={isPending || isLoadingInitial}
                     />
-                    <input type="hidden" name="history" value={JSON.stringify(state.history)} />
+                    <input type="hidden" name="history" value={JSON.stringify(currentHistory)} />
                     <SubmitButton />
                 </form>
             </CardFooter>
@@ -160,12 +169,17 @@ function ChatbotWidgetClient() {
             align="end" 
             className="w-[400px] h-[600px] p-0 rounded-lg shadow-2xl mr-4 mb-2"
         >
-           <ChatInterface />
+           {open && <ChatInterface />}
         </PopoverContent>
     </Popover>
   );
 }
 
 export function ChatbotWidget() {
-    return <ChatbotWidgetClient />;
+    const [isClient, setIsClient] = useState(false);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    return isClient ? <ChatbotWidgetClient /> : null;
 }
