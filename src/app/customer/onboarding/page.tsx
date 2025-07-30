@@ -20,11 +20,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Calendar as CalendarIcon, Upload } from 'lucide-react';
 import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
-import { Upload } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { format } from "date-fns";
 
 const totalSteps = 6;
 
@@ -75,6 +78,35 @@ export default function CustomerOnboardingPage() {
   );
 }
 
+const DatePicker = () => {
+    const [date, setDate] = useState<Date>();
+    
+    return (
+        <Popover>
+            <PopoverTrigger asChild>
+                <Button
+                    variant={"outline"}
+                    className={cn(
+                        "w-full justify-start text-left font-normal",
+                        !date && "text-muted-foreground"
+                    )}
+                >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {date ? format(date, "PPP") : <span>Pick a date</span>}
+                </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+                <Calendar
+                    mode="single"
+                    selected={date}
+                    onSelect={setDate}
+                    initialFocus
+                />
+            </PopoverContent>
+        </Popover>
+    )
+}
+
 const Step1 = () => (
   <div className="space-y-6">
     <h3 className="text-lg font-semibold">Customer Identity</h3>
@@ -98,7 +130,7 @@ const Step1 = () => (
                 <SelectContent><SelectItem value="male">Male</SelectItem><SelectItem value="female">Female</SelectItem><SelectItem value="other">Other</SelectItem></SelectContent>
             </Select>
         </div>
-        <div className="grid gap-2"><Label>Date of Birth</Label><Calendar mode="single" className="p-0 border rounded-md" /></div>
+        <div className="grid gap-2"><Label>Date of Birth</Label><DatePicker /></div>
         <div className="grid gap-2"><Label>Age</Label><Input disabled placeholder="Auto-calculated" /></div>
         <div className="grid gap-2">
             <Label>Civil Status</Label>
@@ -265,3 +297,4 @@ const Step6 = () => (
   </div>
 );
 
+    
