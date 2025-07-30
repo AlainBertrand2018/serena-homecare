@@ -12,7 +12,6 @@ export function Header() {
     { href: "/#testimonials", label: "Testimonials" },
     { href: "/careers", label: "Careers" },
     { href: "/#booking", label: "Contact" },
-    { href: "/chatbot", label: "Chat" },
   ];
 
   return (
