@@ -52,8 +52,8 @@ export default function AdminLoginPage() {
               <Input id="password" type="password" required className="pl-10 bg-background/70" />
             </div>
           </div>
-          <Button type="submit" className="w-full">
-            Login
+          <Button type="submit" className="w-full" asChild>
+            <Link href="/admin/dashboard">Login</Link>
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
