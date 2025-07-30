@@ -5,7 +5,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <main className="relative flex min-h-screen w-full items-center justify-center p-4">
        <Image
-        src="https://placehold.co/1920x1080.png"
+        src="/images/CareGiver.webp"
         alt="Background"
         fill
         objectFit="cover"

@@ -52,8 +52,11 @@ export default function CustomerLoginPage() {
               <Input id="password" type="password" required className="pl-10 bg-background/70" />
             </div>
           </div>
-          <Button type="submit" className="w-full">
-            Login
+          <Button type="submit" className="w-full" asChild>
+            <Link href="/customer/dashboard">Login</Link>
+          </Button>
+          <Button type="submit" variant="secondary" className="w-full" asChild>
+            <Link href="/customer?new=true">Login as New Customer</Link>
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
