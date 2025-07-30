@@ -1,9 +1,9 @@
 
 'use client';
 
-import { useActionState, useFormStatus } from 'react-dom';
+import { useActionState, useEffect, useRef, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { getChatResponse, getInitialChatResponse } from '@/lib/actions';
-import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -42,7 +42,8 @@ function ChatInterface() {
             getInitialChatResponse().then(initialState => {
                 // This is a bit of a hack to set the initial state from an async call
                 // A more complex state management library might handle this more gracefully
-                (dispatch as any)({
+                // @ts-ignore
+                dispatch({
                     type: 'SET_INITIAL_STATE',
                     payload: initialState
                 });
@@ -139,7 +140,7 @@ function ChatInterface() {
 }
 
 
-export function ChatbotWidget() {
+function ChatbotWidgetClient() {
     const [open, setOpen] = useState(false);
 
   return (
@@ -163,4 +164,8 @@ export function ChatbotWidget() {
         </PopoverContent>
     </Popover>
   );
+}
+
+export function ChatbotWidget() {
+    return <ChatbotWidgetClient />;
 }
