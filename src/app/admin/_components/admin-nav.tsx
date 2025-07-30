@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, Users, Briefcase, Calendar } from "lucide-react";
+import { Home, Users, Briefcase, Calendar, DollarSign } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navLinks = [
@@ -11,6 +11,7 @@ const navLinks = [
     { href: "/admin/clients", label: "Clients", icon: Users },
     { href: "/admin/caregivers", label: "Caregivers", icon: Briefcase },
     { href: "/admin/visits", label: "Visits", icon: Calendar },
+    { href: "/admin/financials", label: "Financials", icon: DollarSign },
 ];
 
 export function AdminNav() {
