@@ -9,7 +9,13 @@ const summarySchema = z.object({
   careLog: z.string().min(10, { message: "Care log must be at least 10 characters." }),
 });
 
-export async function getSummary(prevState: any, formData: FormData) {
+type SummaryState = {
+  message: string;
+  summary: string;
+  errors: { careLog?: string[] } | null;
+}
+
+export async function getSummary(prevState: SummaryState, formData: FormData): Promise<SummaryState> {
   const validatedFields = summarySchema.safeParse({
     careLog: formData.get('careLog'),
   });
@@ -27,23 +33,35 @@ export async function getSummary(prevState: any, formData: FormData) {
     return {
       message: 'success',
       summary: result.summary,
-      errors: {},
+      errors: null,
     };
   } catch (error) {
+    console.error("Summarization error:", error);
     return {
-      message: 'An error occurred while summarizing.',
+      message: 'An error occurred during summarization. Please try again.',
       summary: '',
-      errors: {},
+      errors: null,
     };
   }
 }
+
+type Message = {
+  role: 'user' | 'model';
+  content: string;
+};
 
 const chatSchema = z.object({
   prompt: z.string().min(1, { message: "Prompt cannot be empty." }),
   history: z.string(), // JSON string of history
 });
 
-export async function getChatResponse(prevState: any, formData: FormData) {
+type ChatState = {
+    history: Message[];
+    message: string;
+    errors: { prompt?: string[] } | null;
+}
+
+export async function getChatResponse(prevState: ChatState, formData: FormData): Promise<ChatState> {
   const validatedFields = chatSchema.safeParse({
     prompt: formData.get('prompt'),
     history: formData.get('history'),
@@ -57,9 +75,8 @@ export async function getChatResponse(prevState: any, formData: FormData) {
     };
   }
 
-  const history = JSON.parse(validatedFields.data.history);
-
-  const newMessage = { role: 'user', content: validatedFields.data.prompt };
+  const history = JSON.parse(validatedFields.data.history) as Message[];
+  const newMessage: Message = { role: 'user', content: validatedFields.data.prompt };
   const updatedHistory = [...history, newMessage];
 
   try {
@@ -68,20 +85,41 @@ export async function getChatResponse(prevState: any, formData: FormData) {
       history,
     });
     
-    const aiMessage = { role: 'model', content: result };
+    const aiMessage: Message = { role: 'model', content: result };
     
     return {
       history: [...updatedHistory, aiMessage],
       message: 'success',
-      errors: {},
+      errors: null,
     };
 
   } catch (error) {
-     const errorMessage = { role: 'model', content: "Sorry, I'm having trouble connecting. Please try again later." };
+    console.error("Chatbot error:", error);
+    const errorMessage: Message = { role: 'model', content: "Sorry, I'm having trouble connecting at the moment. Please try again later." };
     return {
       history: [...updatedHistory, errorMessage],
       message: 'An error occurred.',
-      errors: {},
+      errors: null,
     };
   }
+}
+
+export async function getInitialChatResponse(): Promise<ChatState> {
+    try {
+        const result = await chat({ prompt: '', history: [] });
+        const aiMessage: Message = { role: 'model', content: result };
+        return {
+            history: [aiMessage],
+            message: 'success',
+            errors: null,
+        };
+    } catch (error) {
+        console.error("Chatbot initial message error:", error);
+        const errorMessage: Message = { role: 'model', content: "Sorry, I'm having trouble connecting. Please try again later." };
+        return {
+            history: [errorMessage],
+            message: 'An error occurred.',
+            errors: null,
+        }
+    }
 }

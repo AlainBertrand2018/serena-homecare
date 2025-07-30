@@ -1,8 +1,8 @@
 
 'use client';
 
-import { useActionState, useFormStatus } from 'react';
-import { getChatResponse } from '@/lib/actions';
+import { useActionState, useFormStatus } from 'react-dom';
+import { getChatResponse, getInitialChatResponse } from '@/lib/actions';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -18,9 +18,7 @@ type Message = {
   content: string;
 };
 
-const initialHistory: Message[] = [
-  { role: 'model', content: 'Hello! How can I help you today?' },
-];
+const initialChatState = { history: [], message: '', errors: null };
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -34,24 +32,33 @@ function SubmitButton() {
 
 function ChatInterface() {
     const formRef = useRef<HTMLFormElement>(null);
-    const scrollAreaId = "chat-scroll-area";
+    const scrollViewportRef = useRef<HTMLDivElement>(null);
 
-    const initialState = { history: initialHistory, message: '', errors: {} };
-    const [state, dispatch] = useActionState(getChatResponse, initialState);
+    const [state, dispatch, isPending] = useActionState(getChatResponse, initialChatState);
+
+    // Fetch initial message when component mounts
+    useEffect(() => {
+        if(state.history.length === 0 && !isPending) {
+            getInitialChatResponse().then(initialState => {
+                // This is a bit of a hack to set the initial state from an async call
+                // A more complex state management library might handle this more gracefully
+                (dispatch as any)({
+                    type: 'SET_INITIAL_STATE',
+                    payload: initialState
+                });
+            });
+        }
+    }, [isPending, state.history.length, dispatch]);
 
     useEffect(() => {
         if (state.message === 'success') {
-        formRef.current?.reset();
+            formRef.current?.reset();
         }
     }, [state.message]);
     
     useEffect(() => {
-        const scrollArea = document.getElementById(scrollAreaId);
-        if (scrollArea) {
-            const viewport = scrollArea.querySelector('div[data-radix-scroll-area-viewport]');
-            if (viewport) {
-                viewport.scrollTop = viewport.scrollHeight;
-            }
+        if (scrollViewportRef.current) {
+            scrollViewportRef.current.scrollTop = scrollViewportRef.current.scrollHeight;
         }
     }, [state.history.length]);
 
@@ -65,12 +72,12 @@ function ChatInterface() {
                     </Avatar>
                     <div>
                         <CardTitle>AI Assistant</CardTitle>
-                        <CardDescription>Ask me about our services, pricing, or careers.</CardDescription>
+                        <CardDescription>Ask me about our services and pricing.</CardDescription>
                     </div>
                 </div>
             </CardHeader>
             <CardContent className="flex-grow overflow-hidden pr-0">
-                <ScrollArea className="h-full pr-4" id={scrollAreaId}>
+                <ScrollArea className="h-full pr-4" viewportRef={scrollViewportRef}>
                     <div className="space-y-6">
                         {state.history.map((message, index) => (
                         <div
@@ -93,7 +100,7 @@ function ChatInterface() {
                                 : 'bg-muted'
                             )}
                             >
-                            <p className="text-sm">{message.content}</p>
+                            <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                             </div>
                             {message.role === 'user' && (
                             <Avatar className="h-8 w-8">
@@ -102,6 +109,16 @@ function ChatInterface() {
                             )}
                         </div>
                         ))}
+                         {isPending && state.history.at(-1)?.role === 'user' && (
+                           <div className="flex items-start gap-3 justify-start">
+                                <Avatar className="h-8 w-8">
+                                    <AvatarFallback><Bot /></AvatarFallback>
+                                </Avatar>
+                                <div className="bg-muted rounded-xl p-3 flex items-center">
+                                    <Loader2 className="animate-spin h-4 w-4" />
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </ScrollArea>
             </CardContent>
@@ -111,7 +128,7 @@ function ChatInterface() {
                         name="prompt"
                         placeholder="Type your message..."
                         autoComplete='off'
-                        disabled={useFormStatus().pending}
+                        disabled={isPending}
                     />
                     <input type="hidden" name="history" value={JSON.stringify(state.history)} />
                     <SubmitButton />
