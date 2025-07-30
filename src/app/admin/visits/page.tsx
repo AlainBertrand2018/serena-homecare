@@ -17,7 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { MoreHorizontal, PlusCircle } from "lucide-react";
+import { MoreHorizontal, PlusCircle, Pencil } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +25,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { VisitForm } from "./_components/visit-form";
 
 const statusVariants = {
     'Upcoming': 'secondary',
@@ -43,10 +44,12 @@ export default function AdminVisitsPage() {
             Manage and schedule all client visits.
             </CardDescription>
         </div>
-        <Button>
-            <PlusCircle />
-            Schedule New Visit
-        </Button>
+        <VisitForm trigger={
+            <Button>
+                <PlusCircle />
+                Schedule New Visit
+            </Button>
+        } />
       </CardHeader>
       <CardContent>
         <Table>
@@ -83,7 +86,10 @@ export default function AdminVisitsPage() {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>Edit</DropdownMenuItem>
+                             <VisitForm 
+                                visit={visit}
+                                trigger={<DropdownMenuItem onSelect={(e) => e.preventDefault()}><Pencil/> Edit</DropdownMenuItem>}
+                            />
                             <DropdownMenuItem>Reschedule</DropdownMenuItem>
                             <DropdownMenuItem className="text-destructive">Cancel</DropdownMenuItem>
                         </DropdownMenuContent>
@@ -97,4 +103,3 @@ export default function AdminVisitsPage() {
     </Card>
   );
 }
-

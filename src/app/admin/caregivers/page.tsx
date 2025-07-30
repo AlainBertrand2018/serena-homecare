@@ -15,6 +15,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { PlusCircle, Edit, Star } from "lucide-react";
+import { CaregiverForm } from "./_components/caregiver-form";
 
 const statusColors = {
     'Available': 'bg-green-500',
@@ -57,7 +58,10 @@ function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
                 <Button variant="outline" className="w-full">
                     <Star/> View Profile
                 </Button>
-                <Button className="w-full"><Edit/> Edit</Button>
+                <CaregiverForm 
+                    caregiver={caregiver}
+                    trigger={<Button className="w-full"><Edit/> Edit</Button>}
+                />
             </CardFooter>
         </Card>
     )
@@ -69,7 +73,7 @@ export default function AdminCaregiversPage() {
     <>
       <div className="flex items-center justify-between">
         <h1 className="font-semibold text-2xl md:text-3xl">Caregivers</h1>
-        <Button><PlusCircle /> Add New Caregiver</Button>
+        <CaregiverForm trigger={<Button><PlusCircle /> Add New Caregiver</Button>} />
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
