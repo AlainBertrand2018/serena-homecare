@@ -152,6 +152,10 @@ export default function CustomerOnboardingPage() {
                                             </SelectContent>
                                         </Select>
                                     </div>
+                                     <div className="grid gap-2">
+                                        <Label htmlFor="id-passport">ID/Passport Number</Label>
+                                        <Input id="id-passport" placeholder="A1234567" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -160,7 +164,7 @@ export default function CustomerOnboardingPage() {
                     {/* Custodian Party Section */}
                     <div className="space-y-4 p-4 border rounded-lg">
                         <h3 className="font-semibold text-lg">2. Custodian Party</h3>
-                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                              <div className="grid gap-2">
                                 <Label htmlFor="custodian-title">Title</Label>
                                 <Select>
@@ -182,6 +186,10 @@ export default function CustomerOnboardingPage() {
                                 <Label htmlFor="custodian-last-name">Last Name</Label>
                                 <Input id="custodian-last-name" placeholder="Smith" />
                             </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="custodian-id-passport">ID/Passport Number</Label>
+                                <Input id="custodian-id-passport" placeholder="B8765432" />
+                            </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="grid gap-2 md:col-span-1">
@@ -202,7 +210,7 @@ export default function CustomerOnboardingPage() {
                     {/* Emergency Contact Section */}
                     <div className="space-y-4 p-4 border rounded-lg">
                         <h3 className="font-semibold text-lg">3. Emergency Contact</h3>
-                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                             <div className="grid gap-2">
                                 <Label htmlFor="ec-title">Title</Label>
                                 <Select>
@@ -223,6 +231,10 @@ export default function CustomerOnboardingPage() {
                             <div className="grid gap-2">
                                 <Label htmlFor="ec-last-name">Last Name</Label>
                                 <Input id="ec-last-name" placeholder="Jones" />
+                            </div>
+                             <div className="grid gap-2">
+                                <Label htmlFor="ec-id-passport">ID/Passport Number</Label>
+                                <Input id="ec-id-passport" placeholder="C5556677" />
                             </div>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
