@@ -23,9 +23,9 @@ export function CaregiverDetails({ caregiver, isOpen, onOpenChange }: { caregive
           </Avatar>
           <div className="flex-grow">
             <DialogTitle className="text-2xl">{caregiver.name}</DialogTitle>
-            <DialogDescription>
-                <Badge variant={caregiver.status === 'Available' ? 'default' : 'destructive'}>{caregiver.status}</Badge>
-            </DialogDescription>
+            <div className="mt-1">
+                <Badge variant={caregiver.status === 'Available' ? 'default' : caregiver.status === 'On Assignment' ? 'secondary' : 'destructive'}>{caregiver.status}</Badge>
+            </div>
           </div>
         </DialogHeader>
         <Separator />
