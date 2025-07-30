@@ -1,4 +1,6 @@
 
+'use client';
+
 import { visits, clients, caregivers } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import {
