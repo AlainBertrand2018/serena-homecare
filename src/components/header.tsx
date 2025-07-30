@@ -1,15 +1,17 @@
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Home, Users, Briefcase, Settings } from "lucide-react";
+import { Menu } from "lucide-react";
 import { LogoWithName } from "./logo";
 
 export function Header() {
   const navLinks = [
-    { href: "/dashboard", label: "Dashboard", icon: Home },
-    { href: "/visits", label: "All Visits", icon: Briefcase },
-    { href: "/clients", label: "Clients", icon: Users },
-    { href: "/admin", label: "Admin", icon: Settings },
+    { href: "/", label: "Home" },
+    { href: "#services", label: "Services" },
+    { href: "#testimonials", label: "Testimonials" },
+    { href: "/careers", label: "Careers" },
+    { href: "#booking", label: "Contact" },
   ];
 
   return (
@@ -26,6 +28,9 @@ export function Header() {
             {label}
           </Link>
         ))}
+         <Button asChild>
+            <Link href="/login">Login</Link>
+         </Button>
       </nav>
       <Sheet>
         <SheetTrigger asChild>
@@ -37,22 +42,29 @@ export function Header() {
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
             <LogoWithName />
-            {navLinks.map(({ href, label, icon: Icon }) => (
+            {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 className="flex items-center gap-4 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground"
               >
-                <Icon className="h-5 w-5" />
                 {label}
               </Link>
             ))}
+             <Button asChild>
+                <Link href="/login">Login</Link>
+             </Button>
           </nav>
         </SheetContent>
       </Sheet>
+       <div className="flex-grow md:hidden text-center">
+            <LogoWithName className="justify-center"/>
+       </div>
        <div className="md:hidden">
-            <LogoWithName />
-        </div>
+            <Button asChild size="sm">
+                <Link href="/login">Login</Link>
+            </Button>
+       </div>
     </header>
   );
 }
