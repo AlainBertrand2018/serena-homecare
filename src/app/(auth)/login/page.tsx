@@ -13,7 +13,7 @@ import { Users, Stethoscope, Shield } from 'lucide-react';
 
 export default function LoginPage() {
   return (
-    <Card className="mx-auto max-w-sm w-full">
+    <Card className="mx-auto max-w-sm w-full bg-card/60 backdrop-blur-lg text-card-foreground border-border/20">
       <CardHeader className="space-y-4">
         <LogoWithName className="justify-center" />
         <div className="text-center">

@@ -15,7 +15,7 @@ import { KeyRound, Mail, Stethoscope } from 'lucide-react';
 
 export default function CaregiverLoginPage() {
   return (
-    <Card className="mx-auto max-w-sm w-full">
+    <Card className="mx-auto max-w-sm w-full bg-card/60 backdrop-blur-lg text-card-foreground border-border/20">
       <CardHeader className="space-y-4">
         <LogoWithName className="justify-center" />
         <div className="text-center">
@@ -39,7 +39,7 @@ export default function CaregiverLoginPage() {
                 type="email"
                 placeholder="m@example.com"
                 required
-                className="pl-10"
+                className="pl-10 bg-background/70"
               />
             </div>
           </div>
@@ -55,7 +55,7 @@ export default function CaregiverLoginPage() {
             </div>
             <div className="relative">
               <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input id="password" type="password" required className="pl-10" />
+              <Input id="password" type="password" required className="pl-10 bg-background/70" />
             </div>
           </div>
           <Button type="submit" className="w-full" asChild>

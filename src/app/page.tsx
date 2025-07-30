@@ -78,7 +78,7 @@ export default function HomePage() {
         {/* Hero Section */}
         <section className="relative h-screen flex items-center justify-center text-center text-white">
           <Image
-            src="https://placehold.co/1920x1080.png"
+            src="/images/CareGiver.webp"
             alt="Caregiver with elderly person"
             fill
             objectFit="cover"

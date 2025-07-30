@@ -18,7 +18,7 @@ const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Sat
 
 export default function OnboardingPage() {
   return (
-    <Card className="w-full max-w-2xl">
+    <Card className="w-full max-w-2xl bg-card/60 backdrop-blur-lg text-card-foreground border-border/20">
       <CardHeader className="text-center space-y-4">
         <div className="w-full flex justify-center">
           <LogoWithName />
@@ -34,7 +34,7 @@ export default function OnboardingPage() {
           <div className="grid md:grid-cols-2 gap-4">
             <div className="grid gap-2">
               <Label htmlFor="id-document">ID Document (Passport, Driver's License)</Label>
-              <div className="flex items-center gap-2 p-2 border-2 border-dashed rounded-lg">
+              <div className="flex items-center gap-2 p-2 border-2 border-dashed rounded-lg border-border/50">
                 <Upload className="h-5 w-5 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">Click to upload or drag & drop</span>
                 <Input id="id-document" type="file" className="sr-only" />
@@ -42,7 +42,7 @@ export default function OnboardingPage() {
             </div>
             <div className="grid gap-2">
               <Label htmlFor="caregiver-cert">Caregiver Certificate (Optional)</Label>
-               <div className="flex items-center gap-2 p-2 border-2 border-dashed rounded-lg">
+               <div className="flex items-center gap-2 p-2 border-2 border-dashed rounded-lg border-border/50">
                 <Upload className="h-5 w-5 text-muted-foreground" />
                 <span className="text-sm text-muted-foreground">Click to upload or drag & drop</span>
                 <Input id="caregiver-cert" type="file" className="sr-only" />
