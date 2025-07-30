@@ -6,8 +6,14 @@ export type Client = {
   emergencyContact: {
     name: string;
     phone: string;
+    relationship: string;
   };
-  notes: string;
+  medicalInfo: {
+    allergies: string[];
+    conditions: string[];
+    medications: { name: string; dosage: string; frequency: string }[];
+  };
+  carePlan: string;
 };
 
 export type Visit = {
@@ -19,6 +25,7 @@ export type Visit = {
   date: string;
   time: string;
   status: 'Upcoming' | 'Completed' | 'In Progress';
+  tasks: string[];
 };
 
 export const clients: Client[] = [
@@ -28,10 +35,19 @@ export const clients: Client[] = [
     avatarUrl: 'https://placehold.co/100x100.png',
     address: '456 Oak Avenue, Springfield, IL 62704',
     emergencyContact: {
-      name: 'John Vance (Son)',
+      name: 'John Vance',
       phone: '555-0101',
+      relationship: 'Son',
     },
-    notes: 'Loves classical music and has a cat named Whiskers. Prefers tea over coffee. Allergic to penicillin.',
+    medicalInfo: {
+        allergies: ['Penicillin'],
+        conditions: ['Hypertension', 'Arthritis'],
+        medications: [
+            { name: 'Lisinopril', dosage: '10mg', frequency: 'Once a day' },
+            { name: 'Ibuprofen', dosage: '200mg', frequency: 'As needed for pain' },
+        ]
+    },
+    carePlan: 'Loves classical music and has a cat named Whiskers. Prefers tea over coffee. Needs help with meal preparation and light housekeeping. Encourage fluid intake.',
   },
   {
     id: '2',
@@ -39,10 +55,19 @@ export const clients: Client[] = [
     avatarUrl: 'https://placehold.co/100x100.png',
     address: '789 Pine Street, Metropolis, IL 62960',
     emergencyContact: {
-      name: 'Susan Pendelton (Daughter)',
+      name: 'Susan Pendelton',
       phone: '555-0102',
+      relationship: 'Daughter',
     },
-    notes: 'Enjoys watching old movies, especially westerns. Needs assistance with mobility, uses a walker.',
+     medicalInfo: {
+        allergies: ['None'],
+        conditions: ['Type 2 Diabetes', 'Glaucoma'],
+        medications: [
+            { name: 'Metformin', dosage: '500mg', frequency: 'Twice a day' },
+            { name: 'Latanoprost', dosage: '1 drop', frequency: 'Once a day in evening' },
+        ]
+    },
+    carePlan: 'Enjoys watching old movies, especially westerns. Needs assistance with mobility, uses a walker. Monitor blood sugar levels before meals.',
   },
 ];
 
@@ -56,6 +81,7 @@ export const visits: Visit[] = [
     date: new Date(Date.now() + 24 * 60 * 60 * 1000).toLocaleDateString(),
     time: '9:00 AM - 11:00 AM',
     status: 'Upcoming',
+    tasks: ['Prepare breakfast', 'Administer morning medication', 'Light housekeeping'],
   },
   {
     id: 'v2',
@@ -66,6 +92,7 @@ export const visits: Visit[] = [
     date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toLocaleDateString(),
     time: '1:00 PM - 3:00 PM',
     status: 'Upcoming',
+    tasks: ['Assist with walk', 'Check blood sugar', 'Prepare lunch'],
   },
   {
     id: 'v3',
@@ -76,6 +103,7 @@ export const visits: Visit[] = [
     date: new Date(Date.now() + 4 * 24 * 60 * 60 * 1000).toLocaleDateString(),
     time: '10:00 AM - 12:00 PM',
     status: 'Upcoming',
+    tasks: ['Tidy up living room', 'Play a game of cards', 'Prepare a light snack'],
   },
 ];
 

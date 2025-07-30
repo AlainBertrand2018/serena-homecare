@@ -1,14 +1,15 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Home, LogIn, UserPlus } from "lucide-react";
+import { Menu, Home, Users, Briefcase, Settings } from "lucide-react";
 import { LogoWithName } from "./logo";
 
 export function Header() {
   const navLinks = [
-    { href: "/login", label: "Login", icon: LogIn },
-    { href: "/signup", label: "Sign Up", icon: UserPlus },
     { href: "/dashboard", label: "Dashboard", icon: Home },
+    { href: "/visits", label: "All Visits", icon: Briefcase },
+    { href: "/clients", label: "Clients", icon: Users },
+    { href: "/admin", label: "Admin", icon: Settings },
   ];
 
   return (
