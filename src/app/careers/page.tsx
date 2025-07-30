@@ -150,6 +150,10 @@ const Section1 = () => (
   <div className="space-y-6">
     <h3 className="text-xl font-bold">SECTION 1 – PERSONAL IDENTIFICATION</h3>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <FileUpload label="Upload Passport-size Photo" id="passport-photo" />
+        <FileUpload label="Upload CV" id="cv-upload" />
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="grid gap-2"><Label>Full Name</Label><Input /></div>
         <div className="grid gap-2"><Label>Preferred Name / Nickname</Label><Input /></div>
         <DatePicker label="Date of Birth" />
@@ -171,10 +175,6 @@ const Section1 = () => (
             <Select><SelectTrigger><SelectValue placeholder="Select..." /></SelectTrigger><SelectContent><SelectItem value="single">Single</SelectItem><SelectItem value="married">Married</SelectItem><SelectItem value="divorced">Divorced</SelectItem><SelectItem value="widowed">Widowed</SelectItem></SelectContent></Select>
         </div>
         <div className="grid gap-2"><Label>Next of Kin & Relationship</Label><Input /></div>
-    </div>
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-        <FileUpload label="Upload Passport-size Photo" id="passport-photo" />
-        <FileUpload label="Upload CV" id="cv-upload" />
     </div>
   </div>
 );
@@ -399,4 +399,5 @@ const Section8 = () => (
     </div>
 );
 
+    
     
