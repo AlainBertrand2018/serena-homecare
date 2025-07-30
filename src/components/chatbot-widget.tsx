@@ -1,9 +1,9 @@
 
 'use client';
 
-import { useActionState, useEffect, useRef, useState } from 'react';
+import { useActionState, useEffect, useRef, useState, useTransition } from 'react';
 import { useFormStatus } from 'react-dom';
-import { getChatResponse } from '@/lib/actions';
+import { getChatResponse, ChatState } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -18,7 +18,7 @@ type Message = {
   content: string;
 };
 
-const initialChatState = { history: [], message: '', errors: null };
+const initialChatState: ChatState = { history: [], message: '', errors: null };
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -33,22 +33,25 @@ function SubmitButton() {
 function ChatInterface() {
     const formRef = useRef<HTMLFormElement>(null);
     const scrollViewportRef = useRef<HTMLDivElement>(null);
-
     const [state, dispatch, isPending] = useActionState(getChatResponse, initialChatState);
 
     // Fetch initial message when component mounts
     useEffect(() => {
-        const fetchInitial = async () => {
+        if (state.history.length === 0) {
             const initialFormData = new FormData();
             initialFormData.append('prompt', '');
             initialFormData.append('history', '[]');
-            dispatch(initialFormData);
+            // The useActionState dispatch is a server action.
+            // It's meant to be called from form actions or startTransition.
+            // We can wrap it in a transition to satisfy React's requirement.
+            startTransition(() => {
+                dispatch(initialFormData);
+            });
         }
-        if (state.history.length === 0) {
-           fetchInitial();
-        }
-    }, []);
+    }, [dispatch, state.history.length]);
     
+    const [_, startTransition] = useTransition();
+
     useEffect(() => {
         if (scrollViewportRef.current) {
             scrollViewportRef.current.scrollTop = scrollViewportRef.current.scrollHeight;
@@ -56,10 +59,11 @@ function ChatInterface() {
     }, [state.history]);
     
     useEffect(() => {
-        if (state.message === 'success' && state.history.at(-1)?.role === 'model') {
+        // Reset form when the model has successfully responded
+        if (!isPending && state.message === 'success' && state.history.at(-1)?.role === 'model') {
             formRef.current?.reset();
         }
-    }, [state]);
+    }, [state, isPending]);
 
     return (
         <Card className="w-full h-full flex flex-col border-0 shadow-none">
@@ -77,7 +81,7 @@ function ChatInterface() {
             <CardContent className="flex-grow overflow-hidden pr-0">
                 <ScrollArea className="h-full pr-4" viewportRef={scrollViewportRef}>
                     <div className="space-y-6">
-                        {state.history.length === 0 && (
+                         {state.history.length === 0 && (
                              <div className="flex items-start gap-3 justify-start">
                                 <Avatar className="h-8 w-8">
                                     <AvatarFallback><Bot /></AvatarFallback>
@@ -117,7 +121,7 @@ function ChatInterface() {
                             )}
                         </div>
                         ))}
-                         {isPending && (
+                         {isPending && state.history.at(-1)?.role === 'user' && (
                            <div className="flex items-start gap-3 justify-start">
                                 <Avatar className="h-8 w-8">
                                     <AvatarFallback><Bot /></AvatarFallback>
@@ -131,13 +135,10 @@ function ChatInterface() {
                 </ScrollArea>
             </CardContent>
             <CardFooter className="pt-4">
-                <form 
+                 <form 
                     ref={formRef} 
                     action={dispatch} 
                     className="flex w-full items-center gap-2"
-                    onSubmit={(e) => {
-                        if (isPending) e.preventDefault();
-                    }}
                 >
                     <Input
                         name="prompt"
