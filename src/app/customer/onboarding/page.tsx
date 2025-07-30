@@ -24,17 +24,30 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Upload } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
 import { format, differenceInYears } from 'date-fns';
 import { Checkbox } from "@/components/ui/checkbox";
+import Image from "next/image";
 
 
 export default function CustomerOnboardingPage() {
     const [dateOfBirth, setDateOfBirth] = useState<Date | undefined>();
+    const [photoPreview, setPhotoPreview] = useState<string | null>(null);
     const age = dateOfBirth ? differenceInYears(new Date(), dateOfBirth) : null;
     
+    const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPhotoPreview(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
   return (
     <div className="flex justify-center items-center min-h-screen bg-muted/40 py-12">
         <Card className="w-full max-w-4xl">
@@ -52,69 +65,94 @@ export default function CustomerOnboardingPage() {
                     {/* Civilities Section */}
                     <div className="space-y-4 p-4 border rounded-lg">
                         <h3 className="font-semibold text-lg">1. Personal Information</h3>
-                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div className="grid gap-2">
-                                <Label htmlFor="title">Title</Label>
-                                <Select>
-                                    <SelectTrigger id="title">
-                                        <SelectValue placeholder="Select title" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="mr">Mr.</SelectItem>
-                                        <SelectItem value="ms">Ms.</SelectItem>
-                                        <SelectItem value="mrs">Mrs.</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
-                            <div className="grid gap-2">
-                                <Label htmlFor="first-name">First Name</Label>
-                                <Input id="first-name" placeholder="John" />
-                            </div>
-                            <div className="grid gap-2">
-                                <Label htmlFor="last-name">Last Name</Label>
-                                <Input id="last-name" placeholder="Doe" />
-                            </div>
-                        </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                             <div className="grid gap-2">
-                                <Label htmlFor="dob">Date of Birth</Label>
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <Button
-                                        variant={"outline"}
-                                        className={cn(
-                                            "justify-start text-left font-normal",
-                                            !dateOfBirth && "text-muted-foreground"
+                         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                            <div className="grid gap-2 md:col-span-1">
+                                <Label>Passport-size Photo</Label>
+                                <div className="flex items-center gap-4">
+                                     <div className="w-24 h-24 rounded-lg bg-muted flex items-center justify-center">
+                                        {photoPreview ? (
+                                            <Image src={photoPreview} alt="Customer photo" width={96} height={96} className="rounded-lg object-cover w-full h-full" />
+                                        ) : (
+                                            <span className="text-xs text-muted-foreground text-center">Photo Preview</span>
                                         )}
-                                        >
-                                        <CalendarIcon className="mr-2 h-4 w-4" />
-                                        {dateOfBirth ? format(dateOfBirth, "PPP") : <span>Pick a date</span>}
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-auto p-0">
-                                        <Calendar
-                                        mode="single"
-                                        selected={dateOfBirth}
-                                        onSelect={setDateOfBirth}
-                                        initialFocus
-                                        />
-                                    </PopoverContent>
-                                </Popover>
-                                {age !== null && <p className="text-sm text-muted-foreground">Age: {age}</p>}
+                                    </div>
+                                    <div className="grid gap-1.5">
+                                        <Input id="photo-upload" type="file" className="sr-only" onChange={handlePhotoChange} accept="image/*" />
+                                        <Label htmlFor="photo-upload" className="cursor-pointer">
+                                            <div className="flex items-center gap-2 p-2 border-2 border-dashed rounded-lg border-border/50 hover:bg-muted">
+                                                <Upload className="h-5 w-5 text-muted-foreground" />
+                                                <span className="text-sm text-muted-foreground">Upload</span>
+                                            </div>
+                                        </Label>
+                                    </div>
+                                </div>
                             </div>
-                             <div className="grid gap-2">
-                                <Label htmlFor="civil-status">Civil Status</Label>
-                                <Select>
-                                    <SelectTrigger id="civil-status">
-                                        <SelectValue placeholder="Select status" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem value="m">Married</SelectItem>
-                                        <SelectItem value="c">Single</SelectItem>
-                                        <SelectItem value="d">Divorced</SelectItem>
-                                        <SelectItem value="w">Widowed</SelectItem>
-                                    </SelectContent>
-                                </Select>
+                            <div className="grid gap-2 md:col-span-3">
+                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="title">Title</Label>
+                                        <Select>
+                                            <SelectTrigger id="title">
+                                                <SelectValue placeholder="Select title" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="mr">Mr.</SelectItem>
+                                                <SelectItem value="ms">Ms.</SelectItem>
+                                                <SelectItem value="mrs">Mrs.</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="first-name">First Name</Label>
+                                        <Input id="first-name" placeholder="John" />
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="last-name">Last Name</Label>
+                                        <Input id="last-name" placeholder="Doe" />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="dob">Date of Birth</Label>
+                                        <Popover>
+                                            <PopoverTrigger asChild>
+                                                <Button
+                                                variant={"outline"}
+                                                className={cn(
+                                                    "justify-start text-left font-normal",
+                                                    !dateOfBirth && "text-muted-foreground"
+                                                )}
+                                                >
+                                                <CalendarIcon className="mr-2 h-4 w-4" />
+                                                {dateOfBirth ? format(dateOfBirth, "PPP") : <span>Pick a date</span>}
+                                                </Button>
+                                            </PopoverTrigger>
+                                            <PopoverContent className="w-auto p-0">
+                                                <Calendar
+                                                mode="single"
+                                                selected={dateOfBirth}
+                                                onSelect={setDateOfBirth}
+                                                initialFocus
+                                                />
+                                            </PopoverContent>
+                                        </Popover>
+                                        {age !== null && <p className="text-sm text-muted-foreground">Age: {age}</p>}
+                                    </div>
+                                    <div className="grid gap-2">
+                                        <Label htmlFor="civil-status">Civil Status</Label>
+                                        <Select>
+                                            <SelectTrigger id="civil-status">
+                                                <SelectValue placeholder="Select status" />
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem value="m">Married</SelectItem>
+                                                <SelectItem value="c">Single</SelectItem>
+                                                <SelectItem value="d">Divorced</SelectItem>
+                                                <SelectItem value="w">Widowed</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
