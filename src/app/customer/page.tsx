@@ -1,6 +1,6 @@
 
-import CustomerDashboard from "./dashboard/page";
+import CustomerOnboardingPage from "./onboarding/page";
 
 export default function CustomerPage() {
-    return <CustomerDashboard />;
+    return <CustomerOnboardingPage />;
 }
