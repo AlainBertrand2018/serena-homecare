@@ -76,11 +76,11 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="relative h-[60vh] flex items-center justify-center text-center text-white">
+        <section className="relative h-screen flex items-center justify-center text-center text-white">
           <Image
             src="https://placehold.co/1920x1080.png"
             alt="Caregiver with elderly person"
-            layout="fill"
+            fill
             objectFit="cover"
             className="absolute inset-0 z-0 brightness-50"
             data-ai-hint="caregiver elderly"
@@ -221,3 +221,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
