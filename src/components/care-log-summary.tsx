@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useFormStatus } from 'react-dom';
 import { getSummary } from '@/lib/actions';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -30,7 +31,7 @@ export function CareLogSummary({ careLog }: { careLog: string }) {
   const formRef = useRef<HTMLFormElement>(null);
   
   const initialState = { message: '', summary: '', errors: {} };
-  const [state, dispatch] = useFormState(getSummary, initialState);
+  const [state, dispatch] = useActionState(getSummary, initialState);
 
   useEffect(() => {
     if (state.message === 'success' && state.summary) {

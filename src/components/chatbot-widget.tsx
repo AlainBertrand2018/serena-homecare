@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useFormStatus } from 'react-dom';
 import { getChatResponse } from '@/lib/actions';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -36,7 +37,7 @@ function ChatInterface() {
     const scrollViewportRef = useRef<HTMLDivElement>(null);
 
     const initialState = { history: initialHistory, message: '', errors: {} };
-    const [state, dispatch] = useFormState(getChatResponse, initialState);
+    const [state, dispatch] = useActionState(getChatResponse, initialState);
 
     useEffect(() => {
         if (state.message === 'success') {
