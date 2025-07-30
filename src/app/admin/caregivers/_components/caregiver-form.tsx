@@ -26,15 +26,29 @@ import type { Caregiver } from "@/lib/data";
 interface CaregiverFormProps {
     caregiver?: Caregiver;
     trigger: React.ReactNode;
+    onAddCaregiver?: (caregiver: Omit<Caregiver, 'id' | 'status'> & { status: string }) => void;
 }
 
-export function CaregiverForm({ caregiver, trigger }: CaregiverFormProps) {
+export function CaregiverForm({ caregiver, trigger, onAddCaregiver }: CaregiverFormProps) {
     const [open, setOpen] = useState(false);
     const isEditing = !!caregiver;
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Caregiver form submitted");
+        const formData = new FormData(e.currentTarget);
+        const newCaregiverData = {
+            name: formData.get('name') as string,
+            avatarUrl: formData.get('avatarUrl') as string,
+            status: formData.get('status') as string,
+            skills: (formData.get('skills') as string).split(',').map(s => s.trim()),
+        };
+
+        if (onAddCaregiver && !isEditing) {
+            onAddCaregiver(newCaregiverData as any);
+        }
+
+        // Here you would also handle the editing logic
+        console.log("Caregiver form submitted", newCaregiverData);
         setOpen(false);
     }
 
@@ -52,15 +66,15 @@ export function CaregiverForm({ caregiver, trigger }: CaregiverFormProps) {
             <div className="grid gap-4 py-4">
                 <div className="grid gap-2">
                     <Label htmlFor="name">Full Name</Label>
-                    <Input id="name" defaultValue={caregiver?.name} placeholder="Samantha Reed" />
+                    <Input id="name" name="name" defaultValue={caregiver?.name} placeholder="Samantha Reed" />
                 </div>
                 <div className="grid gap-2">
                     <Label htmlFor="avatarUrl">Avatar URL</Label>
-                    <Input id="avatarUrl" defaultValue={caregiver?.avatarUrl} placeholder="https://placehold.co/100x100.png" />
+                    <Input id="avatarUrl" name="avatarUrl" defaultValue={caregiver?.avatarUrl} placeholder="https://placehold.co/100x100.png" />
                 </div>
                  <div className="grid gap-2">
                     <Label htmlFor="status">Status</Label>
-                    <Select defaultValue={caregiver?.status}>
+                    <Select name="status" defaultValue={caregiver?.status}>
                         <SelectTrigger id="status">
                             <SelectValue placeholder="Select a status" />
                         </SelectTrigger>
@@ -73,7 +87,7 @@ export function CaregiverForm({ caregiver, trigger }: CaregiverFormProps) {
                 </div>
                 <div className="grid gap-2">
                     <Label htmlFor="skills">Skills (comma-separated)</Label>
-                    <Input id="skills" defaultValue={caregiver?.skills.join(', ')} placeholder="Personal Care, Dementia Care" />
+                    <Input id="skills" name="skills" defaultValue={caregiver?.skills.join(', ')} placeholder="Personal Care, Dementia Care" />
                 </div>
             </div>
             <DialogFooter>
@@ -85,4 +99,3 @@ export function CaregiverForm({ caregiver, trigger }: CaregiverFormProps) {
     </Dialog>
   );
 }
-

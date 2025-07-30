@@ -1,18 +1,34 @@
 
 'use client';
 
-import { caregivers } from "@/lib/data";
+import { useState } from 'react';
+import { caregivers as initialCaregivers, type Caregiver } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { CaregiverForm } from "./_components/caregiver-form";
 import { CaregiverCard } from "./_components/caregiver-card";
 
 export default function AdminCaregiversPage() {
+  const [caregivers, setCaregivers] = useState<Caregiver[]>(initialCaregivers);
+
+  const handleAddCaregiver = (newCaregiverData: Omit<Caregiver, 'id' | 'status'> & { status: string }) => {
+    const newCaregiver: Caregiver = {
+      ...newCaregiverData,
+      id: `c${Math.random().toString(36).substring(7)}`, // pseudo-random id
+      status: newCaregiverData.status as Caregiver['status'],
+      skills: newCaregiverData.skills.length > 0 ? (newCaregiverData.skills as unknown as string).split(',').map(s => s.trim()) : [],
+    };
+    setCaregivers(prev => [...prev, newCaregiver]);
+  };
+
   return (
     <>
       <div className="flex items-center justify-between">
         <h1 className="font-semibold text-2xl md:text-3xl">Caregivers</h1>
-        <CaregiverForm trigger={<Button><PlusCircle /> Add New Caregiver</Button>} />
+        <CaregiverForm 
+            onAddCaregiver={handleAddCaregiver}
+            trigger={<Button><PlusCircle /> Add New Caregiver</Button>} 
+        />
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
