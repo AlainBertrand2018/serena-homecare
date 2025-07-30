@@ -8,10 +8,10 @@ import { LogoWithName } from "./logo";
 export function Header() {
   const navLinks = [
     { href: "/", label: "Home" },
-    { href: "#services", label: "Services" },
-    { href: "#testimonials", label: "Testimonials" },
+    { href: "/#services", label: "Services" },
+    { href: "/#testimonials", label: "Testimonials" },
     { href: "/careers", label: "Careers" },
-    { href: "#booking", label: "Contact" },
+    { href: "/#booking", label: "Contact" },
   ];
 
   return (

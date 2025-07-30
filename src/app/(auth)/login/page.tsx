@@ -1,16 +1,15 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+
+import Link from 'next/link';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { LogoWithName } from "@/components/logo";
-import { KeyRound, Mail } from 'lucide-react';
+} from '@/components/ui/card';
+import { LogoWithName } from '@/components/logo';
+import { Users, Stethoscope, Shield } from 'lucide-react';
 
 export default function LoginPage() {
   return (
@@ -18,52 +17,31 @@ export default function LoginPage() {
       <CardHeader className="space-y-4">
         <LogoWithName className="justify-center" />
         <div className="text-center">
-          <CardTitle className="text-2xl">Welcome Back</CardTitle>
+          <CardTitle className="text-2xl">Select Your Role</CardTitle>
           <CardDescription>
-            Enter your email below to login to your account
+            Please choose your portal to login.
           </CardDescription>
         </div>
       </CardHeader>
-      <CardContent>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <div className="relative">
-              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                className="pl-10"
-              />
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
-              <Link
-                href="#"
-                className="ml-auto inline-block text-sm underline"
-              >
-                Forgot your password?
-              </Link>
-            </div>
-            <div className="relative">
-              <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input id="password" type="password" required className="pl-10" />
-            </div>
-          </div>
-          <Button type="submit" className="w-full" asChild>
-            <Link href="/dashboard">Login</Link>
-          </Button>
-        </div>
-        <div className="mt-4 text-center text-sm">
-          Don&apos;t have an account?{" "}
-          <Link href="/signup" className="underline">
-            Sign up
+      <CardContent className="grid gap-4">
+        <Button size="lg" className="w-full justify-start" asChild>
+          <Link href="/login/customer">
+            <Users />
+            Customer & Custodian
           </Link>
-        </div>
+        </Button>
+        <Button size="lg" className="w-full justify-start" asChild>
+          <Link href="/login/caregiver">
+            <Stethoscope />
+            Caregiver
+          </Link>
+        </Button>
+        <Button size="lg" className="w-full justify-start" asChild>
+          <Link href="/login/admin">
+            <Shield />
+            Administrator
+          </Link>
+        </Button>
       </CardContent>
     </Card>
   );
