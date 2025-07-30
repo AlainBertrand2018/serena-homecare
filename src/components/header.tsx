@@ -41,7 +41,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background/80 backdrop-blur-sm px-4 md:px-6">
       <nav className="hidden w-full flex-row items-center gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
-        <LogoWithName />
+        <Link href="/">
+          <LogoWithName />
+        </Link>
         <div className="flex-grow"></div>
         {navLinks.map(({ href, label }) => (
           <Link
@@ -66,7 +68,9 @@ export function Header() {
         </SheetTrigger>
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
-            <LogoWithName />
+             <Link href="/" onClick={() => setSheetOpen(false)}>
+                <LogoWithName />
+            </Link>
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
@@ -84,7 +88,9 @@ export function Header() {
         </SheetContent>
       </Sheet>
        <div className="flex-grow md:hidden text-center">
-            <LogoWithName className="justify-center"/>
+            <Link href="/">
+                <LogoWithName className="justify-center"/>
+            </Link>
        </div>
        <div className="md:hidden">
             <Button asChild size="sm">
