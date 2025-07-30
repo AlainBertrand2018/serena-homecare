@@ -131,6 +131,21 @@ const YesNoRadio = ({label, id}: {label: string, id: string}) => (
     </div>
 )
 
+const FileUpload = ({label, id}: {label: string, id: string}) => (
+    <div className="grid gap-2">
+        <Label htmlFor={id}>{label}</Label>
+        <div className="flex items-center gap-2">
+            <Input id={id} type="file" className="flex-grow"/>
+            <Button variant="outline" size="icon" asChild>
+                <div>
+                    <Upload className="h-4 w-4"/>
+                    <span className="sr-only">Upload</span>
+                </div>
+            </Button>
+        </div>
+    </div>
+)
+
 const Section1 = () => (
   <div className="space-y-6">
     <h3 className="text-xl font-bold">SECTION 1 – PERSONAL IDENTIFICATION</h3>
@@ -156,6 +171,10 @@ const Section1 = () => (
             <Select><SelectTrigger><SelectValue placeholder="Select..." /></SelectTrigger><SelectContent><SelectItem value="single">Single</SelectItem><SelectItem value="married">Married</SelectItem><SelectItem value="divorced">Divorced</SelectItem><SelectItem value="widowed">Widowed</SelectItem></SelectContent></Select>
         </div>
         <div className="grid gap-2"><Label>Next of Kin & Relationship</Label><Input /></div>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+        <FileUpload label="Upload Passport-size Photo" id="passport-photo" />
+        <FileUpload label="Upload CV" id="cv-upload" />
     </div>
   </div>
 );
@@ -379,3 +398,5 @@ const Section8 = () => (
         </div>
     </div>
 );
+
+    
