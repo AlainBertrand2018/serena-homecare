@@ -8,6 +8,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,7 +21,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { BedDouble, Stethoscope, UtensilsCrossed, CheckCircle, Calendar as CalendarIcon, Car } from 'lucide-react';
+import { BedDouble, Stethoscope, UtensilsCrossed, CheckCircle, Calendar as CalendarIcon, Car, Check } from 'lucide-react';
 
 const services = [
   {
@@ -129,8 +130,85 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Pricing Section */}
+        <section id="pricing" className="py-12 md:py-20 bg-muted/40">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+              Flexible Care Plans
+            </h2>
+            <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3 items-start">
+              {/* Plan 1 */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Companion Care</CardTitle>
+                  <CardDescription>Ideal for clients who need social interaction and light assistance.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="text-4xl font-bold">$25<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                  <ul className="space-y-3 text-sm text-muted-foreground">
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Companionship & conversation</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Light housekeeping</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Meal reminders</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Accompanying to appointments</li>
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full" variant="outline">Choose Plan</Button>
+                </CardFooter>
+              </Card>
+
+              {/* Plan 2 - Highlighted */}
+              <Card className="border-primary border-2 relative">
+                 <div className="absolute top-0 -translate-y-1/2 w-full flex justify-center">
+                    <div className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
+                      Most Popular
+                    </div>
+                  </div>
+                <CardHeader className="pt-10">
+                  <CardTitle>Personal Care</CardTitle>
+                  <CardDescription>Comprehensive non-medical assistance with daily activities.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="text-4xl font-bold">$35<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                   <ul className="space-y-3 text-sm text-muted-foreground">
+                    <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Everything in Companion Care</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Bathing & dressing assistance</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Mobility support</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Meal preparation</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Medication reminders</li>
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full">Choose Plan</Button>
+                </CardFooter>
+              </Card>
+
+              {/* Plan 3 */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Skilled Nursing</CardTitle>
+                  <CardDescription>For clients with medical needs requiring a licensed professional.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="text-4xl font-bold">$50<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                   <ul className="space-y-3 text-sm text-muted-foreground">
+                     <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Everything in Personal Care</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Medication administration</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Wound care</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Vital signs monitoring</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Post-operative care</li>
+                  </ul>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full" variant="outline">Choose Plan</Button>
+                </CardFooter>
+              </Card>
+            </div>
+          </div>
+        </section>
+
         {/* Testimonials Carousel */}
-        <section id="testimonials" className="py-12 md:py-20 bg-muted/40">
+        <section id="testimonials" className="py-12 md:py-20 bg-background">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
               What Our Clients Say
@@ -166,7 +244,7 @@ export default function HomePage() {
         </section>
 
         {/* Booking Section */}
-        <section id="booking" className="py-12 md:py-20 bg-background">
+        <section id="booking" className="py-12 md:py-20 bg-muted/40">
           <div className="container mx-auto px-4">
              <Card className="max-w-3xl mx-auto shadow-lg">
                 <CardHeader className="text-center">
