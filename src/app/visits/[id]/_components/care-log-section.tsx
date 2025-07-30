@@ -13,12 +13,12 @@ export function CareLogSection() {
     const [isRecording, setIsRecording] = useState(false);
     const [careLog, setCareLog] = useState("");
     const [submittedLog, setSubmittedLog] = useState("");
-    const [currentTime, setCurrentTime] = useState("");
+    const [currentTime, setCurrentTime] = useState<string | null>(null);
     const [gpsStatus, setGpsStatus] = useState("Verifying location...");
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentTime(new Date().toLocaleTimeString());
+            setCurrentTime(new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mauritius', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
         }, 1000);
 
         // Simulate GPS check
@@ -59,7 +59,9 @@ export function CareLogSection() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
-                        <div className="font-mono text-lg font-semibold">{currentTime}</div>
+                        <div className="font-mono text-lg font-semibold">
+                            {currentTime !== null ? currentTime : "Loading..."}
+                        </div>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <MapPin className="w-4 h-4" />
                             <span>{gpsStatus}</span>
