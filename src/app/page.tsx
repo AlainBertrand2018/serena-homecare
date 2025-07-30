@@ -140,11 +140,12 @@ export default function HomePage() {
               {/* Plan 1 */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Companion Care</CardTitle>
+                  <CardTitle>Companion Care <span className="text-base font-normal text-muted-foreground">(Non-medical)</span></CardTitle>
                   <CardDescription>Ideal for clients who need social interaction and light assistance.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">$25<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                  <div className="text-4xl font-bold">250<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                  <p className="text-sm font-medium">or 800/day (8hr)</p>
                   <ul className="space-y-3 text-sm text-muted-foreground">
                     <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Companionship & conversation</li>
                     <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Light housekeeping</li>
@@ -165,11 +166,12 @@ export default function HomePage() {
                     </div>
                   </div>
                 <CardHeader className="pt-10">
-                  <CardTitle>Personal Care</CardTitle>
-                  <CardDescription>Comprehensive non-medical assistance with daily activities.</CardDescription>
+                  <CardTitle>Personal Care <span className="text-base font-normal text-muted-foreground">(Non-medical)</span></CardTitle>
+                  <CardDescription>Comprehensive assistance with daily activities.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">$35<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                  <div className="text-4xl font-bold">500<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                  <p className="text-sm font-medium">or 2100/day (8hr)</p>
                    <ul className="space-y-3 text-sm text-muted-foreground">
                     <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Everything in Companion Care</li>
                     <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Bathing & dressing assistance</li>
@@ -186,11 +188,12 @@ export default function HomePage() {
               {/* Plan 3 */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Skilled Nursing</CardTitle>
+                  <CardTitle>Skilled Nursing <span className="text-base font-normal text-muted-foreground">(Medical)</span></CardTitle>
                   <CardDescription>For clients with medical needs requiring a licensed professional.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">$50<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                  <div className="text-4xl font-bold">800<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                   <p className="text-sm font-medium">or 5000/day (8hr)</p>
                    <ul className="space-y-3 text-sm text-muted-foreground">
                      <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Everything in Personal Care</li>
                     <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Medication administration</li>
