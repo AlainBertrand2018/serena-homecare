@@ -144,8 +144,8 @@ export default function HomePage() {
                   <CardDescription>Ideal for clients who need social interaction and light assistance.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">250<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
-                  <p className="text-sm font-medium">or 800/day (8hr)</p>
+                  <div className="text-4xl font-bold">MUR250<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                  <p className="text-sm font-medium">or MUR800/day (8hr)</p>
                   <ul className="space-y-3 text-sm text-muted-foreground">
                     <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Companionship & conversation</li>
                     <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Light housekeeping</li>
@@ -170,8 +170,8 @@ export default function HomePage() {
                   <CardDescription>Comprehensive assistance with daily activities.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">500<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
-                  <p className="text-sm font-medium">or 2100/day (8hr)</p>
+                  <div className="text-4xl font-bold">MUR500<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                  <p className="text-sm font-medium">or MUR2100/day (8hr)</p>
                    <ul className="space-y-3 text-sm text-muted-foreground">
                     <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Everything in Companion Care</li>
                     <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Bathing & dressing assistance</li>
@@ -192,8 +192,8 @@ export default function HomePage() {
                   <CardDescription>For clients with medical needs requiring a licensed professional.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">800<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
-                   <p className="text-sm font-medium">or 5000/day (8hr)</p>
+                  <div className="text-4xl font-bold">MUR800<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
+                   <p className="text-sm font-medium">or MUR5000/day (8hr)</p>
                    <ul className="space-y-3 text-sm text-muted-foreground">
                      <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Everything in Personal Care</li>
                     <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Medication administration</li>

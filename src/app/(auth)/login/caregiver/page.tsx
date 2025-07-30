@@ -59,7 +59,10 @@ export default function CaregiverLoginPage() {
             </div>
           </div>
           <Button type="submit" className="w-full" asChild>
-            <Link href="/dashboard">Login</Link>
+            <Link href="/dashboard">Login (Registered User)</Link>
+          </Button>
+           <Button type="submit" variant="secondary" className="w-full" asChild>
+            <Link href="/careers">Login as New Applicant</Link>
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
@@ -77,4 +80,3 @@ export default function CaregiverLoginPage() {
     </Card>
   );
 }
-
