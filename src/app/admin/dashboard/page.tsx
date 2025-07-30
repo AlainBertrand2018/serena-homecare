@@ -8,6 +8,7 @@ import {
   Clock,
   Star,
   Users2,
+  Calendar,
 } from "lucide-react"
 
 import {
@@ -36,6 +37,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Link from "next/link";
+import { visits } from "@/lib/data";
 
 
 const lineChartData = [
@@ -70,6 +72,8 @@ const barChartConfig = {
 } satisfies ChartConfig
 
 export default function AdminDashboard() {
+  const upcomingVisits = visits.filter(v => v.status === 'Upcoming' || v.status === 'In Progress').slice(0, 5);
+
   return (
     <>
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
@@ -128,76 +132,48 @@ export default function AdminDashboard() {
         </div>
         <div className="grid gap-4 md:gap-8 lg:grid-cols-2 xl:grid-cols-3">
           <Card className="xl:col-span-2">
-            <CardHeader className="flex flex-row items-center">
+             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
-                <CardTitle>Recent Activity</CardTitle>
+                <CardTitle>Upcoming Visits</CardTitle>
                 <CardDescription>
-                  New clients and caregivers in the last 30 days.
+                  A summary of scheduled visits for the upcoming days.
                 </CardDescription>
               </div>
               <Button asChild size="sm" className="ml-auto gap-1">
-                <a href="#">
+                <Link href="/admin/visits">
                   View All
                   <ArrowUpRight className="h-4 w-4" />
-                </a>
+                </Link>
               </Button>
             </CardHeader>
             <CardContent>
-              <Table>
+               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Name</TableHead>
-                    <TableHead>
-                      Type
-                    </TableHead>
-                    <TableHead>
-                      Date Joined
-                    </TableHead>
+                    <TableHead>Client</TableHead>
+                    <TableHead>Caregiver</TableHead>
+                    <TableHead>Date & Time</TableHead>
+                    <TableHead>Status</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Liam Johnson</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        liam@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                       <Badge variant="outline">Client</Badge>
-                    </TableCell>
-                    <TableCell>
-                      2023-06-23
-                    </TableCell>
-                  </TableRow>
-                   <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Aisha Khan</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        aisha@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                       <Badge variant="secondary">Caregiver</Badge>
-                    </TableCell>
-                    <TableCell>
-                      2023-06-21
-                    </TableCell>
-                  </TableRow>
-                   <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Noah Williams</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        noah@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell>
-                       <Badge variant="outline">Client</Badge>
-                    </TableCell>
-                    <TableCell>
-                      2023-06-19
-                    </TableCell>
-                  </TableRow>
+                  {upcomingVisits.map((visit) => (
+                    <TableRow key={visit.id}>
+                      <TableCell>
+                        <div className="font-medium">{visit.clientName}</div>
+                      </TableCell>
+                       <TableCell>
+                        <div className="font-medium">{visit.caregiverName}</div>
+                      </TableCell>
+                      <TableCell>
+                        <div>{visit.date}</div>
+                        <div className="text-sm text-muted-foreground">{visit.time}</div>
+                      </TableCell>
+                       <TableCell>
+                        <Badge variant={visit.status === 'Upcoming' ? 'secondary' : 'outline'}>{visit.status}</Badge>
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </CardContent>
@@ -312,3 +288,5 @@ export default function AdminDashboard() {
       </>
   )
 }
+
+  
