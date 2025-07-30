@@ -153,7 +153,7 @@ export default function OnboardingPage() {
         </CardHeader>
 
         <form>
-            <CardContent className="space-y-8">
+            <CardContent className="space-y-8 min-h-[450px]">
                 <section>
                     <h2 className="text-xl font-semibold mb-4">{currentSection.title}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
