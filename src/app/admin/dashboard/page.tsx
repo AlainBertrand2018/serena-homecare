@@ -37,7 +37,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Link from "next/link";
-import { visits } from "@/lib/data";
+import { visits, clients, caregivers } from "@/lib/data";
 
 
 const lineChartData = [
@@ -73,6 +73,7 @@ const barChartConfig = {
 
 export default function AdminDashboard() {
   const upcomingVisits = visits.filter(v => v.status === 'Upcoming' || v.status === 'In Progress').slice(0, 5);
+  const availableCaregivers = caregivers.filter(c => c.status === 'Available');
 
   return (
     <>
@@ -85,9 +86,9 @@ export default function AdminDashboard() {
               <Users2 className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">124</div>
+              <div className="text-2xl font-bold">{clients.length}</div>
               <p className="text-xs text-muted-foreground">
-                +10.2% from last month
+                Currently managed clients
               </p>
             </CardContent>
           </Card>
@@ -99,9 +100,9 @@ export default function AdminDashboard() {
               <Briefcase className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">45</div>
+              <div className="text-2xl font-bold">{caregivers.length}</div>
               <p className="text-xs text-muted-foreground">
-                +5 from last month
+                Total registered caregivers
               </p>
             </CardContent>
           </Card>
@@ -248,39 +249,23 @@ export default function AdminDashboard() {
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
-                        <div className="flex items-center gap-4">
-                            <Avatar className="h-10 w-10">
-                                <AvatarImage src="https://placehold.co/100x100.png" data-ai-hint="woman portrait" />
-                                <AvatarFallback>SO</AvatarFallback>
-                            </Avatar>
-                            <div className="flex-grow">
-                                <p className="font-medium">Samantha Reed</p>
-                                <p className="text-sm text-muted-foreground">Available from: July 28</p>
-                            </div>
-                             <Button variant="outline" size="sm">Assign</Button>
-                        </div>
-                         <div className="flex items-center gap-4">
-                            <Avatar className="h-10 w-10">
-                                <AvatarImage src="https://placehold.co/100x100.png" data-ai-hint="man portrait" />
-                                <AvatarFallback>MJ</AvatarFallback>
-                            </Avatar>
-                            <div className="flex-grow">
-                                <p className="font-medium">Michael Chen</p>
-                                <p className="text-sm text-muted-foreground">Available from: August 1</p>
-                            </div>
-                             <Button variant="outline" size="sm">Assign</Button>
-                        </div>
-                         <div className="flex items-center gap-4">
-                            <Avatar className="h-10 w-10">
-                                <AvatarImage src="https://placehold.co/100x100.png" data-ai-hint="woman portrait" />
-                                <AvatarFallback>BD</AvatarFallback>
-                            </Avatar>
-                            <div className="flex-grow">
-                                <p className="font-medium">Brenda Davis</p>
-                                <p className="text-sm text-muted-foreground">Available Now</p>
-                            </div>
-                             <Button variant="outline" size="sm">Assign</Button>
-                        </div>
+                       {availableCaregivers.length > 0 ? (
+                            availableCaregivers.map(caregiver => (
+                                <div key={caregiver.id} className="flex items-center gap-4">
+                                    <Avatar className="h-10 w-10">
+                                        <AvatarImage src={caregiver.avatarUrl} data-ai-hint="person portrait" />
+                                        <AvatarFallback>{caregiver.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                                    </Avatar>
+                                    <div className="flex-grow">
+                                        <p className="font-medium">{caregiver.name}</p>
+                                        <p className="text-sm text-muted-foreground">Available Now</p>
+                                    </div>
+                                    <Button variant="outline" size="sm">Assign</Button>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="text-sm text-muted-foreground">No caregivers are currently available.</p>
+                        )}
                     </div>
                 </CardContent>
             </Card>
@@ -288,5 +273,3 @@ export default function AdminDashboard() {
       </>
   )
 }
-
-  
