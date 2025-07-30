@@ -12,12 +12,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react";
 import { visits } from "@/lib/data";
-import { DashboardHeader } from "@/components/dashboard-header";
 
 export default function DashboardPage() {
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <DashboardHeader />
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="flex items-center">
           <h1 className="font-semibold text-2xl md:text-3xl">Upcoming Visits</h1>

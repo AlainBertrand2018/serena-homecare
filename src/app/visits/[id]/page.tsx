@@ -23,24 +23,6 @@ export default function VisitDetailsPage({ params }: { params: { id: string } })
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Button variant="outline" size="icon" asChild>
-            <Link href="/dashboard">
-              <ArrowLeft className="h-4 w-4" />
-              <span className="sr-only">Back to Dashboard</span>
-            </Link>
-          </Button>
-          <h1 className="text-lg font-bold font-headline">Visit Details</h1>
-          <Button variant="ghost" size="icon" asChild>
-            <Link href="/dashboard">
-              <Home className="h-4 w-4" />
-              <span className="sr-only">Home</span>
-            </Link>
-          </Button>
-        </div>
-      </header>
-
       <main className="container mx-auto p-4 space-y-6">
         <Card>
           <CardHeader>
