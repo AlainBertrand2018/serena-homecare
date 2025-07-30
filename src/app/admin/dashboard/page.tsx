@@ -1,29 +1,15 @@
 
+'use client';
+
 import {
   Activity,
   ArrowUpRight,
-  CircleUser,
+  Briefcase,
   Clock,
-  DollarSign,
-  Menu,
-  Package2,
-  Search,
-  Users,
   Star,
   Users2,
-  CalendarCheck,
-  LineChart,
-  BarChart2,
-  Briefcase
 } from "lucide-react"
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
@@ -40,14 +26,18 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import {
+  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Line, LineChart as RechartsLineChart, Tooltip, ResponsiveContainer } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Line, LineChart as RechartsLineChart, Tooltip } from "recharts"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 
-const chartData = [
+const lineChartData = [
   { month: "January", clients: 186 },
   { month: "February", clients: 305 },
   { month: "March", clients: 237 },
@@ -56,12 +46,12 @@ const chartData = [
   { month: "June", clients: 214 },
 ]
 
-const chartConfig = {
+const lineChartConfig = {
   clients: {
     label: "Clients",
     color: "hsl(var(--primary))",
   },
-} satisfies import("@/components/ui/chart").ChartConfig
+} satisfies ChartConfig
 
 const barChartData = [
     { name: 'Companion', hours: 120, fill: 'var(--color-companion)' },
@@ -71,12 +61,12 @@ const barChartData = [
 ];
 
 const barChartConfig = {
-    hours: { label: 'Hours', color: 'hsl(var(--foreground))' },
+    hours: { label: 'Hours' },
     companion: { label: 'Companion Care', color: 'hsl(var(--chart-1))' },
     personal: { label: 'Personal Care', color: 'hsl(var(--chart-2))' },
     nursing: { label: 'Skilled Nursing', color: 'hsl(var(--chart-3))' },
     transport: { label: 'Transport', color: 'hsl(var(--chart-4))' },
-} satisfies import("@/components/ui/chart").ChartConfig
+} satisfies ChartConfig
 
 export default function AdminDashboard() {
   return (
@@ -217,10 +207,10 @@ export default function AdminDashboard() {
                <CardDescription>Monthly new client acquisitions.</CardDescription>
             </CardHeader>
             <CardContent>
-              <ChartContainer config={chartConfig}>
+              <ChartContainer config={lineChartConfig}>
                 <RechartsLineChart
                   accessibilityLayer
-                  data={chartData}
+                  data={lineChartData}
                   margin={{
                     left: 12,
                     right: 12,
@@ -258,8 +248,8 @@ export default function AdminDashboard() {
                 </CardHeader>
                 <CardContent>
                      <ChartContainer config={barChartConfig} className="w-full h-[300px]">
-                        <BarChart data={barChartData} layout="vertical" margin={{ left: 20 }}>
-                            <XAxis type="number" hide />
+                        <BarChart data={barChartData} layout="vertical" margin={{ left: 20, right: 20 }}>
+                            <XAxis type="number" dataKey="hours" hide />
                             <YAxis 
                                 dataKey="name" 
                                 type="category"
@@ -268,7 +258,7 @@ export default function AdminDashboard() {
                                 tickMargin={10}
                                 width={100}
                              />
-                            <Tooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+                            <Tooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
                             <Bar dataKey="hours" radius={5} />
                         </BarChart>
                     </ChartContainer>
@@ -320,6 +310,5 @@ export default function AdminDashboard() {
         </div>
       </main>
   )
-}
 
     
