@@ -26,7 +26,7 @@ import type { Caregiver } from "@/lib/data";
 interface CaregiverFormProps {
     caregiver?: Caregiver;
     trigger: React.ReactNode;
-    onAddCaregiver?: (caregiver: Omit<Caregiver, 'id' | 'status'> & { status: string }) => void;
+    onAddCaregiver?: (caregiver: Omit<Caregiver, 'id'>) => void;
 }
 
 export function CaregiverForm({ caregiver, trigger, onAddCaregiver }: CaregiverFormProps) {
@@ -36,15 +36,16 @@ export function CaregiverForm({ caregiver, trigger, onAddCaregiver }: CaregiverF
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
+        const skillsValue = formData.get('skills') as string;
         const newCaregiverData = {
             name: formData.get('name') as string,
             avatarUrl: formData.get('avatarUrl') as string,
-            status: formData.get('status') as string,
-            skills: (formData.get('skills') as string).split(',').map(s => s.trim()),
+            status: formData.get('status') as Caregiver['status'],
+            skills: skillsValue ? skillsValue.split(',').map(s => s.trim()) : [],
         };
 
         if (onAddCaregiver && !isEditing) {
-            onAddCaregiver(newCaregiverData as any);
+            onAddCaregiver(newCaregiverData);
         }
 
         // Here you would also handle the editing logic

@@ -11,12 +11,11 @@ import { CaregiverCard } from "./_components/caregiver-card";
 export default function AdminCaregiversPage() {
   const [caregivers, setCaregivers] = useState<Caregiver[]>(initialCaregivers);
 
-  const handleAddCaregiver = (newCaregiverData: Omit<Caregiver, 'id' | 'status'> & { status: string }) => {
+  const handleAddCaregiver = (newCaregiverData: Omit<Caregiver, 'id'>) => {
     const newCaregiver: Caregiver = {
       ...newCaregiverData,
       id: `c${Math.random().toString(36).substring(7)}`, // pseudo-random id
-      status: newCaregiverData.status as Caregiver['status'],
-      skills: newCaregiverData.skills.length > 0 ? (newCaregiverData.skills as unknown as string).split(',').map(s => s.trim()) : [],
+      skills: newCaregiverData.skills, // Skills are already an array
     };
     setCaregivers(prev => [...prev, newCaregiver]);
   };
