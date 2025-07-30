@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import { Menu, MessageCircle } from "lucide-react";
 import { LogoWithName } from "./logo";
 
 export function Header() {
@@ -12,6 +12,7 @@ export function Header() {
     { href: "/#testimonials", label: "Testimonials" },
     { href: "/careers", label: "Careers" },
     { href: "/#booking", label: "Contact" },
+    { href: "/chatbot", label: "Chat" },
   ];
 
   return (
