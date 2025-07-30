@@ -17,7 +17,7 @@ export default function LoginPage() {
       <CardHeader className="space-y-4">
         <LogoWithName className="justify-center" />
         <div className="text-center">
-          <CardTitle className="text-2xl">Select Your Role</CardTitle>
+          <CardTitle className="text-2xl">Enter as</CardTitle>
           <CardDescription>
             Please choose your portal to login.
           </CardDescription>
