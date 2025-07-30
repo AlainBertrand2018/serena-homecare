@@ -13,7 +13,7 @@ export function LogoWithName({ className }: { className?: string }) {
     return (
         <div className={cn("flex items-center gap-3", className)}>
             <Logo />
-            <h1 className="text-2xl font-bold text-foreground font-headline">SimpleShift</h1>
+            <h1 className="text-2xl font-bold text-foreground font-headline">JOVE HOME CARE</h1>
         </div>
     )
 }

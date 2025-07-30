@@ -54,13 +54,13 @@ const services = [
 const testimonials = [
   {
     name: "Margaret T.",
-    review: "The caregiver from SimpleShift has been a true blessing for our family. So compassionate and reliable.",
+    review: "The caregiver from JOVE HOME CARE has been a true blessing for our family. So compassionate and reliable.",
     avatar: "https://placehold.co/100x100.png",
     aiHint: "elderly woman"
   },
   {
     name: "John & Susan P.",
-    review: "We were so worried about finding good care for my father. SimpleShift made the process seamless and stress-free.",
+    review: "We were so worried about finding good care for my father. JOVE HOME CARE made the process seamless and stress-free.",
     avatar: "https://placehold.co/100x100.png",
     aiHint: "elderly couple"
   },

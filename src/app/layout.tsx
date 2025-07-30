@@ -5,7 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "SimpleShift",
+  title: "JOVE HOME CARE",
   description: "A simple and intuitive app for caregivers.",
 };
 
