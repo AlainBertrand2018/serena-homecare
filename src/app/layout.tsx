@@ -7,6 +7,9 @@ import { Footer } from "@/components/footer";
 export const metadata: Metadata = {
   title: "JOVE HOME CARE",
   description: "A simple and intuitive app for caregivers.",
+  icons: {
+    icon: "/images/siteIcon.png",
+  },
 };
 
 export default function RootLayout({
