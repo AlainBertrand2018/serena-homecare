@@ -1,8 +1,7 @@
 
 'use client';
 
-import { useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
+import { useActionState, useFormStatus } from 'react';
 import { getChatResponse } from '@/lib/actions';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
@@ -35,7 +34,7 @@ function SubmitButton() {
 
 function ChatInterface() {
     const formRef = useRef<HTMLFormElement>(null);
-    const scrollViewportRef = useRef<HTMLDivElement>(null);
+    const scrollAreaId = "chat-scroll-area";
 
     const initialState = { history: initialHistory, message: '', errors: {} };
     const [state, dispatch] = useActionState(getChatResponse, initialState);
@@ -47,8 +46,12 @@ function ChatInterface() {
     }, [state.message]);
     
     useEffect(() => {
-        if (scrollViewportRef.current) {
-            scrollViewportRef.current.scrollTop = scrollViewportRef.current.scrollHeight;
+        const scrollArea = document.getElementById(scrollAreaId);
+        if (scrollArea) {
+            const viewport = scrollArea.querySelector('div[data-radix-scroll-area-viewport]');
+            if (viewport) {
+                viewport.scrollTop = viewport.scrollHeight;
+            }
         }
     }, [state.history.length]);
 
@@ -67,7 +70,7 @@ function ChatInterface() {
                 </div>
             </CardHeader>
             <CardContent className="flex-grow overflow-hidden pr-0">
-                <ScrollArea className="h-full pr-4" viewportRef={scrollViewportRef}>
+                <ScrollArea className="h-full pr-4" id={scrollAreaId}>
                     <div className="space-y-6">
                         {state.history.map((message, index) => (
                         <div
