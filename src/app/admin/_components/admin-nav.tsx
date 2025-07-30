@@ -19,7 +19,7 @@ export function AdminNav() {
     return (
         <aside className="border-b">
           <div className="px-4 py-2">
-            <nav className="flex items-center space-x-2 lg:space-x-4">
+            <nav className="flex flex-wrap items-center gap-x-2 gap-y-1 lg:gap-x-4">
                 {navLinks.map(link => (
                     <Link
                         key={link.href}
@@ -30,7 +30,7 @@ export function AdminNav() {
                         )}
                         >
                         <link.icon className="h-4 w-4" />
-                        {link.label}
+                        <span className="hidden sm:inline-block">{link.label}</span>
                     </Link>
                 ))}
             </nav>
