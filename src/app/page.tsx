@@ -20,7 +20,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { BedDouble, Stethoscope, UtensilsCrossed, CheckCircle, Calendar as CalendarIcon } from 'lucide-react';
+import { BedDouble, Stethoscope, UtensilsCrossed, CheckCircle, Calendar as CalendarIcon, Car } from 'lucide-react';
 
 const services = [
   {
@@ -43,6 +43,11 @@ const services = [
     title: "Companion Care",
     description: "Providing companionship and engagement in social activities.",
   },
+  {
+    icon: <Car className="h-10 w-10 text-primary" />,
+    title: "Specialized Transportation",
+    description: "Safe and reliable transportation to appointments and social outings.",
+  }
 ];
 
 const testimonials = [
@@ -104,7 +109,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
               Our Services
             </h2>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
               {services.map((service) => (
                 <Card key={service.title} className="text-center hover:shadow-lg transition-shadow">
                   <CardHeader>
