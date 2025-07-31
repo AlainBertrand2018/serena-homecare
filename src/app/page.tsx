@@ -162,7 +162,7 @@ export default function HomePage() {
               <Button size="lg" asChild>
                 <Link href="#booking">Book Consultation</Link>
               </Button>
-              <UrgentVisitModal trigger={<Button size="lg" variant="secondary">Request an Urgent Visit</Button>} />
+              <UrgentVisitModal trigger={<Button size="lg" variant="secondary" style={{ backgroundColor: 'hsl(43, 96%, 56%)' }}>Request an Urgent Visit</Button>} />
             </div>
           </div>
         </section>
@@ -360,3 +360,4 @@ export default function HomePage() {
   );
 
     
+
