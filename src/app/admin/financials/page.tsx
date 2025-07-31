@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import {
@@ -76,6 +77,29 @@ export default function FinancialsPage() {
     const customerTransactions = recentTransactions.filter(t => t.type === 'Invoice');
     const caregiverTransactions = recentTransactions.filter(t => t.type === 'Payroll');
 
+    const legendFormatter = (value: string) => {
+        const label = revenueVsExpensesConfig[value as keyof typeof revenueVsExpensesConfig]?.label || value;
+        return <span className="text-foreground">{label}</span>;
+    };
+    
+    const pieLegendFormatter = (value: string) => {
+        const label = revenueByServiceConfig[value as keyof typeof revenueByServiceConfig]?.label || value;
+        return <span className="text-foreground">{label}</span>;
+    };
+
+    const pieTooltipFormatter = (value: number, name: string) => {
+        const item = revenueByServiceData.find(d => d.service === name);
+        if (item) {
+            return (
+                <div className="flex flex-col">
+                    <span className="font-semibold">{item.service}</span>
+                    <span className="text-muted-foreground">{item.value}%</span>
+                </div>
+            )
+        }
+        return `${name}: ${value}%`;
+    }
+
   return (
     <>
       <div className="flex items-center justify-between">
@@ -150,7 +174,7 @@ export default function FinancialsPage() {
                             <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
                             <YAxis tickFormatter={(value) => `MUR${Number(value) / 1000}k`} />
                             <ChartTooltip content={<ChartTooltipContent />} />
-                            <ChartLegend />
+                            <ChartLegend formatter={legendFormatter} />
                             <Bar dataKey="revenue" fill="var(--color-revenue)" radius={4} />
                             <Bar dataKey="expenses" fill="var(--color-expenses)" radius={4} />
                         </BarChart>
@@ -166,14 +190,14 @@ export default function FinancialsPage() {
                 <CardContent className="flex-1 pb-0">
                      <ChartContainer config={revenueByServiceConfig} className="mx-auto aspect-square max-h-[300px]">
                         <PieChart>
-                            <ChartTooltip content={<ChartTooltipContent nameKey="value" hideLabel />} />
-                            <Pie data={revenueByServiceData} dataKey="value" nameKey="service" label>
+                            <ChartTooltip content={<ChartTooltipContent formatter={pieTooltipFormatter} hideLabel />} />
+                            <Pie data={revenueByServiceData} dataKey="value" nameKey="service">
                                {revenueByServiceData.map((entry) => (
                                  <Cell key={`cell-${entry.service}`} fill={entry.fill} />
                                ))}
                             </Pie>
                              <ChartLegend
-                                content={<ChartLegendContent nameKey="service" />}
+                                content={<ChartLegendContent formatter={pieLegendFormatter} nameKey="service" />}
                                 className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
                             />
                         </PieChart>
