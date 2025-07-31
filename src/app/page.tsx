@@ -32,7 +32,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { BedDouble, Stethoscope, UtensilsCrossed, CheckCircle, Calendar as CalendarIcon, Car, Check } from 'lucide-react';
+import { BedDouble, Stethoscope, UtensilsCrossed, HeartHandshake, FileText, Award, Check, Car, Clock } from 'lucide-react';
 import { useState } from "react";
 
 
@@ -53,7 +53,7 @@ const services = [
     description: "Professional medical care at home, including medication management.",
   },
   {
-    icon: <CheckCircle className="h-10 w-10 text-primary" />,
+    icon: <HeartHandshake className="h-10 w-10 text-primary" />,
     title: "Companion Care",
     description: "Providing companionship and engagement in social activities.",
   },
@@ -62,6 +62,24 @@ const services = [
     title: "Specialized Transportation",
     description: "Safe and reliable transportation to appointments and social outings.",
   }
+];
+
+const whyChooseUs = [
+    {
+        icon: <Award className="h-10 w-10 text-primary" />,
+        title: "Certified & Compassionate",
+        description: "Our caregivers are rigorously vetted, trained, and share a genuine passion for helping others.",
+    },
+    {
+        icon: <FileText className="h-10 w-10 text-primary" />,
+        title: "Personalized Care Plans",
+        description: "We work with you to create a customized care plan that fits your unique needs and preferences.",
+    },
+    {
+        icon: <HeartHandshake className="h-10 w-10 text-primary" />,
+        title: "24/7 Support",
+        description: "Our team is always available to answer your questions and provide support whenever you need it.",
+    }
 ];
 
 const testimonials = [
@@ -162,18 +180,43 @@ export default function HomePage() {
               <Button size="lg" asChild>
                 <Link href="#booking">Book Consultation</Link>
               </Button>
-              <UrgentVisitModal trigger={<Button size="lg" variant="secondary" style={{ backgroundColor: 'hsl(43, 96%, 56%)' }}>Request an Urgent Visit</Button>} />
+              <UrgentVisitModal trigger={
+                <Button size="lg" variant="secondary" style={{ backgroundColor: 'hsl(43, 96%, 56%)' }}>
+                  <Clock /> Request an Urgent Visit
+                </Button>
+              } />
             </div>
           </div>
         </section>
+
+        {/* Why Choose Us Section */}
+        <section id="why-us" className="py-12 md:py-20 bg-muted/40">
+            <div className="container mx-auto px-4">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
+                    Why Choose JOVE HOME CARE?
+                </h2>
+                <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
+                    {whyChooseUs.map((item) => (
+                        <div key={item.title} className="text-center">
+                             <div className="mx-auto bg-primary/10 rounded-full p-4 w-fit mb-4">
+                                {item.icon}
+                            </div>
+                            <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                            <p className="text-muted-foreground">{item.description}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+
 
         {/* Services Overview */}
         <section id="services" className="py-12 md:py-20 bg-background">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-              Our Services
+              Our Comprehensive Services
             </h2>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {services.map((service) => (
                 <Card key={service.title} className="text-center hover:shadow-lg transition-shadow">
                   <CardHeader>
@@ -320,30 +363,27 @@ export default function HomePage() {
                 </CardHeader>
                  <CardContent>
                     <form className="grid gap-6">
+                         <div className="grid gap-2">
+                            <Label htmlFor="name">Full Name</Label>
+                            <Input id="name" placeholder="John Doe" />
+                        </div>
                         <div className="grid md:grid-cols-2 gap-4">
-                            <div className="grid gap-2">
-                                <Label htmlFor="name">Full Name</Label>
-                                <Input id="name" placeholder="John Doe" />
-                            </div>
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email</Label>
                                 <Input id="email" type="email" placeholder="john@example.com" />
                             </div>
-                        </div>
-                         <div className="grid gap-2">
-                            <Label htmlFor="phone">Phone Number</Label>
-                            <Input id="phone" type="tel" placeholder="(555) 123-4567" />
+                            <div className="grid gap-2">
+                                <Label htmlFor="phone">Phone Number</Label>
+                                <Input id="phone" type="tel" placeholder="(555) 123-4567" />
+                            </div>
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="service-type">Type of Service</Label>
+                            <Label htmlFor="service-type">Type of Service Needed</Label>
                             <Input id="service-type" placeholder="e.g., Personal Care, Companion Care" />
                         </div>
                          <div className="grid gap-2">
-                            <Label htmlFor="consultation-date">Preferred Consultation Date</Label>
-                             <div className="relative">
-                                <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                                <Input id="consultation-date" type="text" placeholder="Select a date" className="pl-10" />
-                            </div>
+                            <Label htmlFor="consultation-date">Preferred Consultation Date / Time</Label>
+                            <Input id="consultation-date" type="text" placeholder="e.g., Weekday Mornings, Next Tuesday Afternoon" />
                         </div>
                          <div className="grid gap-2">
                             <Label htmlFor="message">Additional Information (Optional)</Label>
@@ -358,8 +398,3 @@ export default function HomePage() {
       </main>
     </div>
   );
-
-    
-
-
-
