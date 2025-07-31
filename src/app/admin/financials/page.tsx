@@ -58,18 +58,18 @@ const revenueVsExpensesConfig = {
 
 
 const revenueByServiceData = [
-  { service: "Personal Care", value: 45, fill: "var(--color-personal)" },
-  { service: "Skilled Nursing", value: 30, fill: "var(--color-nursing)" },
-  { service: "Companion Care", value: 15, fill: "var(--color-companion)" },
-  { service: "Transport", value: 10, fill: "var(--color-transport)" },
+  { service: "personal", value: 45, fill: "var(--color-personal)" },
+  { service: "nursing", value: 30, fill: "var(--color-nursing)" },
+  { service: "companion", value: 15, fill: "var(--color-companion)" },
+  { service: "transport", value: 10, fill: "var(--color-transport)" },
 ]
 
 const revenueByServiceConfig = {
   value: { label: "Percentage" },
-  "Personal Care": { label: "Personal Care", color: "hsl(var(--chart-1))" },
-  "Skilled Nursing": { label: "Skilled Nursing", color: "hsl(var(--chart-2))" },
-  "Companion Care": { label: "Companion Care", color: "hsl(var(--chart-3))" },
-  "Transport": { label: "Transport", color: "hsl(var(--chart-4))" },
+  personal: { label: "Personal Care", color: "hsl(var(--chart-1))" },
+  nursing: { label: "Skilled Nursing", color: "hsl(var(--chart-2))" },
+  companion: { label: "Companion Care", color: "hsl(var(--chart-3))" },
+  transport: { label: "Transport", color: "hsl(var(--chart-4))" },
 } satisfies ChartConfig
 
 
@@ -88,9 +88,10 @@ export default function FinancialsPage() {
     };
 
     const pieTooltipFormatter = (value: number, name: string) => {
+        const itemConfig = revenueByServiceConfig[name as keyof typeof revenueByServiceConfig];
         return (
             <div className="flex flex-col text-sm">
-                <span className="font-semibold">{name}</span>
+                <span className="font-semibold">{itemConfig?.label}</span>
                 <span className="text-muted-foreground">{value}%</span>
             </div>
         )
