@@ -1,4 +1,6 @@
 
+'use client';
+
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -21,7 +23,18 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { BedDouble, Stethoscope, UtensilsCrossed, CheckCircle, Calendar as CalendarIcon, Car, Check } from 'lucide-react';
+import { useState } from "react";
+
 
 const services = [
   {
@@ -71,6 +84,59 @@ const testimonials = [
     aiHint: "man"
   },
 ];
+
+function UrgentVisitModal() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>
+        <Button size="lg">Request an Urgent Visit</Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>Your request for for an urgent visit</DialogTitle>
+          <DialogDescription>
+            Fill in the following form and we will be contacting you for further information.
+          </DialogDescription>
+        </DialogHeader>
+        <form className="grid gap-6 py-4" onSubmit={(e) => { e.preventDefault(); setOpen(false); }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                    <Label htmlFor="customer-name">Name of Customer</Label>
+                    <Input id="customer-name" placeholder="John Doe" />
+                </div>
+                <div className="grid gap-2">
+                    <Label htmlFor="customer-phone">Mobile phone/ Whatsapp</Label>
+                    <Input id="customer-phone" type="tel" placeholder="+123456789" />
+                </div>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                    <Label htmlFor="guardian-name">Name of Guardian</Label>
+                    <Input id="guardian-name" placeholder="Jane Doe" />
+                </div>
+                <div className="grid gap-2">
+                    <Label htmlFor="guardian-phone">Mobile Phone/ Whatsapp</Label>
+                    <Input id="guardian-phone" type="tel" placeholder="+123456789" />
+                </div>
+            </div>
+            <div className="grid gap-2">
+                <Label htmlFor="address">Intervention address</Label>
+                <Textarea id="address" placeholder="123 Main St, Anytown..." />
+            </div>
+            <div className="grid gap-2">
+                <Label htmlFor="instructions">Special Instructions</Label>
+                <Textarea id="instructions" placeholder="e.g., Key under the mat, allergic to peanuts..." />
+            </div>
+            <DialogFooter>
+                <Button type="submit">Submit</Button>
+            </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  )
+}
 
 export default function HomePage() {
   return (
@@ -207,6 +273,9 @@ export default function HomePage() {
                 </CardFooter>
               </Card>
             </div>
+             <div className="text-center mt-8">
+              <UrgentVisitModal />
+            </div>
           </div>
         </section>
 
@@ -294,4 +363,5 @@ export default function HomePage() {
       </main>
     </div>
   );
-}
+
+    
