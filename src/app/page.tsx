@@ -113,7 +113,7 @@ function UrgentVisitModal({ trigger }: { trigger: React.ReactNode }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Your request for for an urgent visit</DialogTitle>
+          <DialogTitle>Your request for an urgent visit</DialogTitle>
           <DialogDescription>
             Fill in the following form and we will be contacting you for further information.
           </DialogDescription>
