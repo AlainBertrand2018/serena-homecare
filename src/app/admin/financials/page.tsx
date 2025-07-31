@@ -66,10 +66,10 @@ const revenueByServiceData = [
 
 const revenueByServiceConfig = {
   value: { label: "Percentage" },
-  personal: { label: "Personal Care", color: "hsl(var(--chart-1))" },
-  nursing: { label: "Skilled Nursing", color: "hsl(var(--chart-2))" },
-  companion: { label: "Companion Care", color: "hsl(var(--chart-3))" },
-  transport: { label: "Transport", color: "hsl(var(--chart-4))" },
+  "Personal Care": { label: "Personal Care", color: "hsl(var(--chart-1))" },
+  "Skilled Nursing": { label: "Skilled Nursing", color: "hsl(var(--chart-2))" },
+  "Companion Care": { label: "Companion Care", color: "hsl(var(--chart-3))" },
+  "Transport": { label: "Transport", color: "hsl(var(--chart-4))" },
 } satisfies ChartConfig
 
 
@@ -83,21 +83,17 @@ export default function FinancialsPage() {
     };
     
     const pieLegendFormatter = (value: string) => {
-        const label = revenueByServiceConfig[value as keyof typeof revenueByServiceConfig]?.label || value;
-        return <span className="text-foreground">{label}</span>;
+        const itemConfig = revenueByServiceConfig[value as keyof typeof revenueByServiceConfig];
+        return <span className="text-foreground">{itemConfig?.label || value}</span>;
     };
 
     const pieTooltipFormatter = (value: number, name: string) => {
-        const item = revenueByServiceData.find(d => d.service === name);
-        if (item) {
-            return (
-                <div className="flex flex-col">
-                    <span className="font-semibold">{item.service}</span>
-                    <span className="text-muted-foreground">{item.value}%</span>
-                </div>
-            )
-        }
-        return `${name}: ${value}%`;
+        return (
+            <div className="flex flex-col text-sm">
+                <span className="font-semibold">{name}</span>
+                <span className="text-muted-foreground">{value}%</span>
+            </div>
+        )
     }
 
   return (
