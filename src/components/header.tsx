@@ -17,7 +17,7 @@ export function Header() {
     { href: "/", label: "Home" },
     { href: "/#services", label: "Services" },
     { href: "/#testimonials", label: "Testimonials" },
-    { href: "/careers", label: "Careers" },
+    { href: "/careers", label: "Apply as Caregiver" },
     { href: "/#booking", label: "Contact" },
   ];
 

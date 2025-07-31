@@ -85,13 +85,13 @@ const testimonials = [
   },
 ];
 
-function UrgentVisitModal() {
+function UrgentVisitModal({ trigger }: { trigger: React.ReactNode }) {
   const [open, setOpen] = useState(false);
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg">Request an Urgent Visit</Button>
+        {trigger}
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
@@ -162,9 +162,7 @@ export default function HomePage() {
               <Button size="lg" asChild>
                 <Link href="#booking">Book Consultation</Link>
               </Button>
-              <Button size="lg" variant="secondary" asChild>
-                <Link href="/careers">Apply as Caregiver</Link>
-              </Button>
+              <UrgentVisitModal trigger={<Button size="lg" variant="secondary">Request an Urgent Visit</Button>} />
             </div>
           </div>
         </section>
@@ -272,9 +270,6 @@ export default function HomePage() {
                   <Button className="w-full" variant="outline">Choose Plan</Button>
                 </CardFooter>
               </Card>
-            </div>
-             <div className="text-center mt-8">
-              <UrgentVisitModal />
             </div>
           </div>
         </section>

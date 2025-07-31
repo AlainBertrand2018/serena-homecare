@@ -40,6 +40,12 @@ export default function CaregiverOnboardingPage() {
 
   return (
     <div className="min-h-screen bg-muted/40 py-12 px-4">
+       <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold">Apply as a Caregiver</h1>
+        <p className="text-muted-foreground mt-2">
+          We are honored by your application. Fill in the following form. We will contact you very soon.
+        </p>
+      </div>
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
           <CardTitle className='text-3xl'>Caregiver Onboarding Form</CardTitle>
