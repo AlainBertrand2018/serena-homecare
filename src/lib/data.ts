@@ -213,11 +213,11 @@ export const visits: Visit[] = [
 ];
 
 export const recentTransactions: Transaction[] = [
-    { id: 't1', name: 'Eleanor Vance', description: 'Invoice #INV001', type: 'Invoice', status: 'Paid', date: 'July 20, 2024', amount: 'MUR4,200.00' },
-    { id: 't2', name: 'Samantha Reed', description: 'Payroll Payout', type: 'Payroll', status: 'Sent', date: 'July 15, 2024', amount: 'MUR8,500.00' },
-    { id: 't3', name: 'Arthur Pendelton', description: 'Invoice #INV002', type: 'Invoice', status: 'Pending', date: 'July 22, 2024', amount: 'MUR3,000.00' },
-    { id: 't4', name: 'Michael Chen', description: 'Payroll Payout', type: 'Payroll', status: 'Sent', date: 'July 15, 2024', amount: 'MUR7,800.00' },
-    { id: 't5', name: 'Beatrice Miller', description: 'Invoice #INV003', type: 'Invoice', status: 'Overdue', date: 'July 18, 2024', amount: 'MUR5,500.00' },
+    { id: 't1', name: 'Azizza MOOTTEE', description: 'Invoice #INV001', type: 'Invoice', status: 'Paid', date: 'July 20, 2024', amount: 'MUR4,200.00' },
+    { id: 't2', name: 'Samantha RENÉ', description: 'Payroll Payout', type: 'Payroll', status: 'Sent', date: 'July 15, 2024', amount: 'MUR8,500.00' },
+    { id: 't3', name: 'Mario DINDAR', description: 'Invoice #INV002', type: 'Invoice', status: 'Pending', date: 'July 22, 2024', amount: 'MUR3,000.00' },
+    { id: 't4', name: 'David LELOUP', description: 'Payroll Payout', type: 'Payroll', status: 'Sent', date: 'July 15, 2024', amount: 'MUR7,800.00' },
+    { id: 't5', name: 'Preety NAANKI', description: 'Invoice #INV003', type: 'Invoice', status: 'Overdue', date: 'July 18, 2024', amount: 'MUR5,500.00' },
 ];
 
 export const getClientById = (id: string): Client | undefined => {
