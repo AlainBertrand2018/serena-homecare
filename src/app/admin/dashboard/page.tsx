@@ -32,7 +32,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart"
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Line, LineChart as RechartsLineChart } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Line, LineChart as RechartsLineChart, Cell } from "recharts"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -237,7 +237,11 @@ export default function AdminDashboard() {
                                 width={100}
                              />
                             <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
-                            <Bar dataKey="hours" radius={5} />
+                            <Bar dataKey="hours" radius={5}>
+                                {barChartData.map((entry) => (
+                                    <Cell key={`cell-${entry.name}`} fill={entry.fill} />
+                                ))}
+                            </Bar>
                         </BarChart>
                     </ChartContainer>
                 </CardContent>
