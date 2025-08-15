@@ -60,6 +60,7 @@ export function WelcomePopup() {
                   <li>Intégration clients simplifiée</li>
                   <li>Prise de Rendez-vous et gestion des visites à domicile</li>
               </ul>
+              <p className="font-bold pt-2">L’humain d’abord, le reste en un clic.</p>
             </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
