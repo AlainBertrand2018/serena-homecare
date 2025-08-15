@@ -173,7 +173,7 @@ function ChatbotWidgetClient() {
         <PopoverContent 
             side="top" 
             align="end" 
-            className="w-[400px] h-[600px] p-0 rounded-lg shadow-2xl mr-4 mb-2"
+            className="w-[calc(100vw-2rem)] sm:w-[400px] h-[600px] p-0 rounded-lg shadow-2xl mb-2"
         >
            {open && <ChatInterface />}
         </PopoverContent>
