@@ -6,6 +6,8 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ChatbotWidget } from "@/components/chatbot-widget";
 import { WelcomePopup } from "@/components/welcome-popup";
+import { Analytics } from "@vercel/analytics/next"
+
 
 export const metadata: Metadata = {
   title: "SERENA",
@@ -37,6 +39,7 @@ export default function RootLayout({
         <Footer />
         <ChatbotWidget />
         <WelcomePopup />
+        <Analytics />
       </body>
     </html>
   );
