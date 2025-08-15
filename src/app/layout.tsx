@@ -1,9 +1,11 @@
+
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { ChatbotWidget } from "@/components/chatbot-widget";
+import { WelcomePopup } from "@/components/welcome-popup";
 
 export const metadata: Metadata = {
   title: "SERENA",
@@ -34,6 +36,7 @@ export default function RootLayout({
         <Toaster />
         <Footer />
         <ChatbotWidget />
+        <WelcomePopup />
       </body>
     </html>
   );
