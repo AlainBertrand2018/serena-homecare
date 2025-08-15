@@ -48,11 +48,19 @@ export function WelcomePopup() {
               data-ai-hint="logo"
             />
           </div>
-          <AlertDialogTitle>SERENA : La Gestion de Votre Service en Toute Intelligence</AlertDialogTitle>
-          <AlertDialogDescription>
-            Optimisez opérations, qualité et rentabilité avec un suivi intelligent en temps réel.
-            <br />
-            <strong className="mt-2 block">L’humain d’abord, le reste en un clic.</strong>
+          <AlertDialogTitle>La Gestion de Votre Service de Soins à la Personne en Toute Intelligence</AlertDialogTitle>
+          <AlertDialogDescription asChild>
+            <div className='space-y-3'>
+              <p>
+                Optimisez vos opérations, assurez la qualité et la rentabilité de votre service avec un suivi intelligent en temps réel.
+              </p>
+              <ul className="list-disc list-inside space-y-1 text-left">
+                  <li>Tableau de bord pour une vue d'ensemble : Comptabilité, Calendrier, Clients, Personnels</li>
+                  <li>Gestion et recrutement des aides-soignants</li>
+                  <li>Intégration clients simplifiée</li>
+                  <li>Prise de Rendez-vous et gestion des visites à domicile</li>
+              </ul>
+            </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
