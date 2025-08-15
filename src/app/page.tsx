@@ -182,7 +182,7 @@ export default function HomePage() {
               </Button>
               <UrgentVisitModal trigger={
                 <Button size="lg" variant="secondary" style={{ backgroundColor: 'hsl(43, 96%, 56%)' }}>
-                  <Clock /> Demander une Visite Urgente
+                  <Clock /> Demandez une Visite Urgente à Domicile.
                 </Button>
               } />
             </div>
