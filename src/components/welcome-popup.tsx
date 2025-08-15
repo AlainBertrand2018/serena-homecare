@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,6 +38,16 @@ export function WelcomePopup() {
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogContent>
         <AlertDialogHeader>
+          <div className="w-1/2 mx-auto mb-4">
+            <Image
+              src="/images/popupLogo.webp"
+              alt="SERENA Logo"
+              width={200}
+              height={100}
+              className="w-full h-auto object-contain"
+              data-ai-hint="logo"
+            />
+          </div>
           <AlertDialogTitle>SERENA : La Gestion de Votre Service en Toute Intelligence</AlertDialogTitle>
           <AlertDialogDescription>
             Optimisez opérations, qualité et rentabilité avec un suivi intelligent en temps réel.
