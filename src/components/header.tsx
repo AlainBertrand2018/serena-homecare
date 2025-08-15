@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from "next/link";
@@ -87,9 +88,9 @@ export function Header() {
           </nav>
         </SheetContent>
       </Sheet>
-       <div className="flex-grow md:hidden text-center">
+       <div className="flex w-full items-center justify-center md:hidden">
             <Link href="/">
-                <LogoWithName className="justify-center"/>
+                <LogoWithName />
             </Link>
        </div>
        <div className="md:hidden">

@@ -111,16 +111,16 @@ const Step1 = () => (
   <div className="space-y-6">
     <h3 className="text-lg font-semibold">Identité du Client</h3>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="grid gap-2">
+        <div className="grid gap-2 md:col-span-1">
             <Label>Titre</Label>
             <Select>
                 <SelectTrigger><SelectValue placeholder="Sélectionner" /></SelectTrigger>
                 <SelectContent><SelectItem value="mr">M.</SelectItem><SelectItem value="ms">Mme</SelectItem><SelectItem value="mrs">Mlle</SelectItem></SelectContent>
             </Select>
         </div>
-        <div className="grid gap-2"><Label>Prénom</Label><Input /></div>
-        <div className="grid gap-2"><Label>Nom</Label><Input /></div>
-        <div className="grid gap-2"><Label>Nom d'usage</Label><Input /></div>
+        <div className="grid gap-2 md:col-span-1"><Label>Prénom</Label><Input /></div>
+        <div className="grid gap-2 md:col-span-1"><Label>Nom</Label><Input /></div>
+        <div className="grid gap-2 md:col-span-1"><Label>Nom d'usage</Label><Input /></div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="grid gap-2">

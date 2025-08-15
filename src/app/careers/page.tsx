@@ -191,7 +191,7 @@ const Section2 = () => (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
             <YesNoRadio label="Copie de la carte d'identité fournie" id="nid-copy" />
             <div className="space-y-2">
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
                     <YesNoRadio label="Extrait de casier judiciaire" id="police-clearance"/>
                     <DatePicker label="Date d'émission"/>
                 </div>

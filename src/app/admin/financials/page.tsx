@@ -205,7 +205,7 @@ export default function FinancialsPage() {
 
          <Card>
             <Tabs defaultValue="customer">
-                 <CardHeader className="flex flex-row items-center">
+                 <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <div className="grid gap-2">
                         <CardTitle>Transactions Récentes</CardTitle>
                         <CardDescription>
@@ -213,7 +213,7 @@ export default function FinancialsPage() {
                         </CardDescription>
                     </div>
                     <div className="ml-auto flex items-center gap-2">
-                         <TabsList>
+                         <TabsList className="grid grid-cols-2 w-full sm:w-auto">
                             <TabsTrigger value="customer">Factures Clients</TabsTrigger>
                             <TabsTrigger value="caregiver">Paie des Soignants</TabsTrigger>
                         </TabsList>
