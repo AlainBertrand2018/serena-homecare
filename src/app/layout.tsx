@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "SERENA",
   description: "Service de Soins à Domicile",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/images/siteIcon.webp",
   },
 };
 
