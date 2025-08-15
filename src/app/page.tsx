@@ -176,7 +176,7 @@ export default function HomePage() {
             <p className="text-lg md:text-xl max-w-2xl mx-auto">
               Offrez à vos proches des soins dignes et professionnels dans le confort de leur propre maison.
             </p>
-            <div className="flex justify-center gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-6">
               <Button size="lg" asChild>
                 <Link href="#booking">Prendre Rendez-vous</Link>
               </Button>
