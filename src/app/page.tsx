@@ -171,10 +171,10 @@ export default function HomePage() {
           />
           <div className="relative z-10 p-4 space-y-4">
             <h1 className="text-4xl md:text-6xl font-bold">
-              Soins à Domicile Fiables, Dispensés avec Dignité
+              Soins à Domicile Fiables et Dignes
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto">
-              Fournir des soins compatissants et professionnels à vos proches dans le confort de leur propre maison.
+              Offrez à vos proches des soins dignes et professionnels dans le confort de leur propre maison.
             </p>
             <div className="flex justify-center gap-4 mt-6">
               <Button size="lg" asChild>
@@ -398,3 +398,5 @@ export default function HomePage() {
       </main>
     </div>
   );
+
+    
