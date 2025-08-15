@@ -17,8 +17,11 @@ const LOCAL_STORAGE_KEY = 'hasSeenWelcomePopup';
 
 export function WelcomePopup() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    // This effect runs only on the client side
+    setIsClient(true);
     const hasSeenPopup = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (!hasSeenPopup) {
       setIsOpen(true);
@@ -29,8 +32,9 @@ export function WelcomePopup() {
     localStorage.setItem(LOCAL_STORAGE_KEY, 'true');
     setIsOpen(false);
   };
-
-  if (!isOpen) {
+  
+  // Render nothing until the component is mounted on the client
+  if (!isClient || !isOpen) {
     return null;
   }
 
