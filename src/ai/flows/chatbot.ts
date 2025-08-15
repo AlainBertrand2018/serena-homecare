@@ -2,7 +2,7 @@
 'use server';
 
 /**
- * @fileOverview A simple chatbot flow for JOVE HOME CARE.
+ * @fileOverview A simple chatbot flow for SERENA.
  *
  * - chat - A function that handles the chat conversation.
  * - ChatInput - The input type for the chat function.
@@ -33,9 +33,9 @@ const chatPrompt = ai.definePrompt({
   name: 'chatPrompt',
   input: { schema: ChatInputSchema },
   output: { format: 'text' },
-  system: `You are a friendly and helpful AI assistant for JOVE HOME CARE, a home care service provider. Your goal is to answer user questions about the company, its services, and how to get started. Be concise and professional. Do not make up information you don't know. If you don't know the answer, politely say that you don't have that information.
+  system: `You are a friendly and helpful AI assistant for SERENA, a home care service provider. Your goal is to answer user questions about the company, its services, and how to get started. Be concise and professional. Do not make up information you don't know. If you don't know the answer, politely say that you don't have that information.
 
-Your first message should always be: "Hello! I'm the JOVE HOME CARE assistant. How can I help you today?"
+Your first message should always be: "Hello! I'm the SERENA assistant. How can I help you today?"
 
 Here are the services offered:
 - Personal Care: Assistance with daily activities like bathing, dressing, and mobility.
@@ -71,7 +71,7 @@ const chatFlow = ai.defineFlow(
     // If history is empty, it's a new conversation.
     // Return the predefined greeting from the system prompt.
     if (input.history.length === 0) {
-      return "Hello! I'm the JOVE HOME CARE assistant. How can I help you today?";
+      return "Hello! I'm the SERENA assistant. How can I help you today?";
     }
 
     const { output } = await chatPrompt(input);

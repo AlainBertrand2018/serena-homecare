@@ -285,7 +285,7 @@ const Step6 = () => (
             I, the undersigned, hereby declare that all information provided in this onboarding document is true, accurate, and complete to the best of my knowledge. I understand that any false or misleading information may result in the refusal or termination of care services.
         </p>
         <p className="text-sm text-muted-foreground">
-            As the client or the legally authorized custodian/guardian, I grant permission to JOVE HOME CARE and its designated caregivers to perform the duties outlined in the care plan. This includes, but is not limited to, providing personal care, administering medication as prescribed, assisting with mobility, and providing transportation for medical appointments or essential errands. I acknowledge that I have discussed the care plan and consent to the services described herein.
+            As the client or the legally authorized custodian/guardian, I grant permission to SERENA and its designated caregivers to perform the duties outlined in the care plan. This includes, but is not limited to, providing personal care, administering medication as prescribed, assisting with mobility, and providing transportation for medical appointments or essential errands. I acknowledge that I have discussed the care plan and consent to the services described herein.
         </p>
     </div>
     <div className="flex items-center space-x-2">

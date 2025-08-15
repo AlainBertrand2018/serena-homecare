@@ -6,8 +6,8 @@ import { Footer } from "@/components/footer";
 import { ChatbotWidget } from "@/components/chatbot-widget";
 
 export const metadata: Metadata = {
-  title: "JOVE HOME CARE",
-  description: "A simple and intuitive app for caregivers.",
+  title: "SERENA",
+  description: "Service de Soins à Domicile",
   icons: {
     icon: "/favicon.ico",
   },

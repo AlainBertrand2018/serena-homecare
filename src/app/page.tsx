@@ -85,13 +85,13 @@ const whyChooseUs = [
 const testimonials = [
   {
     name: "Margaret T.",
-    review: "The caregiver from JOVE HOME CARE has been a true blessing for our family. So compassionate and reliable.",
+    review: "The caregiver from SERENA has been a true blessing for our family. So compassionate and reliable.",
     avatar: "https://placehold.co/100x100.png",
     aiHint: "elderly woman"
   },
   {
     name: "John & Susan P.",
-    review: "We were so worried about finding good care for my father. JOVE HOME CARE made the process seamless and stress-free.",
+    review: "We were so worried about finding good care for my father. SERENA made the process seamless and stress-free.",
     avatar: "https://placehold.co/100x100.png",
     aiHint: "elderly couple"
   },
@@ -193,7 +193,7 @@ export default function HomePage() {
         <section id="why-us" className="py-12 md:py-20 bg-muted/40">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-                    Why Choose JOVE HOME CARE?
+                    Why Choose SERENA?
                 </h2>
                 <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
                     {whyChooseUs.map((item) => (
