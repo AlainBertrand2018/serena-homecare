@@ -53,7 +53,7 @@ export function ClientForm({ client, trigger, onAddClient }: ClientFormProps) {
         }
         
         // Here you would also handle the editing logic
-        console.log("Client form submitted", newClientData);
+        console.log("Formulaire client soumis", newClientData);
         setOpen(false);
     }
 
@@ -62,74 +62,74 @@ export function ClientForm({ client, trigger, onAddClient }: ClientFormProps) {
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-3xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>{isEditing ? "Edit Client" : "Add New Client"}</DialogTitle>
+          <DialogTitle>{isEditing ? "Modifier Client" : "Ajouter Nouveau Client"}</DialogTitle>
           <DialogDescription>
-            {isEditing ? "Update the client's information below." : "Fill out the form to add a new client."}
+            {isEditing ? "Mettez à jour les informations du client ci-dessous." : "Remplissez le formulaire pour ajouter un nouveau client."}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
             <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="grid gap-2">
-                        <Label htmlFor="name">Full Name</Label>
+                        <Label htmlFor="name">Nom Complet</Label>
                         <Input id="name" name="name" defaultValue={client?.name} placeholder="John Doe" />
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="address">Address</Label>
-                        <Input id="address" name="address" defaultValue={client?.address} placeholder="123 Main St, Anytown, USA" />
+                        <Label htmlFor="address">Adresse</Label>
+                        <Input id="address" name="address" defaultValue={client?.address} placeholder="123 Rue Principale, Anytown, France" />
                     </div>
                 </div>
 
                  <div className="grid gap-2">
-                    <Label htmlFor="avatarUrl">Avatar URL</Label>
+                    <Label htmlFor="avatarUrl">URL de l'Avatar</Label>
                     <Input id="avatarUrl" name="avatarUrl" defaultValue={client?.avatarUrl} placeholder="https://placehold.co/100x100.png" />
                 </div>
                 
-                <h3 className="font-semibold text-lg mt-4 border-t pt-4">Emergency Contact</h3>
+                <h3 className="font-semibold text-lg mt-4 border-t pt-4">Contact d'Urgence</h3>
                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div className="grid gap-2">
-                        <Label htmlFor="ec-name">Name</Label>
+                        <Label htmlFor="ec-name">Nom</Label>
                         <Input id="ec-name" name="ec-name" defaultValue={client?.emergencyContact.name} placeholder="Jane Doe" />
                     </div>
                      <div className="grid gap-2">
-                        <Label htmlFor="ec-relationship">Relationship</Label>
-                        <Input id="ec-relationship" name="ec-relationship" defaultValue={client?.emergencyContact.relationship} placeholder="Spouse" />
+                        <Label htmlFor="ec-relationship">Relation</Label>
+                        <Input id="ec-relationship" name="ec-relationship" defaultValue={client?.emergencyContact.relationship} placeholder="Conjoint(e)" />
                     </div>
                      <div className="grid gap-2">
-                        <Label htmlFor="ec-phone">Phone</Label>
-                        <Input id="ec-phone" name="ec-phone" defaultValue={client?.emergencyContact.phone} placeholder="555-123-4567" />
+                        <Label htmlFor="ec-phone">Téléphone</Label>
+                        <Input id="ec-phone" name="ec-phone" defaultValue={client?.emergencyContact.phone} placeholder="0612345678" />
                     </div>
                 </div>
 
-                <h3 className="font-semibold text-lg mt-4 border-t pt-4">Medical Information</h3>
+                <h3 className="font-semibold text-lg mt-4 border-t pt-4">Informations Médicales</h3>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="grid gap-2">
-                        <Label htmlFor="allergies">Allergies (comma-separated)</Label>
-                        <Input id="allergies" name="allergies" defaultValue={client?.medicalInfo.allergies.join(', ')} placeholder="Peanuts, Shellfish" />
+                        <Label htmlFor="allergies">Allergies (séparées par des virgules)</Label>
+                        <Input id="allergies" name="allergies" defaultValue={client?.medicalInfo.allergies.join(', ')} placeholder="Arachides, Fruits de mer" />
                     </div>
                      <div className="grid gap-2">
-                        <Label htmlFor="conditions">Conditions (comma-separated)</Label>
-                        <Input id="conditions" name="conditions" defaultValue={client?.medicalInfo.conditions.join(', ')} placeholder="Hypertension, Diabetes" />
+                        <Label htmlFor="conditions">Conditions (séparées par des virgules)</Label>
+                        <Input id="conditions" name="conditions" defaultValue={client?.medicalInfo.conditions.join(', ')} placeholder="Hypertension, Diabète" />
                     </div>
                 </div>
                 
                 <div className="grid gap-2">
-                    <Label>Medications</Label>
-                    {/* A more complex implementation would allow adding/removing medications dynamically */}
+                    <Label>Médicaments</Label>
+                    {/* Une implémentation plus complexe permettrait d'ajouter/supprimer dynamiquement des médicaments */}
                     <div className="text-sm text-muted-foreground p-2 border rounded-md">
-                       For this prototype, medication editing is not implemented.
+                       Pour ce prototype, la modification des médicaments n'est pas implémentée.
                     </div>
                 </div>
                 
-                <h3 className="font-semibold text-lg mt-4 border-t pt-4">Care Plan</h3>
+                <h3 className="font-semibold text-lg mt-4 border-t pt-4">Plan de Soins</h3>
                 <div className="grid gap-2">
-                    <Textarea id="care-plan" name="care-plan" defaultValue={client?.carePlan} rows={4} placeholder="Client preferences, daily routines, etc."/>
+                    <Textarea id="care-plan" name="care-plan" defaultValue={client?.carePlan} rows={4} placeholder="Préférences du client, routines quotidiennes, etc."/>
                 </div>
 
             </div>
             <DialogFooter>
-                <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-                <Button type="submit">{isEditing ? "Save Changes" : "Create Client"}</Button>
+                <Button type="button" variant="outline" onClick={() => setOpen(false)}>Annuler</Button>
+                <Button type="submit">{isEditing ? "Sauvegarder" : "Créer Client"}</Button>
             </DialogFooter>
         </form>
       </DialogContent>

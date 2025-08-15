@@ -14,13 +14,13 @@ export default function CustomerDashboard() {
         <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-1">
           <Card>
             <CardHeader>
-              <CardTitle>Welcome to your Portal</CardTitle>
+              <CardTitle>Bienvenue sur votre Portail</CardTitle>
               <CardDescription>
-                This is your central hub for managing care.
+                Ceci est votre hub central pour la gestion des soins.
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <p>From here, you will be able to view upcoming visits, manage your profile, and communicate with your caregivers. This section is under construction.</p>
+              <p>D'ici, vous pourrez voir les visites à venir, gérer votre profil et communiquer avec vos soignants. Cette section est en construction.</p>
             </CardContent>
           </Card>
         </div>

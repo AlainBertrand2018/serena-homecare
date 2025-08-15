@@ -19,16 +19,16 @@ export default function SignupPage() {
       <CardHeader className="space-y-4">
         <LogoWithName className="justify-center" />
         <div className="text-center">
-          <CardTitle className="text-2xl">Create an Account</CardTitle>
+          <CardTitle className="text-2xl">Créer un Compte</CardTitle>
           <CardDescription>
-            Enter your information to create an account
+            Entrez vos informations pour créer un compte
           </CardDescription>
         </div>
       </CardHeader>
       <CardContent>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="full-name">Full name</Label>
+            <Label htmlFor="full-name">Nom complet</Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input id="full-name" placeholder="John Doe" required className="pl-10 bg-background/70"/>
@@ -41,27 +41,27 @@ export default function SignupPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder="m@exemple.com"
                 required
                 className="pl-10 bg-background/70"
               />
             </div>
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">Mot de passe</Label>
              <div className="relative">
               <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input id="password" type="password" required className="pl-10 bg-background/70"/>
             </div>
           </div>
           <Button type="submit" className="w-full" asChild>
-            <Link href="/verify-otp">Create account</Link>
+            <Link href="/verify-otp">Créer un compte</Link>
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
-          Already have an account?{" "}
+          Vous avez déjà un compte ?{" "}
           <Link href="/login" className="underline">
-            Login
+            Connexion
           </Link>
         </div>
       </CardContent>

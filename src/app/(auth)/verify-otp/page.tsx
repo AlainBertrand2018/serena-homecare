@@ -16,9 +16,9 @@ export default function VerifyOtpPage() {
       <CardHeader className="space-y-4">
         <LogoWithName className="justify-center" />
         <div className="text-center">
-          <CardTitle className="text-2xl">Verify Your Account</CardTitle>
+          <CardTitle className="text-2xl">Vérifiez Votre Compte</CardTitle>
           <CardDescription>
-            Enter the 6-digit code sent to your email address.
+            Entrez le code à 6 chiffres envoyé à votre adresse e-mail.
           </CardDescription>
         </div>
       </CardHeader>
@@ -33,12 +33,12 @@ export default function VerifyOtpPage() {
             <Input id="otp-6" maxLength={1} className="text-center text-lg bg-background/70" />
           </div>
           <Button type="submit" className="w-full" asChild>
-             <Link href="/dashboard">Verify Code</Link>
+             <Link href="/dashboard">Vérifier le Code</Link>
           </Button>
         </form>
         <div className="mt-4 text-center text-sm">
-          Didn't receive a code?{" "}
-          <button className="underline">Resend</button>
+          Vous n'avez pas reçu de code ?{" "}
+          <button className="underline">Renvoyer</button>
         </div>
       </CardContent>
     </Card>

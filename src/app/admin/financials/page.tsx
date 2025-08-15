@@ -45,15 +45,15 @@ import Link from "next/link";
 import { recentTransactions } from "@/lib/data";
 
 const revenueVsExpensesData = [
-  { month: "Apr", revenue: 45000, expenses: 32000 },
-  { month: "May", revenue: 52000, expenses: 34000 },
-  { month: "Jun", revenue: 55000, expenses: 36000 },
-  { month: "Jul", revenue: 60000, expenses: 38000 },
+  { month: "Avr", revenue: 45000, expenses: 32000 },
+  { month: "Mai", revenue: 52000, expenses: 34000 },
+  { month: "Juin", revenue: 55000, expenses: 36000 },
+  { month: "Juil", revenue: 60000, expenses: 38000 },
 ];
 
 const revenueVsExpensesConfig = {
-  revenue: { label: "Revenue", color: "hsl(var(--primary))" },
-  expenses: { label: "Expenses", color: "hsl(var(--secondary))" },
+  revenue: { label: "Revenu", color: "hsl(var(--primary))" },
+  expenses: { label: "Dépenses", color: "hsl(var(--secondary))" },
 } satisfies ChartConfig;
 
 
@@ -65,17 +65,17 @@ const revenueByServiceData = [
 ]
 
 const revenueByServiceConfig = {
-  value: { label: "Percentage" },
-  personal: { label: "Personal Care", color: "hsl(var(--chart-1))" },
-  nursing: { label: "Skilled Nursing", color: "hsl(var(--chart-2))" },
-  companion: { label: "Companion Care", color: "hsl(var(--chart-3))" },
+  value: { label: "Pourcentage" },
+  personal: { label: "Soins Personnels", color: "hsl(var(--chart-1))" },
+  nursing: { label: "Soins Infirmiers", color: "hsl(var(--chart-2))" },
+  companion: { label: "Accompagnement", color: "hsl(var(--chart-3))" },
   transport: { label: "Transport", color: "hsl(var(--chart-4))" },
 } satisfies ChartConfig
 
 
 export default function FinancialsPage() {
-    const customerTransactions = recentTransactions.filter(t => t.type === 'Invoice');
-    const caregiverTransactions = recentTransactions.filter(t => t.type === 'Payroll');
+    const customerTransactions = recentTransactions.filter(t => t.type === 'Facture');
+    const caregiverTransactions = recentTransactions.filter(t => t.type === 'Paie');
 
     const legendFormatter = (value: string) => {
         const label = revenueVsExpensesConfig[value as keyof typeof revenueVsExpensesConfig]?.label || value;
@@ -100,59 +100,59 @@ export default function FinancialsPage() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="font-semibold text-2xl md:text-3xl">Financials</h1>
+        <h1 className="font-semibold text-2xl md:text-3xl">Finances</h1>
       </div>
       
        <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Revenue (MTD)
+                Revenu Total (Mois en cours)
               </CardTitle>
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">MUR60,000</div>
               <p className="text-xs text-muted-foreground">
-                +9.1% from last month
+                +9.1% depuis le mois dernier
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Net Profit (MTD)
+                Bénéfice Net (Mois en cours)
               </CardTitle>
               <CircleDollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">MUR22,000</div>
               <p className="text-xs text-muted-foreground">
-                +12.5% from last month
+                +12.5% depuis le mois dernier
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Accounts Receivable</CardTitle>
+              <CardTitle className="text-sm font-medium">Comptes à Recevoir</CardTitle>
               <CreditCard className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">MUR15,231.89</div>
               <p className="text-xs text-muted-foreground">
-                15 outstanding invoices
+                15 factures en attente
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Payroll Expenses (MTD)</CardTitle>
+              <CardTitle className="text-sm font-medium">Dépenses de Paie (Mois en cours)</CardTitle>
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">MUR38,000</div>
               <p className="text-xs text-muted-foreground">
-                 for 45 caregivers
+                 pour 45 soignants
               </p>
             </CardContent>
           </Card>
@@ -161,8 +161,8 @@ export default function FinancialsPage() {
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             <Card className="col-span-4">
                 <CardHeader>
-                    <CardTitle>Revenue vs. Expenses</CardTitle>
-                    <CardDescription>A look at profitability over the last four months.</CardDescription>
+                    <CardTitle>Revenus vs. Dépenses</CardTitle>
+                    <CardDescription>Un aperçu de la rentabilité sur les quatre derniers mois.</CardDescription>
                 </CardHeader>
                 <CardContent>
                      <ChartContainer config={revenueVsExpensesConfig} className="w-full h-[300px]">
@@ -181,8 +181,8 @@ export default function FinancialsPage() {
 
              <Card className="col-span-3">
                 <CardHeader>
-                    <CardTitle>Revenue by Service Type</CardTitle>
-                    <CardDescription>Breakdown of revenue streams for the current month.</CardDescription>
+                    <CardTitle>Revenu par Type de Service</CardTitle>
+                    <CardDescription>Répartition des sources de revenus pour le mois en cours.</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1 pb-0">
                      <ChartContainer config={revenueByServiceConfig} className="mx-auto aspect-square max-h-[300px]">
@@ -207,15 +207,15 @@ export default function FinancialsPage() {
             <Tabs defaultValue="customer">
                  <CardHeader className="flex flex-row items-center">
                     <div className="grid gap-2">
-                        <CardTitle>Recent Transactions</CardTitle>
+                        <CardTitle>Transactions Récentes</CardTitle>
                         <CardDescription>
-                            Invoices paid and payments issued this month.
+                            Factures payées et paiements émis ce mois-ci.
                         </CardDescription>
                     </div>
                     <div className="ml-auto flex items-center gap-2">
                          <TabsList>
-                            <TabsTrigger value="customer">Customer Invoices</TabsTrigger>
-                            <TabsTrigger value="caregiver">Caregiver Payroll</TabsTrigger>
+                            <TabsTrigger value="customer">Factures Clients</TabsTrigger>
+                            <TabsTrigger value="caregiver">Paie des Soignants</TabsTrigger>
                         </TabsList>
                     </div>
                 </CardHeader>
@@ -224,11 +224,11 @@ export default function FinancialsPage() {
                         <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>Customer</TableHead>
-                                    <TableHead>Invoice #</TableHead>
-                                    <TableHead>Status</TableHead>
+                                    <TableHead>Client</TableHead>
+                                    <TableHead>Facture #</TableHead>
+                                    <TableHead>Statut</TableHead>
                                     <TableHead>Date</TableHead>
-                                    <TableHead className="text-right">Amount</TableHead>
+                                    <TableHead className="text-right">Montant</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -242,8 +242,8 @@ export default function FinancialsPage() {
                                 </TableCell>
                                 <TableCell>
                                     <Badge 
-                                        variant={transaction.status === 'Paid' ? 'default' : 'destructive'} 
-                                        className={transaction.status === 'Pending' ? 'bg-yellow-500' : ''}
+                                        variant={transaction.status === 'Payée' ? 'default' : 'destructive'} 
+                                        className={transaction.status === 'En attente' ? 'bg-yellow-500' : ''}
                                     >
                                         {transaction.status}
                                     </Badge>
@@ -259,11 +259,11 @@ export default function FinancialsPage() {
                           <Table>
                             <TableHeader>
                                 <TableRow>
-                                    <TableHead>Caregiver</TableHead>
+                                    <TableHead>Soignant</TableHead>
                                     <TableHead>Description</TableHead>
-                                    <TableHead>Status</TableHead>
+                                    <TableHead>Statut</TableHead>
                                     <TableHead>Date</TableHead>
-                                    <TableHead className="text-right">Amount</TableHead>
+                                    <TableHead className="text-right">Montant</TableHead>
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
@@ -276,7 +276,7 @@ export default function FinancialsPage() {
                                     {transaction.description}
                                 </TableCell>
                                 <TableCell>
-                                    <Badge variant={transaction.status === 'Sent' ? 'default' : 'destructive'}>
+                                    <Badge variant={transaction.status === 'Envoyée' ? 'default' : 'destructive'}>
                                         {transaction.status}
                                     </Badge>
                                 </TableCell>

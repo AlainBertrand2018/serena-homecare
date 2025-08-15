@@ -16,11 +16,11 @@ function SubmitButton() {
     <Button type="submit" disabled={pending}>
       {pending ? (
         <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Summarizing...
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Résumé en cours...
         </>
       ) : (
         <>
-          <Sparkles className="mr-2 h-4 w-4" /> Summarize with AI
+          <Sparkles className="mr-2 h-4 w-4" /> Résumer avec l'IA
         </>
       )}
     </Button>
@@ -37,13 +37,13 @@ export function CareLogSummary({ careLog }: { careLog: string }) {
   useEffect(() => {
     if (state.message === 'success' && state.summary) {
        toast({
-        title: "Summary Generated",
-        description: "The AI summary has been successfully created.",
+        title: "Résumé Généré",
+        description: "Le résumé par IA a été créé avec succès.",
       });
     } else if (state.message && state.message !== 'success' && state.message !== 'Validation failed') {
       toast({
         variant: "destructive",
-        title: "Summarization Failed",
+        title: "Échec de la Synthèse",
         description: state.message,
       });
     }
@@ -54,7 +54,7 @@ export function CareLogSummary({ careLog }: { careLog: string }) {
     <div className="space-y-4">
       <Card>
         <CardHeader>
-          <CardTitle>Original Care Log</CardTitle>
+          <CardTitle>Journal de Soins Original</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground whitespace-pre-wrap">{careLog}</p>
@@ -71,7 +71,7 @@ export function CareLogSummary({ careLog }: { careLog: string }) {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />
-              AI Summary
+              Résumé par IA
             </CardTitle>
           </CardHeader>
           <CardContent>

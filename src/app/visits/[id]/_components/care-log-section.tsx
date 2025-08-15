@@ -14,16 +14,16 @@ export function CareLogSection() {
     const [careLog, setCareLog] = useState("");
     const [submittedLog, setSubmittedLog] = useState("");
     const [currentTime, setCurrentTime] = useState<string | null>(null);
-    const [gpsStatus, setGpsStatus] = useState("Verifying location...");
+    const [gpsStatus, setGpsStatus] = useState("Vérification de l'emplacement...");
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentTime(new Date().toLocaleTimeString('en-US', { timeZone: 'Indian/Mauritius', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }));
+            setCurrentTime(new Date().toLocaleTimeString('fr-FR', { timeZone: 'Indian/Mauritius', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }));
         }, 1000);
 
         // Simulate GPS check
         setTimeout(() => {
-            setGpsStatus("Location verified");
+            setGpsStatus("Emplacement vérifié");
         }, 2000);
 
         return () => clearInterval(timer);
@@ -54,13 +54,13 @@ export function CareLogSection() {
         <div className="space-y-6">
             <Card>
                 <CardHeader>
-                    <CardTitle>Time Tracking</CardTitle>
-                    <CardDescription>Clock in to begin your visit and clock out when you're done.</CardDescription>
+                    <CardTitle>Suivi du Temps</CardTitle>
+                    <CardDescription>Pointez pour commencer votre visite et dépointez lorsque vous avez terminé.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div className="flex items-center justify-between p-3 bg-muted rounded-lg">
                         <div className="font-mono text-lg font-semibold">
-                            {currentTime !== null ? currentTime : "Loading..."}
+                            {currentTime !== null ? currentTime : "Chargement..."}
                         </div>
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                             <MapPin className="w-4 h-4" />
@@ -69,10 +69,10 @@ export function CareLogSection() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Button onClick={handleClockIn} disabled={clockedIn} size="lg">
-                            <LogIn className="mr-2 h-4 w-4" /> Clock In
+                            <LogIn className="mr-2 h-4 w-4" /> Arrivée
                         </Button>
                         <Button onClick={handleClockOut} disabled={!clockedIn || clockedOut} variant="destructive" size="lg">
-                            <LogOut className="mr-2 h-4 w-4" /> Clock Out
+                            <LogOut className="mr-2 h-4 w-4" /> Départ
                         </Button>
                     </div>
                 </CardContent>
@@ -83,17 +83,17 @@ export function CareLogSection() {
             ) : (
                 <Card>
                     <CardHeader>
-                        <CardTitle>Care Log</CardTitle>
+                        <CardTitle>Journal de Soins</CardTitle>
                         <CardDescription>
                             {canSubmitLog 
-                                ? "Record the activities and observations from your visit."
-                                : "Please clock in to submit a care log."
+                                ? "Enregistrez les activités et observations de votre visite."
+                                : "Veuillez pointer votre arrivée pour soumettre un journal de soins."
                             }
                         </CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <Textarea
-                            placeholder="Enter care log details here..."
+                            placeholder="Entrez les détails du journal de soins ici..."
                             rows={6}
                             disabled={!canSubmitLog}
                             value={careLog}
@@ -107,14 +107,14 @@ export function CareLogSection() {
                                 className="w-full sm:w-auto"
                             >
                                 <Mic className="mr-2 h-4 w-4" /> 
-                                {isRecording ? "Stop Recording" : "Record Voice Memo"}
+                                {isRecording ? "Arrêter l'enregistrement" : "Enregistrer un mémo vocal"}
                             </Button>
                             <Button 
                                 onClick={handleSubmitLog} 
                                 disabled={!canSubmitLog || !careLog.trim()}
                                 className="w-full sm:w-auto flex-grow"
                             >
-                                <FileText className="mr-2 h-4 w-4" /> Submit Log
+                                <FileText className="mr-2 h-4 w-4" /> Soumettre le Journal
                             </Button>
                         </div>
                     </CardContent>

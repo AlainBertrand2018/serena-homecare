@@ -24,7 +24,7 @@ export default function AdminClientsPage() {
         <h1 className="font-semibold text-2xl md:text-3xl">Clients</h1>
         <ClientForm 
           onAddClient={handleAddClient}
-          trigger={<Button><PlusCircle />Add New Client</Button>} 
+          trigger={<Button><PlusCircle />Ajouter Nouveau Client</Button>} 
         />
       </div>
 

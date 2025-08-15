@@ -23,10 +23,10 @@ export default function AdminCaregiversPage() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <h1 className="font-semibold text-2xl md:text-3xl">Caregivers</h1>
+        <h1 className="font-semibold text-2xl md:text-3xl">Soignants</h1>
         <CaregiverForm 
             onAddCaregiver={handleAddCaregiver}
-            trigger={<Button><PlusCircle /> Add New Caregiver</Button>} 
+            trigger={<Button><PlusCircle /> Ajouter Nouveau Soignant</Button>} 
         />
       </div>
 

@@ -18,7 +18,7 @@ type Message = {
 };
 
 const initialHistory: Message[] = [
-  { role: 'model', content: 'Hello! How can I help you today?' },
+  { role: 'model', content: 'Bonjour! Comment puis-je vous aider aujourd\'hui?' },
 ];
 
 function SubmitButton() {
@@ -26,7 +26,7 @@ function SubmitButton() {
   return (
     <Button type="submit" size="icon" disabled={pending}>
       {pending ? <Loader2 className="animate-spin" /> : <Send />}
-      <span className="sr-only">Send</span>
+      <span className="sr-only">Envoyer</span>
     </Button>
   );
 }
@@ -59,8 +59,8 @@ function ChatInterface() {
                         <AvatarFallback><Bot /></AvatarFallback>
                     </Avatar>
                     <div>
-                        <CardTitle>AI Assistant</CardTitle>
-                        <CardDescription>Ask me about our services, pricing, or careers.</CardDescription>
+                        <CardTitle>Assistant IA</CardTitle>
+                        <CardDescription>Posez-moi des questions sur nos services, nos tarifs ou nos carrières.</CardDescription>
                     </div>
                 </div>
             </CardHeader>
@@ -104,7 +104,7 @@ function ChatInterface() {
                 <form ref={formRef} action={dispatch} className="flex w-full items-center gap-2">
                     <Input
                         name="prompt"
-                        placeholder="Type your message..."
+                        placeholder="Tapez votre message..."
                         autoComplete='off'
                         disabled={useFormStatus().pending}
                     />
@@ -129,7 +129,7 @@ export function ChatbotWidget() {
                 className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
             >
                 {open ? <X className="h-6 w-6" /> : <MessageSquare className="h-6 w-6" />}
-                <span className="sr-only">Toggle Chat</span>
+                <span className="sr-only">Ouvrir le Chat</span>
             </Button>
         </PopoverTrigger>
         <PopoverContent 

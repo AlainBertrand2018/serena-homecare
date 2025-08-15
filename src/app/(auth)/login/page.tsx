@@ -17,9 +17,9 @@ export default function LoginPage() {
       <CardHeader className="space-y-4">
         <LogoWithName className="justify-center" />
         <div className="text-center">
-          <CardTitle className="text-2xl">Enter as:</CardTitle>
+          <CardTitle className="text-2xl">Entrer en tant que :</CardTitle>
           <CardDescription>
-            Please choose your portal to login.
+            Veuillez choisir votre portail pour vous connecter.
           </CardDescription>
         </div>
       </CardHeader>
@@ -27,19 +27,19 @@ export default function LoginPage() {
         <Button size="lg" className="w-full justify-start" asChild>
           <Link href="/login/customer">
             <Users />
-            Customer & Custodian
+            Client & Gardien
           </Link>
         </Button>
         <Button size="lg" className="w-full justify-start" asChild>
           <Link href="/login/caregiver">
             <Stethoscope />
-            Caregiver
+            Soignant
           </Link>
         </Button>
         <Button size="lg" className="w-full justify-start" asChild>
           <Link href="/login/admin">
             <Shield />
-            Administrator
+            Administrateur
           </Link>
         </Button>
       </CardContent>

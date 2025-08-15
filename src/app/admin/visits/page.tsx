@@ -30,10 +30,10 @@ import {
 import { VisitForm } from "./_components/visit-form";
 
 const statusVariants = {
-    'Upcoming': 'secondary',
-    'Completed': 'default',
-    'In Progress': 'outline',
-    'Cancelled': 'destructive',
+    'À venir': 'secondary',
+    'Terminée': 'default',
+    'En cours': 'outline',
+    'Annulée': 'destructive',
 } as const;
 
 export default function AdminVisitsPage() {
@@ -41,15 +41,15 @@ export default function AdminVisitsPage() {
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
         <div>
-            <CardTitle>Scheduled Visits</CardTitle>
+            <CardTitle>Visites Planifiées</CardTitle>
             <CardDescription>
-            Manage and schedule all client visits.
+            Gérez et planifiez toutes les visites des clients.
             </CardDescription>
         </div>
         <VisitForm trigger={
             <Button>
                 <PlusCircle />
-                Schedule New Visit
+                Planifier Nouvelle Visite
             </Button>
         } />
       </CardHeader>
@@ -58,9 +58,9 @@ export default function AdminVisitsPage() {
           <TableHeader>
             <TableRow>
               <TableHead>Client</TableHead>
-              <TableHead>Caregiver</TableHead>
-              <TableHead>Date & Time</TableHead>
-              <TableHead>Status</TableHead>
+              <TableHead>Soignant</TableHead>
+              <TableHead>Date & Heure</TableHead>
+              <TableHead>Statut</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
@@ -83,17 +83,17 @@ export default function AdminVisitsPage() {
                         <DropdownMenuTrigger asChild>
                             <Button aria-haspopup="true" size="icon" variant="ghost">
                             <MoreHorizontal className="h-4 w-4" />
-                            <span className="sr-only">Toggle menu</span>
+                            <span className="sr-only">Ouvrir le menu</span>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             <DropdownMenuLabel>Actions</DropdownMenuLabel>
                              <VisitForm 
                                 visit={visit}
-                                trigger={<DropdownMenuItem onSelect={(e) => e.preventDefault()}><Pencil/> Edit</DropdownMenuItem>}
+                                trigger={<DropdownMenuItem onSelect={(e) => e.preventDefault()}><Pencil/> Modifier</DropdownMenuItem>}
                             />
-                            <DropdownMenuItem>Reschedule</DropdownMenuItem>
-                            <DropdownMenuItem className="text-destructive">Cancel</DropdownMenuItem>
+                            <DropdownMenuItem>Replanifier</DropdownMenuItem>
+                            <DropdownMenuItem className="text-destructive">Annuler</DropdownMenuItem>
                         </DropdownMenuContent>
                         </DropdownMenu>
                     </TableCell>

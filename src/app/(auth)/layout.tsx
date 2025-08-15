@@ -6,7 +6,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
     <main className="relative flex min-h-screen w-full items-center justify-center p-4">
        <Image
         src="/images/CareGiver.webp"
-        alt="Background"
+        alt="Arrière-plan"
         fill
         className="absolute inset-0 z-0 brightness-50 object-cover"
         data-ai-hint="background caregiver"

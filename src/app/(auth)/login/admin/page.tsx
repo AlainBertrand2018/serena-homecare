@@ -21,10 +21,10 @@ export default function AdminLoginPage() {
         <div className="text-center">
           <div className="flex justify-center items-center gap-2">
             <Shield className="h-6 w-6"/>
-            <CardTitle className="text-2xl">Admin Login</CardTitle>
+            <CardTitle className="text-2xl">Connexion Administrateur</CardTitle>
           </div>
           <CardDescription>
-            Enter your credentials to access the admin portal.
+            Entrez vos identifiants pour accéder au portail administrateur.
           </CardDescription>
         </div>
       </CardHeader>
@@ -37,7 +37,7 @@ export default function AdminLoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="admin@example.com"
+                placeholder="admin@exemple.com"
                 required
                 className="pl-10 bg-background/70"
               />
@@ -45,7 +45,7 @@ export default function AdminLoginPage() {
           </div>
           <div className="grid gap-2">
             <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Mot de passe</Label>
             </div>
             <div className="relative">
               <KeyRound className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -53,12 +53,12 @@ export default function AdminLoginPage() {
             </div>
           </div>
           <Button type="submit" className="w-full" asChild>
-            <Link href="/admin/dashboard">Login</Link>
+            <Link href="/admin/dashboard">Connexion</Link>
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
            <Link href="/login" className="underline">
-            Back to role selection
+            Retour à la sélection du rôle
           </Link>
         </div>
       </CardContent>

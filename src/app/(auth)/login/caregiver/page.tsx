@@ -21,10 +21,10 @@ export default function CaregiverLoginPage() {
         <div className="text-center">
            <div className="flex justify-center items-center gap-2">
             <Stethoscope className="h-6 w-6"/>
-            <CardTitle className="text-2xl">Caregiver Login</CardTitle>
+            <CardTitle className="text-2xl">Connexion Soignant</CardTitle>
           </div>
           <CardDescription>
-            Enter your email below to login to your account
+            Entrez votre email ci-dessous pour vous connecter à votre compte
           </CardDescription>
         </div>
       </CardHeader>
@@ -37,7 +37,7 @@ export default function CaregiverLoginPage() {
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder="m@exemple.com"
                 required
                 className="pl-10 bg-background/70"
               />
@@ -45,12 +45,12 @@ export default function CaregiverLoginPage() {
           </div>
           <div className="grid gap-2">
             <div className="flex items-center">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password">Mot de passe</Label>
               <Link
                 href="#"
                 className="ml-auto inline-block text-sm underline"
               >
-                Forgot your password?
+                Mot de passe oublié?
               </Link>
             </div>
             <div className="relative">
@@ -59,21 +59,21 @@ export default function CaregiverLoginPage() {
             </div>
           </div>
           <Button type="submit" className="w-full" asChild>
-            <Link href="/dashboard">Login (Registered User)</Link>
+            <Link href="/dashboard">Connexion (Utilisateur Enregistré)</Link>
           </Button>
            <Button type="submit" variant="secondary" className="w-full" asChild>
-            <Link href="/careers">Login as New Applicant</Link>
+            <Link href="/careers">Connexion en tant que Nouveau Candidat</Link>
           </Button>
         </div>
         <div className="mt-4 text-center text-sm">
-          Don&apos;t have an account?{" "}
+          Vous n'avez pas de compte?{" "}
           <Link href="/signup" className="underline">
-            Sign up
+            S'inscrire
           </Link>
         </div>
          <div className="mt-4 text-center text-sm">
            <Link href="/login" className="underline">
-            Back to role selection
+            Retour à la sélection du rôle
           </Link>
         </div>
       </CardContent>

@@ -48,7 +48,7 @@ export default function VisitDetailsPage({ params }: { params: { id: string } })
         <div className="grid md:grid-cols-2 gap-6">
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><HeartPulse/> Medical Information</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><HeartPulse/> Informations Médicales</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                     <div>
@@ -58,13 +58,13 @@ export default function VisitDetailsPage({ params }: { params: { id: string } })
                         </div>
                     </div>
                      <div>
-                        <h4 className="font-semibold text-sm mb-1">Active Conditions</h4>
+                        <h4 className="font-semibold text-sm mb-1">Conditions Actives</h4>
                         <div className="flex flex-wrap gap-2">
                            {client.medicalInfo.conditions.map(condition => <Badge key={condition} variant="secondary">{condition}</Badge>)}
                         </div>
                     </div>
                     <div>
-                        <h4 className="font-semibold text-sm mb-2">Medications</h4>
+                        <h4 className="font-semibold text-sm mb-2">Médicaments</h4>
                         <ul className="space-y-2 text-sm text-muted-foreground">
                             {client.medicalInfo.medications.map(med => (
                                 <li key={med.name} className="flex items-center gap-2"><Pill className="h-4 w-4 text-primary"/>{med.name} ({med.dosage}) - {med.frequency}</li>
@@ -75,7 +75,7 @@ export default function VisitDetailsPage({ params }: { params: { id: string } })
             </Card>
             <Card>
                 <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><FileText/> Care Plan</CardTitle>
+                    <CardTitle className="flex items-center gap-2"><FileText/> Plan de Soins</CardTitle>
                 </CardHeader>
                 <CardContent>
                     <p className="text-sm text-muted-foreground">{client.carePlan}</p>
@@ -85,8 +85,8 @@ export default function VisitDetailsPage({ params }: { params: { id: string } })
 
          <Card>
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><ListChecks/> Visit Tasks</CardTitle>
-                <CardDescription>Specific tasks to be completed during this visit.</CardDescription>
+                <CardTitle className="flex items-center gap-2"><ListChecks/> Tâches de la Visite</CardTitle>
+                <CardDescription>Tâches spécifiques à accomplir lors de cette visite.</CardDescription>
             </CardHeader>
             <CardContent>
                 <ul className="space-y-2 text-sm text-muted-foreground list-disc list-inside">

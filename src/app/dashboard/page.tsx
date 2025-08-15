@@ -19,7 +19,7 @@ export default function DashboardPage() {
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
         <div className="flex items-center">
-          <h1 className="font-semibold text-2xl md:text-3xl">Upcoming Visits</h1>
+          <h1 className="font-semibold text-2xl md:text-3xl">Visites à Venir</h1>
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -34,7 +34,7 @@ export default function DashboardPage() {
                   <div>
                     <CardTitle>{visit.clientName}</CardTitle>
                     <div className="mt-1">
-                        <Badge variant={visit.status === 'Upcoming' ? 'secondary' : 'default'}>{visit.status}</Badge>
+                        <Badge variant={visit.status === 'À venir' ? 'secondary' : 'default'}>{visit.status}</Badge>
                     </div>
                   </div>
                 </div>
@@ -56,7 +56,7 @@ export default function DashboardPage() {
               <CardFooter>
                 <Button asChild className="w-full">
                   <Link href={`/visits/${visit.id}`}>
-                    View Details <ArrowRight className="ml-2 h-4 w-4" />
+                    Voir les Détails <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
               </CardFooter>

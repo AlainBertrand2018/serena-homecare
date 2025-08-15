@@ -25,7 +25,7 @@ function SubmitButton() {
   return (
     <Button type="submit" size="icon" disabled={pending}>
       {pending ? <Loader2 className="animate-spin" /> : <Send />}
-      <span className="sr-only">Send</span>
+      <span className="sr-only">Envoyer</span>
     </Button>
   );
 }
@@ -73,8 +73,8 @@ function ChatInterface() {
                         <AvatarFallback><Bot /></AvatarFallback>
                     </Avatar>
                     <div>
-                        <CardTitle>AI Assistant</CardTitle>
-                        <CardDescription>Ask me about our services and pricing.</CardDescription>
+                        <CardTitle>Assistant IA</CardTitle>
+                        <CardDescription>Posez-moi des questions sur nos services et tarifs.</CardDescription>
                     </div>
                 </div>
             </CardHeader>
@@ -142,7 +142,7 @@ function ChatInterface() {
                 >
                     <Input
                         name="prompt"
-                        placeholder="Type your message..."
+                        placeholder="Écrivez votre message..."
                         autoComplete='off'
                         disabled={isPending || state.history.length === 0}
                     />
@@ -167,7 +167,7 @@ function ChatbotWidgetClient() {
                 className="fixed bottom-6 right-6 h-14 w-14 rounded-full shadow-lg z-50"
             >
                 {open ? <X className="h-6 w-6" /> : <MessageSquare className="h-6 w-6" />}
-                <span className="sr-only">Toggle Chat</span>
+                <span className="sr-only">Ouvrir le Chat</span>
             </Button>
         </PopoverTrigger>
         <PopoverContent 

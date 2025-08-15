@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import type { Caregiver } from "@/lib/data";
+import type { Caregiver, CaregiverStatus } from "@/lib/data";
 
 interface CaregiverFormProps {
     caregiver?: Caregiver;
@@ -40,7 +40,7 @@ export function CaregiverForm({ caregiver, trigger, onAddCaregiver }: CaregiverF
         const newCaregiverData = {
             name: formData.get('name') as string,
             avatarUrl: formData.get('avatarUrl') as string,
-            status: formData.get('status') as Caregiver['status'],
+            status: formData.get('status') as CaregiverStatus,
             skills: skillsValue ? skillsValue.split(',').map(s => s.trim()) : [],
         };
 
@@ -49,7 +49,7 @@ export function CaregiverForm({ caregiver, trigger, onAddCaregiver }: CaregiverF
         }
 
         // Here you would also handle the editing logic
-        console.log("Caregiver form submitted", newCaregiverData);
+        console.log("Formulaire soignant soumis", newCaregiverData);
         setOpen(false);
     }
 
@@ -58,42 +58,42 @@ export function CaregiverForm({ caregiver, trigger, onAddCaregiver }: CaregiverF
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>{isEditing ? "Edit Caregiver" : "Add New Caregiver"}</DialogTitle>
+          <DialogTitle>{isEditing ? "Modifier Soignant" : "Ajouter Nouveau Soignant"}</DialogTitle>
           <DialogDescription>
-            {isEditing ? "Update the caregiver's information." : "Fill out the form to add a new caregiver."}
+            {isEditing ? "Mettez à jour les informations du soignant." : "Remplissez le formulaire pour ajouter un nouveau soignant."}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
             <div className="grid gap-4 py-4">
                 <div className="grid gap-2">
-                    <Label htmlFor="name">Full Name</Label>
+                    <Label htmlFor="name">Nom Complet</Label>
                     <Input id="name" name="name" defaultValue={caregiver?.name} placeholder="Samantha Reed" />
                 </div>
                 <div className="grid gap-2">
-                    <Label htmlFor="avatarUrl">Avatar URL</Label>
+                    <Label htmlFor="avatarUrl">URL de l'Avatar</Label>
                     <Input id="avatarUrl" name="avatarUrl" defaultValue={caregiver?.avatarUrl} placeholder="https://placehold.co/100x100.png" />
                 </div>
                  <div className="grid gap-2">
-                    <Label htmlFor="status">Status</Label>
+                    <Label htmlFor="status">Statut</Label>
                     <Select name="status" defaultValue={caregiver?.status}>
                         <SelectTrigger id="status">
-                            <SelectValue placeholder="Select a status" />
+                            <SelectValue placeholder="Sélectionnez un statut" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="Available">Available</SelectItem>
-                            <SelectItem value="On Assignment">On Assignment</SelectItem>
-                            <SelectItem value="Unavailable">Unavailable</SelectItem>
+                            <SelectItem value="Disponible">Disponible</SelectItem>
+                            <SelectItem value="En mission">En mission</SelectItem>
+                            <SelectItem value="Indisponible">Indisponible</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
                 <div className="grid gap-2">
-                    <Label htmlFor="skills">Skills (comma-separated)</Label>
-                    <Input id="skills" name="skills" defaultValue={caregiver?.skills.join(', ')} placeholder="Personal Care, Dementia Care" />
+                    <Label htmlFor="skills">Compétences (séparées par des virgules)</Label>
+                    <Input id="skills" name="skills" defaultValue={caregiver?.skills.join(', ')} placeholder="Soins personnels, Soins pour la démence" />
                 </div>
             </div>
             <DialogFooter>
-                <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-                <Button type="submit">{isEditing ? "Save Changes" : "Create Caregiver"}</Button>
+                <Button type="button" variant="outline" onClick={() => setOpen(false)}>Annuler</Button>
+                <Button type="submit">{isEditing ? "Sauvegarder" : "Créer Soignant"}</Button>
             </DialogFooter>
         </form>
       </DialogContent>

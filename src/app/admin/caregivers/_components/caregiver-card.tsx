@@ -15,13 +15,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Edit, Star } from "lucide-react";
 import { CaregiverForm } from "./caregiver-form";
-import type { Caregiver } from "@/lib/data";
+import type { Caregiver, CaregiverStatus } from "@/lib/data";
 import { CaregiverDetails } from './caregiver-details';
 
-const statusColors = {
-    'Available': 'bg-green-500',
-    'On Assignment': 'bg-yellow-500',
-    'Unavailable': 'bg-red-500',
+const statusColors: Record<CaregiverStatus, string> = {
+    'Disponible': 'bg-green-500',
+    'En mission': 'bg-yellow-500',
+    'Indisponible': 'bg-red-500',
 }
 
 export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
@@ -50,7 +50,7 @@ export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
                 </CardHeader>
                 <CardContent className="flex-grow space-y-3">
                     <div>
-                        <h4 className="font-semibold text-sm mb-2">Skills</h4>
+                        <h4 className="font-semibold text-sm mb-2">Compétences</h4>
                         <div className="flex flex-wrap gap-1">
                             {caregiver.skills.map(skill => (
                                 <Badge key={skill} variant="secondary">{skill}</Badge>
@@ -60,11 +60,11 @@ export function CaregiverCard({ caregiver }: { caregiver: Caregiver }) {
                 </CardContent>
                 <CardFooter className="flex gap-2">
                     <Button variant="outline" className="w-full" onClick={() => setDetailsOpen(true)}>
-                        <Star/> View Profile
+                        <Star/> Voir Profil
                     </Button>
                     <CaregiverForm 
                         caregiver={caregiver}
-                        trigger={<Button className="w-full"><Edit/> Edit</Button>}
+                        trigger={<Button className="w-full"><Edit/> Modifier</Button>}
                     />
                 </CardFooter>
             </Card>

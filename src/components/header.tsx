@@ -13,11 +13,11 @@ export function Header() {
   const [sheetOpen, setSheetOpen] = useState(false);
 
   const navLinks = [
-    { href: "/", label: "Home" },
+    { href: "/", label: "Accueil" },
     { href: "/#services", label: "Services" },
-    { href: "/#pricing", label: "Pricing" },
-    { href: "/#testimonials", label: "Testimonials" },
-    { href: "/careers", label: "Apply as Caregiver" },
+    { href: "/#pricing", label: "Tarifs" },
+    { href: "/#testimonials", label: "Témoignages" },
+    { href: "/careers", label: "Postuler" },
     { href: "/#booking", label: "Contact" },
   ];
 
@@ -56,14 +56,14 @@ export function Header() {
           </Link>
         ))}
          <Button asChild>
-            <Link href="/login">Login</Link>
+            <Link href="/login">Connexion</Link>
          </Button>
       </nav>
       <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
             <Menu className="h-5 w-5" />
-            <span className="sr-only">Toggle navigation menu</span>
+            <span className="sr-only">Ouvrir le menu de navigation</span>
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
@@ -82,7 +82,7 @@ export function Header() {
               </Link>
             ))}
              <Button asChild>
-                <Link href="/login" onClick={() => setSheetOpen(false)}>Login</Link>
+                <Link href="/login" onClick={() => setSheetOpen(false)}>Connexion</Link>
              </Button>
           </nav>
         </SheetContent>
@@ -94,7 +94,7 @@ export function Header() {
        </div>
        <div className="md:hidden">
             <Button asChild size="sm">
-                <Link href="/login">Login</Link>
+                <Link href="/login">Connexion</Link>
             </Button>
        </div>
     </header>

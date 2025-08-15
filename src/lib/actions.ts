@@ -6,7 +6,7 @@ import { chat } from "@/ai/flows/chatbot";
 import { z } from "zod";
 
 const summarySchema = z.object({
-  careLog: z.string().min(10, { message: "Care log must be at least 10 characters." }),
+  careLog: z.string().min(10, { message: "Le journal de soins doit contenir au moins 10 caractères." }),
 });
 
 type SummaryState = {
@@ -22,7 +22,7 @@ export async function getSummary(prevState: SummaryState, formData: FormData): P
 
   if (!validatedFields.success) {
     return {
-      message: 'Validation failed',
+      message: 'La validation a échoué',
       errors: validatedFields.error.flatten().fieldErrors,
       summary: '',
     };
@@ -36,9 +36,9 @@ export async function getSummary(prevState: SummaryState, formData: FormData): P
       errors: null,
     };
   } catch (error) {
-    console.error("Summarization error:", error);
+    console.error("Erreur de résumé:", error);
     return {
-      message: 'An error occurred during summarization. Please try again.',
+      message: 'Une erreur est survenue lors du résumé. Veuillez réessayer.',
       summary: '',
       errors: null,
     };
@@ -51,7 +51,7 @@ type Message = {
 };
 
 const chatSchema = z.object({
-  prompt: z.string().min(1, { message: "Prompt cannot be empty." }),
+  prompt: z.string().min(1, { message: "Le prompt ne peut pas être vide." }),
   history: z.string(), // JSON string of history
 });
 
@@ -78,11 +78,11 @@ export async function getChatResponse(prevState: ChatState, formData: FormData):
                 errors: null,
             };
         } catch (error) {
-            console.error("Chatbot initial message error:", error);
-            const errorMessage: Message = { role: 'model', content: "Sorry, I'm having trouble connecting. Please try again later." };
+            console.error("Erreur message initial chatbot:", error);
+            const errorMessage: Message = { role: 'model', content: "Désolé, j'ai des difficultés à me connecter. Veuillez réessayer plus tard." };
             return {
                 history: [errorMessage],
-                message: 'An error occurred.',
+                message: 'Une erreur est survenue.',
                 errors: null,
             }
         }
@@ -94,7 +94,7 @@ export async function getChatResponse(prevState: ChatState, formData: FormData):
     if (!validatedFields.success) {
         return {
         ...prevState,
-        message: 'Validation failed',
+        message: 'La validation a échoué',
         errors: validatedFields.error.flatten().fieldErrors,
         };
     }
@@ -117,11 +117,11 @@ export async function getChatResponse(prevState: ChatState, formData: FormData):
         };
 
     } catch (error) {
-        console.error("Chatbot error:", error);
-        const errorMessage: Message = { role: 'model', content: "Sorry, I'm having trouble connecting at the moment. Please try again later." };
+        console.error("Erreur chatbot:", error);
+        const errorMessage: Message = { role: 'model', content: "Désolé, j'ai des difficultés à me connecter en ce moment. Veuillez réessayer plus tard." };
         return {
         history: [...updatedHistory, errorMessage],
-        message: 'An error occurred.',
+        message: 'Une erreur est survenue.',
         errors: null,
         };
     }

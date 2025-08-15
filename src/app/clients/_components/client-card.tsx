@@ -31,7 +31,7 @@ export function ClientCard({ client }: { client: Client }) {
             </Avatar>
             <div>
               <CardTitle>{client.name}</CardTitle>
-              <CardDescription>Client Profile</CardDescription>
+              <CardDescription>Profil Client</CardDescription>
             </div>
           </div>
         </CardHeader>
@@ -43,11 +43,11 @@ export function ClientCard({ client }: { client: Client }) {
         </CardContent>
         <CardFooter className="flex gap-2">
             <Button variant="outline" className="w-full" onClick={() => setDetailsOpen(true)}>
-                <Eye/> View Details
+                <Eye/> Voir Détails
             </Button>
             <ClientForm 
                 client={client}
-                trigger={<Button className="w-full"><Edit/> Edit</Button>}
+                trigger={<Button className="w-full"><Edit/> Modifier</Button>}
             />
         </CardFooter>
       </Card>

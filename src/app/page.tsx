@@ -39,67 +39,67 @@ import { useState } from "react";
 const services = [
   {
     icon: <BedDouble className="h-10 w-10 text-primary" />,
-    title: "Personal Care",
-    description: "Assistance with daily activities like bathing, dressing, and mobility.",
+    title: "Soins Personnels",
+    description: "Aide aux activités quotidiennes comme le bain, l'habillage et la mobilité.",
   },
   {
     icon: <UtensilsCrossed className="h-10 w-10 text-primary" />,
-    title: "Meal Preparation",
-    description: "Nutritious and delicious meal planning and preparation according to dietary needs.",
+    title: "Préparation des Repas",
+    description: "Planification et préparation de repas nutritifs et délicieux selon les besoins diététiques.",
   },
   {
     icon: <Stethoscope className="h-10 w-10 text-primary" />,
-    title: "Skilled Nursing",
-    description: "Professional medical care at home, including medication management.",
+    title: "Soins Infirmiers Qualifiés",
+    description: "Soins médicaux professionnels à domicile, y compris la gestion des médicaments.",
   },
   {
     icon: <HeartHandshake className="h-10 w-10 text-primary" />,
-    title: "Companion Care",
-    description: "Providing companionship and engagement in social activities.",
+    title: "Accompagnement",
+    description: "Offrir de la compagnie et participer à des activités sociales.",
   },
   {
     icon: <Car className="h-10 w-10 text-primary" />,
-    title: "Specialized Transportation",
-    description: "Safe and reliable transportation to appointments and social outings.",
+    title: "Transport Spécialisé",
+    description: "Transport sûr et fiable pour les rendez-vous et les sorties sociales.",
   }
 ];
 
 const whyChooseUs = [
     {
         icon: <Award className="h-10 w-10 text-primary" />,
-        title: "Certified & Compassionate",
-        description: "Our caregivers are rigorously vetted, trained, and share a genuine passion for helping others.",
+        title: "Certifiés & Compatissants",
+        description: "Nos soignants sont rigoureusement sélectionnés, formés et partagent une véritable passion pour aider les autres.",
     },
     {
         icon: <FileText className="h-10 w-10 text-primary" />,
-        title: "Personalized Care Plans",
-        description: "We work with you to create a customized care plan that fits your unique needs and preferences.",
+        title: "Plans de Soins Personnalisés",
+        description: "Nous travaillons avec vous pour créer un plan de soins personnalisé qui correspond à vos besoins et préférences uniques.",
     },
     {
         icon: <HeartHandshake className="h-10 w-10 text-primary" />,
-        title: "24/7 Support",
-        description: "Our team is always available to answer your questions and provide support whenever you need it.",
+        title: "Support 24/7",
+        description: "Notre équipe est toujours disponible pour répondre à vos questions et vous apporter son soutien quand vous en avez besoin.",
     }
 ];
 
 const testimonials = [
   {
-    name: "Margaret T.",
-    review: "The caregiver from SERENA has been a true blessing for our family. So compassionate and reliable.",
+    name: "Marguerite T.",
+    review: "Le soignant de SERENA a été une véritable bénédiction pour notre famille. Si compatissant et fiable.",
     avatar: "https://placehold.co/100x100.png",
-    aiHint: "elderly woman"
+    aiHint: "femme âgée"
   },
   {
-    name: "John & Susan P.",
-    review: "We were so worried about finding good care for my father. SERENA made the process seamless and stress-free.",
+    name: "Jean & Suzanne P.",
+    review: "Nous étions si inquiets de trouver de bons soins pour mon père. SERENA a rendu le processus simple et sans stress.",
     avatar: "https://placehold.co/100x100.png",
-    aiHint: "elderly couple"
+    aiHint: "couple de personnes âgées"
   },
   {
     name: "David L.",
-    review: "Excellent service. The caregivers are professional, and the administration is always helpful and responsive.",
+    review: "Excellent service. Les soignants sont professionnels et l'administration est toujours serviable et réactive.",
     avatar: "https://placehold.co/100x100.png",
-    aiHint: "man"
+    aiHint: "homme"
   },
 ];
 
@@ -113,42 +113,42 @@ function UrgentVisitModal({ trigger }: { trigger: React.ReactNode }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>Your request for an urgent visit</DialogTitle>
+          <DialogTitle>Votre demande de visite urgente</DialogTitle>
           <DialogDescription>
-            Fill in the following form and we will be contacting you for further information.
+            Remplissez le formulaire suivant et nous vous contacterons pour plus d'informations.
           </DialogDescription>
         </DialogHeader>
         <form className="grid gap-6 py-4" onSubmit={(e) => { e.preventDefault(); setOpen(false); }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="grid gap-2">
-                    <Label htmlFor="customer-name">Name of Customer</Label>
+                    <Label htmlFor="customer-name">Nom du Client</Label>
                     <Input id="customer-name" placeholder="John Doe" />
                 </div>
                 <div className="grid gap-2">
-                    <Label htmlFor="customer-phone">Mobile phone/ Whatsapp</Label>
+                    <Label htmlFor="customer-phone">Téléphone portable / Whatsapp</Label>
                     <Input id="customer-phone" type="tel" placeholder="+123456789" />
                 </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="grid gap-2">
-                    <Label htmlFor="guardian-name">Name of Guardian</Label>
+                    <Label htmlFor="guardian-name">Nom du Tuteur</Label>
                     <Input id="guardian-name" placeholder="Jane Doe" />
                 </div>
                 <div className="grid gap-2">
-                    <Label htmlFor="guardian-phone">Mobile Phone/ Whatsapp</Label>
+                    <Label htmlFor="guardian-phone">Téléphone Portable / Whatsapp</Label>
                     <Input id="guardian-phone" type="tel" placeholder="+123456789" />
                 </div>
             </div>
             <div className="grid gap-2">
-                <Label htmlFor="address">Intervention address</Label>
-                <Textarea id="address" placeholder="123 Main St, Anytown..." />
+                <Label htmlFor="address">Adresse d'intervention</Label>
+                <Textarea id="address" placeholder="123 Rue Principale, Anytown..." />
             </div>
             <div className="grid gap-2">
-                <Label htmlFor="instructions">Special Instructions</Label>
-                <Textarea id="instructions" placeholder="e.g., Key under the mat, allergic to peanuts..." />
+                <Label htmlFor="instructions">Instructions Spéciales</Label>
+                <Textarea id="instructions" placeholder="ex: Clé sous le paillasson, allergique aux arachides..." />
             </div>
             <DialogFooter>
-                <Button type="submit">Submit</Button>
+                <Button type="submit">Soumettre</Button>
             </DialogFooter>
         </form>
       </DialogContent>
@@ -160,40 +160,40 @@ export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
-        {/* Hero Section */}
+        {/* Section Héros */}
         <section className="relative h-screen flex items-center justify-center text-center text-white">
           <Image
             src="/images/CareGiver.webp"
-            alt="Caregiver with elderly person"
+            alt="Soignant avec une personne âgée"
             fill
             className="absolute inset-0 z-0 brightness-50 object-cover"
             data-ai-hint="caregiver elderly"
           />
           <div className="relative z-10 p-4 space-y-4">
             <h1 className="text-4xl md:text-6xl font-bold">
-              Reliable In-Home Care, Delivered with Dignity
+              Soins à Domicile Fiables, Dispensés avec Dignité
             </h1>
             <p className="text-lg md:text-xl max-w-2xl mx-auto">
-              Providing compassionate and professional care for your loved ones in the comfort of their own home.
+              Fournir des soins compatissants et professionnels à vos proches dans le confort de leur propre maison.
             </p>
             <div className="flex justify-center gap-4 mt-6">
               <Button size="lg" asChild>
-                <Link href="#booking">Book Consultation</Link>
+                <Link href="#booking">Prendre Rendez-vous</Link>
               </Button>
               <UrgentVisitModal trigger={
                 <Button size="lg" variant="secondary" style={{ backgroundColor: 'hsl(43, 96%, 56%)' }}>
-                  <Clock /> Request an Urgent Visit
+                  <Clock /> Demander une Visite Urgente
                 </Button>
               } />
             </div>
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
+        {/* Section Pourquoi Nous Choisir */}
         <section id="why-us" className="py-12 md:py-20 bg-muted/40">
             <div className="container mx-auto px-4">
                 <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-                    Why Choose SERENA?
+                    Pourquoi Choisir SERENA ?
                 </h2>
                 <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3">
                     {whyChooseUs.map((item) => (
@@ -210,11 +210,11 @@ export default function HomePage() {
         </section>
 
 
-        {/* Services Overview */}
+        {/* Aperçu des Services */}
         <section id="services" className="py-12 md:py-20 bg-background">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-              Our Comprehensive Services
+              Nos Services Complets
             </h2>
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
               {services.map((service) => (
@@ -232,96 +232,96 @@ export default function HomePage() {
               ))}
             </div>
              <div className="text-center mt-10">
-                <Button variant="outline">Learn More About Our Services</Button>
+                <Button variant="outline">En Savoir Plus Sur Nos Services</Button>
             </div>
           </div>
         </section>
 
-        {/* Pricing Section */}
+        {/* Section Tarifs */}
         <section id="pricing" className="py-12 md:py-20 bg-muted/40">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-              Flexible Care Plans
+              Plans de Soins Flexibles
             </h2>
             <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-3 items-start">
               {/* Plan 1 */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Companion Care <span className="text-base font-normal text-muted-foreground">(Non-medical)</span></CardTitle>
-                  <CardDescription>Ideal for clients who need social interaction and light assistance.</CardDescription>
+                  <CardTitle>Accompagnement <span className="text-base font-normal text-muted-foreground">(Non-médical)</span></CardTitle>
+                  <CardDescription>Idéal pour les clients ayant besoin d'interaction sociale et d'une aide légère.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">MUR250<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
-                  <p className="text-sm font-medium">or MUR800/day (8hr)</p>
+                  <div className="text-4xl font-bold">MUR250<span className="text-lg font-normal text-muted-foreground">/heure</span></div>
+                  <p className="text-sm font-medium">ou MUR800/jour (8h)</p>
                   <ul className="space-y-3 text-sm text-muted-foreground">
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Companionship & conversation</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Light housekeeping</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Meal reminders</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Accompanying to appointments</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Compagnie & conversation</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Entretien ménager léger</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Rappels de repas</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Accompagnement aux rendez-vous</li>
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full" variant="outline">Choose Plan</Button>
+                  <Button className="w-full" variant="outline">Choisir le Plan</Button>
                 </CardFooter>
               </Card>
 
-              {/* Plan 2 - Highlighted */}
+              {/* Plan 2 - Mis en avant */}
               <Card className="border-primary border-2 relative">
                  <div className="absolute top-0 -translate-y-1/2 w-full flex justify-center">
                     <div className="bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
-                      Most Popular
+                      Le Plus Populaire
                     </div>
                   </div>
                 <CardHeader className="pt-10">
-                  <CardTitle>Personal Care <span className="text-base font-normal text-muted-foreground">(Non-medical)</span></CardTitle>
-                  <CardDescription>Comprehensive assistance with daily activities.</CardDescription>
+                  <CardTitle>Soins Personnels <span className="text-base font-normal text-muted-foreground">(Non-médical)</span></CardTitle>
+                  <CardDescription>Assistance complète pour les activités quotidiennes.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">MUR500<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
-                  <p className="text-sm font-medium">or MUR2100/day (8hr)</p>
+                  <div className="text-4xl font-bold">MUR500<span className="text-lg font-normal text-muted-foreground">/heure</span></div>
+                  <p className="text-sm font-medium">ou MUR2100/jour (8h)</p>
                    <ul className="space-y-3 text-sm text-muted-foreground">
-                    <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Everything in Companion Care</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Bathing & dressing assistance</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Mobility support</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Meal preparation</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Medication reminders</li>
+                    <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Tout ce qui est inclus dans l'Accompagnement</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Aide au bain et à l'habillage</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Soutien à la mobilité</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Préparation des repas</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Rappels de médicaments</li>
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full">Choose Plan</Button>
+                  <Button className="w-full">Choisir le Plan</Button>
                 </CardFooter>
               </Card>
 
               {/* Plan 3 */}
               <Card>
                 <CardHeader>
-                  <CardTitle>Skilled Nursing <span className="text-base font-normal text-muted-foreground">(Medical)</span></CardTitle>
-                  <CardDescription>For clients with medical needs requiring a licensed professional.</CardDescription>
+                  <CardTitle>Soins Infirmiers <span className="text-base font-normal text-muted-foreground">(Médical)</span></CardTitle>
+                  <CardDescription>Pour les clients ayant des besoins médicaux nécessitant un professionnel agréé.</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="text-4xl font-bold">MUR800<span className="text-lg font-normal text-muted-foreground">/hour</span></div>
-                   <p className="text-sm font-medium">or MUR5000/day (8hr)</p>
+                  <div className="text-4xl font-bold">MUR800<span className="text-lg font-normal text-muted-foreground">/heure</span></div>
+                   <p className="text-sm font-medium">ou MUR5000/jour (8h)</p>
                    <ul className="space-y-3 text-sm text-muted-foreground">
-                     <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Everything in Personal Care</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Medication administration</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Wound care</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Vital signs monitoring</li>
-                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Post-operative care</li>
+                     <li className="flex items-center gap-2 font-semibold text-foreground"><Check className="h-4 w-4 text-primary" />Tout ce qui est inclus dans les Soins Personnels</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Administration des médicaments</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Soins des plaies</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Surveillance des signes vitaux</li>
+                    <li className="flex items-center gap-2"><Check className="h-4 w-4 text-primary" />Soins post-opératoires</li>
                   </ul>
                 </CardContent>
                 <CardFooter>
-                  <Button className="w-full" variant="outline">Choose Plan</Button>
+                  <Button className="w-full" variant="outline">Choisir le Plan</Button>
                 </CardFooter>
               </Card>
             </div>
           </div>
         </section>
 
-        {/* Testimonials Carousel */}
+        {/* Carrousel des Témoignages */}
         <section id="testimonials" className="py-12 md:py-20 bg-background">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">
-              What Our Clients Say
+              Ce que Disent Nos Clients
             </h2>
             <Carousel
               opts={{ align: "start", loop: true }}
@@ -353,43 +353,43 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Booking Section */}
+        {/* Section Réservation */}
         <section id="booking" className="py-12 md:py-20 bg-muted/40">
           <div className="container mx-auto px-4">
              <Card className="max-w-3xl mx-auto shadow-lg">
                 <CardHeader className="text-center">
-                    <CardTitle className="text-3xl">Request a Consultation</CardTitle>
-                    <CardDescription>Fill out the form below and we'll get in touch to schedule your free consultation.</CardDescription>
+                    <CardTitle className="text-3xl">Demander une Consultation</CardTitle>
+                    <CardDescription>Remplissez le formulaire ci-dessous et nous vous contacterons pour planifier votre consultation gratuite.</CardDescription>
                 </CardHeader>
                  <CardContent>
                     <form className="grid gap-6">
                          <div className="grid gap-2">
-                            <Label htmlFor="name">Full Name</Label>
+                            <Label htmlFor="name">Nom Complet</Label>
                             <Input id="name" placeholder="John Doe" />
                         </div>
                         <div className="grid md:grid-cols-2 gap-4">
                             <div className="grid gap-2">
                                 <Label htmlFor="email">Email</Label>
-                                <Input id="email" type="email" placeholder="john@example.com" />
+                                <Input id="email" type="email" placeholder="john@exemple.com" />
                             </div>
                             <div className="grid gap-2">
-                                <Label htmlFor="phone">Phone Number</Label>
-                                <Input id="phone" type="tel" placeholder="(555) 123-4567" />
+                                <Label htmlFor="phone">Numéro de Téléphone</Label>
+                                <Input id="phone" type="tel" placeholder="(+33) 1 23 45 67 89" />
                             </div>
                         </div>
                         <div className="grid gap-2">
-                            <Label htmlFor="service-type">Type of Service Needed</Label>
-                            <Input id="service-type" placeholder="e.g., Personal Care, Companion Care" />
+                            <Label htmlFor="service-type">Type de Service Requis</Label>
+                            <Input id="service-type" placeholder="ex: Soins Personnels, Accompagnement" />
                         </div>
                          <div className="grid gap-2">
-                            <Label htmlFor="consultation-date">Preferred Consultation Date / Time</Label>
-                            <Input id="consultation-date" type="text" placeholder="e.g., Weekday Mornings, Next Tuesday Afternoon" />
+                            <Label htmlFor="consultation-date">Date / Heure de Consultation Préférée</Label>
+                            <Input id="consultation-date" type="text" placeholder="ex: Matinées en semaine, Mardi prochain après-midi" />
                         </div>
                          <div className="grid gap-2">
-                            <Label htmlFor="message">Additional Information (Optional)</Label>
-                            <Textarea id="message" placeholder="Tell us more about your needs..."/>
+                            <Label htmlFor="message">Informations Supplémentaires (Optionnel)</Label>
+                            <Textarea id="message" placeholder="Dites-nous en plus sur vos besoins..."/>
                         </div>
-                        <Button type="submit" size="lg" className="w-full">Confirm Request</Button>
+                        <Button type="submit" size="lg" className="w-full">Confirmer la Demande</Button>
                     </form>
                  </CardContent>
              </Card>

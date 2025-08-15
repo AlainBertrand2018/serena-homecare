@@ -41,12 +41,12 @@ import { visits, clients, caregivers } from "@/lib/data";
 
 
 const lineChartData = [
-  { month: "January", clients: 186 },
-  { month: "February", clients: 305 },
-  { month: "March", clients: 237 },
-  { month: "April", clients: 273 },
-  { month: "May", clients: 209 },
-  { month: "June", clients: 214 },
+  { month: "Janvier", clients: 186 },
+  { month: "Février", clients: 305 },
+  { month: "Mars", clients: 237 },
+  { month: "Avril", clients: 273 },
+  { month: "Mai", clients: 209 },
+  { month: "Juin", clients: 214 },
 ]
 
 const lineChartConfig = {
@@ -57,23 +57,23 @@ const lineChartConfig = {
 } satisfies ChartConfig
 
 const barChartData = [
-    { name: 'Companion', hours: 120, fill: 'var(--color-companion)' },
-    { name: 'Personal', hours: 190, fill: 'var(--color-personal)' },
-    { name: 'Nursing', hours: 80, fill: 'var(--color-nursing)' },
+    { name: 'Accompagnement', hours: 120, fill: 'var(--color-companion)' },
+    { name: 'Personnel', hours: 190, fill: 'var(--color-personal)' },
+    { name: 'Soins infirmiers', hours: 80, fill: 'var(--color-nursing)' },
     { name: 'Transport', hours: 45, fill: 'var(--color-transport)' },
 ];
 
 const barChartConfig = {
-    hours: { label: 'Hours' },
-    companion: { label: 'Companion Care', color: 'hsl(var(--chart-1))' },
-    personal: { label: 'Personal Care', color: 'hsl(var(--chart-2))' },
-    nursing: { label: 'Skilled Nursing', color: 'hsl(var(--chart-3))' },
+    hours: { label: 'Heures' },
+    companion: { label: 'Accompagnement', color: 'hsl(var(--chart-1))' },
+    personal: { label: 'Soins Personnels', color: 'hsl(var(--chart-2))' },
+    nursing: { label: 'Soins Infirmiers', color: 'hsl(var(--chart-3))' },
     transport: { label: 'Transport', color: 'hsl(var(--chart-4))' },
 } satisfies ChartConfig
 
 export default function AdminDashboard() {
-  const upcomingVisits = visits.filter(v => v.status === 'Upcoming' || v.status === 'In Progress').slice(0, 5);
-  const availableCaregivers = caregivers.filter(c => c.status === 'Available');
+  const upcomingVisits = visits.filter(v => v.status === 'À venir' || v.status === 'En cours').slice(0, 5);
+  const availableCaregivers = caregivers.filter(c => c.status === 'Disponible');
 
   return (
     <>
@@ -81,52 +81,52 @@ export default function AdminDashboard() {
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Active Clients
+                Total des Clients Actifs
               </CardTitle>
               <Users2 className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{clients.length}</div>
               <p className="text-xs text-muted-foreground">
-                Currently managed clients
+                Clients actuellement gérés
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Active Caregivers
+                Soignants Actifs
               </CardTitle>
               <Briefcase className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">{caregivers.length}</div>
               <p className="text-xs text-muted-foreground">
-                Total registered caregivers
+                Total des soignants inscrits
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Hours Logged (This Month)</CardTitle>
+              <CardTitle className="text-sm font-medium">Heures Enregistrées (Ce Mois)</CardTitle>
               <Clock className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">1,234</div>
               <p className="text-xs text-muted-foreground">
-                +180.1 since last month
+                +180.1 depuis le mois dernier
               </p>
             </CardContent>
           </Card>
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Client Satisfaction</CardTitle>
+              <CardTitle className="text-sm font-medium">Satisfaction Client</CardTitle>
               <Star className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">4.8/5</div>
               <p className="text-xs text-muted-foreground">
-                Based on 25 recent reviews
+                Basé sur 25 avis récents
               </p>
             </CardContent>
           </Card>
@@ -135,14 +135,14 @@ export default function AdminDashboard() {
           <Card className="xl:col-span-2">
              <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
-                <CardTitle>Upcoming Visits</CardTitle>
+                <CardTitle>Visites à Venir</CardTitle>
                 <CardDescription>
-                  A summary of scheduled visits for the upcoming days.
+                  Un résumé des visites prévues pour les prochains jours.
                 </CardDescription>
               </div>
               <Button asChild size="sm" className="ml-auto gap-1">
                 <Link href="/admin/visits">
-                  View All
+                  Voir Tout
                   <ArrowUpRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -152,9 +152,9 @@ export default function AdminDashboard() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Client</TableHead>
-                    <TableHead>Caregiver</TableHead>
-                    <TableHead>Date & Time</TableHead>
-                    <TableHead>Status</TableHead>
+                    <TableHead>Soignant</TableHead>
+                    <TableHead>Date & Heure</TableHead>
+                    <TableHead>Statut</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -171,7 +171,7 @@ export default function AdminDashboard() {
                         <div className="text-sm text-muted-foreground">{visit.time}</div>
                       </TableCell>
                        <TableCell>
-                        <Badge variant={visit.status === 'Upcoming' ? 'secondary' : 'outline'}>{visit.status}</Badge>
+                        <Badge variant={visit.status === 'À venir' ? 'secondary' : 'outline'}>{visit.status}</Badge>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -181,8 +181,8 @@ export default function AdminDashboard() {
           </Card>
           <Card>
             <CardHeader>
-              <CardTitle>Client Growth</CardTitle>
-               <CardDescription>Monthly new client acquisitions.</CardDescription>
+              <CardTitle>Croissance de la Clientèle</CardTitle>
+               <CardDescription>Acquisitions mensuelles de nouveaux clients.</CardDescription>
             </CardHeader>
             <CardContent>
               <ChartContainer config={lineChartConfig}>
@@ -221,8 +221,8 @@ export default function AdminDashboard() {
          <div className="grid gap-4 md:gap-8 lg:grid-cols-2">
             <Card>
                 <CardHeader>
-                    <CardTitle>Visit Hours by Care Type</CardTitle>
-                    <CardDescription>Distribution of billable hours across different service types this month.</CardDescription>
+                    <CardTitle>Heures de Visite par Type de Soin</CardTitle>
+                    <CardDescription>Répartition des heures facturables par type de service ce mois-ci.</CardDescription>
                 </CardHeader>
                 <CardContent>
                      <ChartContainer config={barChartConfig} className="w-full h-[300px]">
@@ -248,8 +248,8 @@ export default function AdminDashboard() {
             </Card>
              <Card>
                 <CardHeader>
-                    <CardTitle>Caregiver Availability</CardTitle>
-                    <CardDescription>Caregivers with upcoming availability for assignments.</CardDescription>
+                    <CardTitle>Disponibilité des Soignants</CardTitle>
+                    <CardDescription>Soignants avec une disponibilité prochaine pour des missions.</CardDescription>
                 </CardHeader>
                 <CardContent>
                     <div className="space-y-4">
@@ -262,13 +262,13 @@ export default function AdminDashboard() {
                                     </Avatar>
                                     <div className="flex-grow">
                                         <p className="font-medium">{caregiver.name}</p>
-                                        <p className="text-sm text-muted-foreground">Available Now</p>
+                                        <p className="text-sm text-muted-foreground">Disponible Maintenant</p>
                                     </div>
-                                    <Button variant="outline" size="sm">Assign</Button>
+                                    <Button variant="outline" size="sm">Assigner</Button>
                                 </div>
                             ))
                         ) : (
-                            <p className="text-sm text-muted-foreground">No caregivers are currently available.</p>
+                            <p className="text-sm text-muted-foreground">Aucun soignant n'est actuellement disponible.</p>
                         )}
                     </div>
                 </CardContent>

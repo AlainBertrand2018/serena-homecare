@@ -9,11 +9,11 @@ import { useState, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const navLinks = [
-    { href: "/admin/dashboard", label: "Dashboard", icon: Home },
+    { href: "/admin/dashboard", label: "Tableau de Bord", icon: Home },
     { href: "/admin/clients", label: "Clients", icon: Users },
-    { href: "/admin/caregivers", label: "Caregivers", icon: Briefcase },
-    { href: "/admin/visits", label: "Visits", icon: Calendar },
-    { href: "/admin/financials", label: "Financials", icon: DollarSign },
+    { href: "/admin/caregivers", label: "Soignants", icon: Briefcase },
+    { href: "/admin/visits", label: "Visites", icon: Calendar },
+    { href: "/admin/financials", label: "Finances", icon: DollarSign },
 ];
 
 export function AdminNav() {

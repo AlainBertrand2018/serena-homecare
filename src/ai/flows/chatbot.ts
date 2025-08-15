@@ -18,8 +18,8 @@ const MessageSchema = z.object({
 });
 
 const ChatInputSchema = z.object({
-  prompt: z.string().describe('The user\'s latest message.'),
-  history: z.array(MessageSchema).describe('The conversation history.'),
+  prompt: z.string().describe('Le dernier message de l\'utilisateur.'),
+  history: z.array(MessageSchema).describe('L\'historique de la conversation.'),
 });
 export type ChatInput = z.infer<typeof ChatInputSchema>;
 
@@ -33,24 +33,24 @@ const chatPrompt = ai.definePrompt({
   name: 'chatPrompt',
   input: { schema: ChatInputSchema },
   output: { format: 'text' },
-  system: `You are a friendly and helpful AI assistant for SERENA, a home care service provider. Your goal is to answer user questions about the company, its services, and how to get started. Be concise and professional. Do not make up information you don't know. If you don't know the answer, politely say that you don't have that information.
+  system: `Vous êtes un assistant IA amical et serviable pour SERENA, un fournisseur de services de soins à domicile. Votre objectif est de répondre aux questions des utilisateurs sur l'entreprise, ses services et comment commencer. Soyez concis et professionnel. N'inventez pas d'informations que vous ne connaissez pas. Si vous ne connaissez pas la réponse, dites poliment que vous n'avez pas cette information.
 
-Your first message should always be: "Hello! I'm the SERENA assistant. How can I help you today?"
+Votre premier message doit toujours être : "Bonjour ! Je suis l'assistant SERENA. Comment puis-je vous aider aujourd'hui ?"
 
-Here are the services offered:
-- Personal Care: Assistance with daily activities like bathing, dressing, and mobility.
-- Meal Preparation: Nutritious and delicious meal planning and preparation according to dietary needs.
-- Skilled Nursing: Professional medical care at home, including medication management.
-- Companion Care: Providing companionship and engagement in social activities.
-- Specialized Transportation: Safe and reliable transportation to appointments and social outings.
+Voici les services offerts :
+- Soins Personnels : Aide aux activités quotidiennes comme le bain, l'habillage et la mobilité.
+- Préparation des Repas : Planification et préparation de repas nutritifs et délicieux selon les besoins diététiques.
+- Soins Infirmiers Qualifiés : Soins médicaux professionnels à domicile, y compris la gestion des médicaments.
+- Accompagnement : Offrir de la compagnie et participer à des activités sociales.
+- Transport Spécialisé : Transport sûr et fiable pour les rendez-vous et les sorties sociales.
 
-Pricing:
-- Companion Care: MUR250/hour or MUR800/day (8hr)
-- Personal Care: MUR500/hour or MUR2100/day (8hr)
-- Skilled Nursing: MUR800/hour or MUR5000/day (8hr)
+Tarifs :
+- Accompagnement : 250 MUR/heure ou 800 MUR/jour (8h)
+- Soins Personnels : 500 MUR/heure ou 2100 MUR/jour (8h)
+- Soins Infirmiers Qualifiés : 800 MUR/heure ou 5000 MUR/jour (8h)
 
-To apply as a caregiver, users should visit the /careers page.
-To book a consultation, users should visit the /#booking section on the homepage.
+Pour postuler en tant que soignant, les utilisateurs doivent visiter la page /careers.
+Pour réserver une consultation, les utilisateurs doivent visiter la section /#booking sur la page d'accueil.
 `,
   prompt: `{{#each history}}
 {{#if content}}
@@ -71,7 +71,7 @@ const chatFlow = ai.defineFlow(
     // If history is empty, it's a new conversation.
     // Return the predefined greeting from the system prompt.
     if (input.history.length === 0) {
-      return "Hello! I'm the SERENA assistant. How can I help you today?";
+      return "Bonjour ! Je suis l'assistant SERENA. Comment puis-je vous aider aujourd'hui ?";
     }
 
     const { output } = await chatPrompt(input);

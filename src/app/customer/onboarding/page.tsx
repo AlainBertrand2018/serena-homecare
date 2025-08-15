@@ -41,9 +41,9 @@ export default function CustomerOnboardingPage() {
     <div className="min-h-screen bg-muted/40 py-12 px-4">
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
-          <CardTitle>Customer Onboarding</CardTitle>
+          <CardTitle>Intégration du Client</CardTitle>
           <CardDescription>
-            Step {step} of {totalSteps}: Please fill out the information below.
+            Étape {step} sur {totalSteps}: Veuillez remplir les informations ci-dessous.
           </CardDescription>
           <Progress value={(step / totalSteps) * 100} className="mt-4" />
         </CardHeader>
@@ -58,18 +58,18 @@ export default function CustomerOnboardingPage() {
         <CardFooter className="flex justify-between">
           {step > 1 && (
             <Button variant="outline" onClick={prevStep}>
-              Previous
+              Précédent
             </Button>
           )}
           <div /> 
           {step < totalSteps && (
             <Button onClick={nextStep}>
-              Next
+              Suivant
             </Button>
           )}
           {step === totalSteps && (
             <Button>
-              Submit Onboarding Form
+              Soumettre le Formulaire
             </Button>
           )}
         </CardFooter>
@@ -92,7 +92,7 @@ const DatePicker = () => {
                     )}
                 >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {date ? format(date, "PPP") : <span>Pick a date</span>}
+                    {date ? format(date, "PPP") : <span>Choisir une date</span>}
                 </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">
@@ -109,189 +109,189 @@ const DatePicker = () => {
 
 const Step1 = () => (
   <div className="space-y-6">
-    <h3 className="text-lg font-semibold">Customer Identity</h3>
+    <h3 className="text-lg font-semibold">Identité du Client</h3>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="grid gap-2">
-            <Label>Title</Label>
+            <Label>Titre</Label>
             <Select>
-                <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
-                <SelectContent><SelectItem value="mr">Mr.</SelectItem><SelectItem value="ms">Ms.</SelectItem><SelectItem value="mrs">Mrs.</SelectItem></SelectContent>
+                <SelectTrigger><SelectValue placeholder="Sélectionner" /></SelectTrigger>
+                <SelectContent><SelectItem value="mr">M.</SelectItem><SelectItem value="ms">Mme</SelectItem><SelectItem value="mrs">Mlle</SelectItem></SelectContent>
             </Select>
         </div>
-        <div className="grid gap-2"><Label>First Name</Label><Input /></div>
-        <div className="grid gap-2"><Label>Last Name</Label><Input /></div>
-        <div className="grid gap-2"><Label>Preferred Name (AKA)</Label><Input /></div>
+        <div className="grid gap-2"><Label>Prénom</Label><Input /></div>
+        <div className="grid gap-2"><Label>Nom</Label><Input /></div>
+        <div className="grid gap-2"><Label>Nom d'usage</Label><Input /></div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <div className="grid gap-2">
-            <Label>Gender</Label>
+            <Label>Genre</Label>
             <Select>
-                <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
-                <SelectContent><SelectItem value="male">Male</SelectItem><SelectItem value="female">Female</SelectItem><SelectItem value="other">Other</SelectItem></SelectContent>
+                <SelectTrigger><SelectValue placeholder="Sélectionner" /></SelectTrigger>
+                <SelectContent><SelectItem value="male">Homme</SelectItem><SelectItem value="female">Femme</SelectItem><SelectItem value="other">Autre</SelectItem></SelectContent>
             </Select>
         </div>
-        <div className="grid gap-2"><Label>Date of Birth</Label><DatePicker /></div>
-        <div className="grid gap-2"><Label>Age</Label><Input disabled placeholder="Auto-calculated" /></div>
+        <div className="grid gap-2"><Label>Date de Naissance</Label><DatePicker /></div>
+        <div className="grid gap-2"><Label>Âge</Label><Input disabled placeholder="Auto-calculé" /></div>
         <div className="grid gap-2">
-            <Label>Civil Status</Label>
+            <Label>État Civil</Label>
             <Select>
-                <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
+                <SelectTrigger><SelectValue placeholder="Sélectionner" /></SelectTrigger>
                 <SelectContent>
-                    <SelectItem value="m">Married</SelectItem><SelectItem value="d">Divorced</SelectItem><SelectItem value="c">Single</SelectItem><SelectItem value="w">Widowed</SelectItem>
+                    <SelectItem value="m">Marié(e)</SelectItem><SelectItem value="d">Divorcé(e)</SelectItem><SelectItem value="c">Célibataire</SelectItem><SelectItem value="w">Veuf/Veuve</SelectItem>
                 </SelectContent>
             </Select>
         </div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="grid gap-2">
-            <Label>Passport-size Photo Upload</Label>
+            <Label>Télécharger photo format passeport</Label>
             <div className="flex items-center gap-4">
                 <div className="w-24 h-24 bg-muted rounded-md flex items-center justify-center"><Upload className="text-muted-foreground" /></div>
-                <Button variant="outline">Choose File</Button>
+                <Button variant="outline">Choisir Fichier</Button>
             </div>
         </div>
-        <div className="grid gap-2"><Label>ID / Passport Number</Label><Input /></div>
+        <div className="grid gap-2"><Label>Numéro d'Identité / Passeport</Label><Input /></div>
     </div>
-    <div className="grid gap-2"><Label>Address of Service</Label><Textarea /></div>
+    <div className="grid gap-2"><Label>Adresse du Service</Label><Textarea /></div>
   </div>
 );
 
 const Step2 = () => (
     <div className="space-y-6">
-    <h3 className="text-lg font-semibold">Custodian / Guardian Information</h3>
+    <h3 className="text-lg font-semibold">Informations du Tuteur / Gardien</h3>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="grid gap-2">
-            <Label>Title</Label>
+            <Label>Titre</Label>
             <Select>
-                <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
-                <SelectContent><SelectItem value="mr">Mr.</SelectItem><SelectItem value="ms">Ms.</SelectItem><SelectItem value="mrs">Mrs.</SelectItem></SelectContent>
+                <SelectTrigger><SelectValue placeholder="Sélectionner" /></SelectTrigger>
+                <SelectContent><SelectItem value="mr">M.</SelectItem><SelectItem value="ms">Mme</SelectItem><SelectItem value="mrs">Mlle</SelectItem></SelectContent>
             </Select>
         </div>
-        <div className="grid gap-2"><Label>First Name</Label><Input /></div>
-        <div className="grid gap-2"><Label>Last Name</Label><Input /></div>
+        <div className="grid gap-2"><Label>Prénom</Label><Input /></div>
+        <div className="grid gap-2"><Label>Nom</Label><Input /></div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="grid gap-2">
-            <Label>Passport-size Photo Upload</Label>
+            <Label>Télécharger photo format passeport</Label>
             <div className="flex items-center gap-4">
                 <div className="w-24 h-24 bg-muted rounded-md flex items-center justify-center"><Upload className="text-muted-foreground" /></div>
-                <Button variant="outline">Choose File</Button>
+                <Button variant="outline">Choisir Fichier</Button>
             </div>
         </div>
-        <div className="grid gap-2"><Label>ID / Passport Number</Label><Input /></div>
+        <div className="grid gap-2"><Label>Numéro d'Identité / Passeport</Label><Input /></div>
     </div>
-    <div className="grid gap-2"><Label>Residential Address</Label><Textarea /></div>
+    <div className="grid gap-2"><Label>Adresse Résidentielle</Label><Textarea /></div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="grid gap-2"><Label>Work Phone</Label><Input type="tel" /></div>
-        <div className="grid gap-2"><Label>Mobile Phone</Label><Input type="tel" /></div>
+        <div className="grid gap-2"><Label>Téléphone Professionnel</Label><Input type="tel" /></div>
+        <div className="grid gap-2"><Label>Téléphone Portable</Label><Input type="tel" /></div>
     </div>
   </div>
 );
 
 const Step3 = () => (
  <div className="space-y-6">
-    <h3 className="text-lg font-semibold">Emergency Contacts</h3>
+    <h3 className="text-lg font-semibold">Contacts d'Urgence</h3>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="grid gap-2">
-            <Label>Title</Label>
+            <Label>Titre</Label>
             <Select>
-                <SelectTrigger><SelectValue placeholder="Select" /></SelectTrigger>
-                <SelectContent><SelectItem value="mr">Mr.</SelectItem><SelectItem value="ms">Ms.</SelectItem><SelectItem value="mrs">Mrs.</SelectItem></SelectContent>
+                <SelectTrigger><SelectValue placeholder="Sélectionner" /></SelectTrigger>
+                <SelectContent><SelectItem value="mr">M.</SelectItem><SelectItem value="ms">Mme</SelectItem><SelectItem value="mrs">Mlle</SelectItem></SelectContent>
             </Select>
         </div>
-        <div className="grid gap-2"><Label>First Name</Label><Input /></div>
-        <div className="grid gap-2"><Label>Last Name</Label><Input /></div>
+        <div className="grid gap-2"><Label>Prénom</Label><Input /></div>
+        <div className="grid gap-2"><Label>Nom</Label><Input /></div>
     </div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="grid gap-2">
-            <Label>Passport-size Photo Upload</Label>
+            <Label>Télécharger photo format passeport</Label>
             <div className="flex items-center gap-4">
                 <div className="w-24 h-24 bg-muted rounded-md flex items-center justify-center"><Upload className="text-muted-foreground" /></div>
-                <Button variant="outline">Choose File</Button>
+                <Button variant="outline">Choisir Fichier</Button>
             </div>
         </div>
-        <div className="grid gap-2"><Label>ID / Passport Number</Label><Input /></div>
+        <div className="grid gap-2"><Label>Numéro d'Identité / Passeport</Label><Input /></div>
     </div>
-    <div className="grid gap-2"><Label>Residential Address</Label><Textarea /></div>
+    <div className="grid gap-2"><Label>Adresse Résidentielle</Label><Textarea /></div>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="grid gap-2"><Label>GP/ Family Doctor Name</Label><Input /></div>
-        <div className="grid gap-2"><Label>GP/ Family Doctor Phone</Label><Input type="tel" /></div>
+        <div className="grid gap-2"><Label>Nom du Médecin Traitant</Label><Input /></div>
+        <div className="grid gap-2"><Label>Téléphone du Médecin Traitant</Label><Input type="tel" /></div>
     </div>
      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="grid gap-2"><Label>Case Manager/ Social Worker Name</Label><Input /></div>
-        <div className="grid gap-2"><Label>Case Manager/ Social Worker Phone</Label><Input type="tel" /></div>
+        <div className="grid gap-2"><Label>Nom du Gestionnaire de Cas/Travailleur Social</Label><Input /></div>
+        <div className="grid gap-2"><Label>Téléphone du Gestionnaire de Cas/Travailleur Social</Label><Input type="tel" /></div>
     </div>
   </div>
 );
 
 const Step4 = () => (
  <div className="space-y-6">
-    <h3 className="text-lg font-semibold">Medical Background</h3>
+    <h3 className="text-lg font-semibold">Antécédents Médicaux</h3>
     <div className="space-y-2">
-        <Label>Check all applicable medical conditions:</Label>
+        <Label>Cochez toutes les conditions médicales applicables :</Label>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="flex items-center space-x-2"><Checkbox id="diabetes" /><Label htmlFor="diabetes">Diabetes</Label></div>
+            <div className="flex items-center space-x-2"><Checkbox id="diabetes" /><Label htmlFor="diabetes">Diabète</Label></div>
             <div className="flex items-center space-x-2"><Checkbox id="hypertension" /><Label htmlFor="hypertension">Hypertension</Label></div>
             <div className="flex items-center space-x-2"><Checkbox id="alzheimer" /><Label htmlFor="alzheimer">Alzheimer</Label></div>
-            <div className="flex items-center space-x-2"><Checkbox id="dementia" /><Label htmlFor="dementia">Dementia</Label></div>
-            <div className="flex items-center space-x-2"><Checkbox id="stroke" /><Label htmlFor="stroke">Stroke</Label></div>
+            <div className="flex items-center space-x-2"><Checkbox id="dementia" /><Label htmlFor="dementia">Démence</Label></div>
+            <div className="flex items-center space-x-2"><Checkbox id="stroke" /><Label htmlFor="stroke">AVC</Label></div>
             <div className="flex items-center space-x-2"><Checkbox id="cancer" /><Label htmlFor="cancer">Cancer</Label></div>
-            <div className="flex items-center space-x-2"><Checkbox id="parkinsons" /><Label htmlFor="parkinsons">Parkinson's</Label></div>
-            <div className="flex items-center space-x-2"><Checkbox id="arthritis" /><Label htmlFor="arthritis">Arthritis</Label></div>
-            <div className="flex items-center space-x-2"><Checkbox id="depression" /><Label htmlFor="depression">Depression</Label></div>
-            <div className="flex items-center space-x-2"><Checkbox id="other_condition" /><Label htmlFor="other_condition">Other</Label></div>
+            <div className="flex items-center space-x-2"><Checkbox id="parkinsons" /><Label htmlFor="parkinsons">Parkinson</Label></div>
+            <div className="flex items-center space-x-2"><Checkbox id="arthritis" /><Label htmlFor="arthritis">Arthrite</Label></div>
+            <div className="flex items-center space-x-2"><Checkbox id="depression" /><Label htmlFor="depression">Dépression</Label></div>
+            <div className="flex items-center space-x-2"><Checkbox id="other_condition" /><Label htmlFor="other_condition">Autre</Label></div>
         </div>
-        <Input placeholder="If other condition(s), please specify which one(s)" />
+        <Input placeholder="Si autre(s) condition(s), veuillez préciser" />
     </div>
      <div className="space-y-2">
-        <div className="flex items-center space-x-2"><Checkbox id="disabilities" /><Label htmlFor="disabilities">Disabilities</Label></div>
-        <Input placeholder="If checked, which one(s)?" />
+        <div className="flex items-center space-x-2"><Checkbox id="disabilities" /><Label htmlFor="disabilities">Handicaps</Label></div>
+        <Input placeholder="Si coché, le(s)quel(s) ?" />
     </div>
      <div className="space-y-2">
         <div className="flex items-center space-x-2"><Checkbox id="allergies" /><Label htmlFor="allergies">Allergies</Label></div>
-        <Input placeholder="If checked, which one(s)?" />
+        <Input placeholder="Si coché, le(s)quel(s) ?" />
     </div>
      <div className="space-y-2">
-        <div className="flex items-center space-x-2"><Checkbox id="mental_health" /><Label htmlFor="mental_health">Mental Health Conditions</Label></div>
-        <Input placeholder="If checked, which one(s)?" />
+        <div className="flex items-center space-x-2"><Checkbox id="mental_health" /><Label htmlFor="mental_health">Conditions de santé mentale</Label></div>
+        <Input placeholder="Si coché, le(s)quel(s) ?" />
     </div>
       <div className="space-y-2">
-        <div className="flex items-center space-x-2"><Checkbox id="infection_risk" /><Label htmlFor="infection_risk">Infectious Risk Precautions</Label></div>
-        <Input placeholder="If checked, which one(s)?" />
+        <div className="flex items-center space-x-2"><Checkbox id="infection_risk" /><Label htmlFor="infection_risk">Précautions contre les risques infectieux</Label></div>
+        <Input placeholder="Si coché, le(s)quel(s) ?" />
     </div>
-    <div className="grid gap-2"><Label>Hospitalisation History</Label><Textarea /></div>
+    <div className="grid gap-2"><Label>Historique des hospitalisations</Label><Textarea /></div>
   </div>
 );
 
 const Step5 = () => (
   <div className="space-y-6">
-    <h3 className="text-lg font-semibold">Medication &amp; Treatments</h3>
+    <h3 className="text-lg font-semibold">Médicaments & Traitements</h3>
     <div className="space-y-2">
-        <div className="flex items-center space-x-2"><Checkbox id="on_medication" /><Label htmlFor="on_medication">Currently on Medication</Label></div>
-        <Input placeholder="If checked, which one(s)?" />
+        <div className="flex items-center space-x-2"><Checkbox id="on_medication" /><Label htmlFor="on_medication">Actuellement sous médication</Label></div>
+        <Input placeholder="Si coché, le(s)quel(s) ?" />
     </div>
-    <div className="grid gap-2"><Label>Medication List & Dosage</Label><Textarea /></div>
-    <div className="grid gap-2"><Label>Pharmacy Contact, if any</Label><Input /></div>
-    <div className="grid gap-2"><Label>Special Instructions</Label><Textarea /></div>
+    <div className="grid gap-2"><Label>Liste des médicaments & Posologie</Label><Textarea /></div>
+    <div className="grid gap-2"><Label>Contact de la pharmacie, si applicable</Label><Input /></div>
+    <div className="grid gap-2"><Label>Instructions spéciales</Label><Textarea /></div>
   </div>
 );
 
 const Step6 = () => (
   <div className="space-y-6">
-    <h3 className="text-lg font-semibold">Consent &amp; Acknowledgements</h3>
+    <h3 className="text-lg font-semibold">Consentement & Remerciements</h3>
      <div className="space-y-4 p-4 border rounded-md bg-muted/50">
-        <h4 className="font-medium">Disclaimer and Consent Agreement</h4>
+        <h4 className="font-medium">Clause de non-responsabilité et accord de consentement</h4>
         <p className="text-sm text-muted-foreground">
-            I, the undersigned, hereby declare that all information provided in this onboarding document is true, accurate, and complete to the best of my knowledge. I understand that any false or misleading information may result in the refusal or termination of care services.
+            Je, soussigné(e), déclare par la présente que toutes les informations fournies dans ce document d'intégration sont vraies, exactes et complètes au meilleur de ma connaissance. Je comprends que toute information fausse ou trompeuse peut entraîner le refus ou la résiliation des services de soins.
         </p>
         <p className="text-sm text-muted-foreground">
-            As the client or the legally authorized custodian/guardian, I grant permission to SERENA and its designated caregivers to perform the duties outlined in the care plan. This includes, but is not limited to, providing personal care, administering medication as prescribed, assisting with mobility, and providing transportation for medical appointments or essential errands. I acknowledge that I have discussed the care plan and consent to the services described herein.
+            En tant que client ou tuteur/gardien légalement autorisé, j'autorise SERENA et ses soignants désignés à effectuer les tâches décrites dans le plan de soins. Cela inclut, sans s'y limiter, la fourniture de soins personnels, l'administration de médicaments tels que prescrits, l'aide à la mobilité et le transport pour les rendez-vous médicaux ou les courses essentielles. Je reconnais avoir discuté du plan de soins et consentir aux services qui y sont décrits.
         </p>
     </div>
     <div className="flex items-center space-x-2">
       <Checkbox id="acknowledgement" />
       <Label htmlFor="acknowledgement" className="font-medium">
-        I have read, understood, and agree to the terms and conditions outlined above.
+        J'ai lu, compris et accepte les termes et conditions décrits ci-dessus.
       </Label>
     </div>
   </div>

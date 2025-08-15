@@ -44,13 +44,13 @@ function AssignCaregiverDialog({ onSelectCaregiver }: { onSelectCaregiver: (care
             <DialogTrigger asChild>
                 <Button variant="outline" className="w-full justify-start">
                     <UserCheck className="mr-2 h-4 w-4" />
-                    Assign Caregiver...
+                    Assigner Soignant...
                 </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-2xl">
                 <DialogHeader>
-                    <DialogTitle>Assign Caregiver</DialogTitle>
-                    <DialogDescription>Select an available caregiver for this visit.</DialogDescription>
+                    <DialogTitle>Assigner Soignant</DialogTitle>
+                    <DialogDescription>Sélectionnez un soignant disponible pour cette visite.</DialogDescription>
                 </DialogHeader>
                 <div className="grid gap-4 py-4 max-h-[60vh] overflow-y-auto">
                     {caregivers.map(caregiver => (
@@ -66,14 +66,14 @@ function AssignCaregiverDialog({ onSelectCaregiver }: { onSelectCaregiver: (care
                                 </div>
                             </div>
                             <div className="text-sm text-muted-foreground">
-                                <Badge variant={caregiver.status === 'Available' ? 'default' : 'destructive'}>{caregiver.status}</Badge>
+                                <Badge variant={caregiver.status === 'Disponible' ? 'default' : 'destructive'}>{caregiver.status}</Badge>
                             </div>
                             <Button
                                 size="sm"
                                 onClick={() => handleSelect(caregiver)}
-                                disabled={caregiver.status !== 'Available'}
+                                disabled={caregiver.status !== 'Disponible'}
                             >
-                                Assign
+                                Assigner
                             </Button>
                         </div>
                     ))}
@@ -98,7 +98,7 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Visit form submitted");
+        console.log("Formulaire de visite soumis");
         setOpen(false);
     }
 
@@ -111,9 +111,9 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="sm:max-w-lg">
         <DialogHeader>
-          <DialogTitle>{isEditing ? "Edit Visit" : "Schedule New Visit"}</DialogTitle>
+          <DialogTitle>{isEditing ? "Modifier Visite" : "Planifier Nouvelle Visite"}</DialogTitle>
           <DialogDescription>
-            {isEditing ? "Update the visit details below." : "Assign a client to a caregiver for a specific date and time."}
+            {isEditing ? "Mettez à jour les détails de la visite ci-dessous." : "Assignez un client à un soignant pour une date et une heure spécifiques."}
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
@@ -123,7 +123,7 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                         <Label htmlFor="client">Client</Label>
                         <Select defaultValue={visit?.clientId}>
                             <SelectTrigger id="client">
-                                <SelectValue placeholder="Select a client" />
+                                <SelectValue placeholder="Sélectionnez un client" />
                             </SelectTrigger>
                             <SelectContent>
                                 {clients.map(c => <SelectItem key={c.id} value={c.id}>{c.name}</SelectItem>)}
@@ -131,7 +131,7 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                         </Select>
                     </div>
                     <div className="grid gap-2">
-                        <Label htmlFor="caregiver">Caregiver</Label>
+                        <Label htmlFor="caregiver">Soignant</Label>
                         {selectedCaregiver ? (
                              <div className="flex items-center gap-2 p-2 border rounded-md">
                                 <Avatar className="h-8 w-8">
@@ -139,7 +139,7 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                                     <AvatarFallback>{selectedCaregiver.name.charAt(0)}</AvatarFallback>
                                 </Avatar>
                                 <span className="text-sm font-medium flex-grow">{selectedCaregiver.name}</span>
-                                <Button variant="ghost" size="sm" onClick={() => setSelectedCaregiver(null)}>Change</Button>
+                                <Button variant="ghost" size="sm" onClick={() => setSelectedCaregiver(null)}>Changer</Button>
                             </div>
                         ) : (
                            <AssignCaregiverDialog onSelectCaregiver={handleCaregiverSelect} />
@@ -161,7 +161,7 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                                     )}
                                 >
                                     <CalendarIcon className="mr-2 h-4 w-4" />
-                                    {date ? format(date, "PPP") : <span>Pick a date</span>}
+                                    {date ? format(date, "PPP") : <span>Choisissez une date</span>}
                                 </Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-auto p-0">
@@ -175,32 +175,32 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                         </Popover>
                     </div>
                      <div className="grid gap-2">
-                        <Label htmlFor="time">Time</Label>
-                        <Input id="time" defaultValue={visit?.time} placeholder="e.g., 9:00 AM - 11:00 AM" />
+                        <Label htmlFor="time">Heure</Label>
+                        <Input id="time" defaultValue={visit?.time} placeholder="ex: 09:00 - 11:00" />
                     </div>
                 </div>
                  <div className="grid gap-2">
-                    <Label htmlFor="status">Status</Label>
-                    <Select defaultValue={visit?.status || 'Upcoming'}>
+                    <Label htmlFor="status">Statut</Label>
+                    <Select defaultValue={visit?.status || 'À venir'}>
                         <SelectTrigger id="status">
-                            <SelectValue placeholder="Select a status" />
+                            <SelectValue placeholder="Sélectionnez un statut" />
                         </SelectTrigger>
                         <SelectContent>
-                             <SelectItem value="Upcoming">Upcoming</SelectItem>
-                             <SelectItem value="In Progress">In Progress</SelectItem>
-                             <SelectItem value="Completed">Completed</SelectItem>
-                             <SelectItem value="Cancelled">Cancelled</SelectItem>
+                             <SelectItem value="À venir">À venir</SelectItem>
+                             <SelectItem value="En cours">En cours</SelectItem>
+                             <SelectItem value="Terminée">Terminée</SelectItem>
+                             <SelectItem value="Annulée">Annulée</SelectItem>
                         </SelectContent>
                     </Select>
                 </div>
                  <div className="grid gap-2">
-                    <Label htmlFor="tasks">Tasks (comma-separated)</Label>
-                    <Textarea id="tasks" defaultValue={visit?.tasks.join(', ')} placeholder="Prepare breakfast, Administer medication..." />
+                    <Label htmlFor="tasks">Tâches (séparées par des virgules)</Label>
+                    <Textarea id="tasks" defaultValue={visit?.tasks.join(', ')} placeholder="Préparer le petit déjeuner, administrer les médicaments..." />
                 </div>
             </div>
             <DialogFooter>
-                <Button type="button" variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-                <Button type="submit">{isEditing ? "Save Changes" : "Schedule Visit"}</Button>
+                <Button type="button" variant="outline" onClick={() => setOpen(false)}>Annuler</Button>
+                <Button type="submit">{isEditing ? "Sauvegarder" : "Planifier Visite"}</Button>
             </DialogFooter>
         </form>
       </DialogContent>

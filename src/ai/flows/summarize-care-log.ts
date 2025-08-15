@@ -12,13 +12,13 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 const SummarizeCareLogInputSchema = z.object({
-  careLog: z.string().describe('The care log to summarize.'),
+  careLog: z.string().describe('Le journal de soins à résumer.'),
 });
 
 export type SummarizeCareLogInput = z.infer<typeof SummarizeCareLogInputSchema>;
 
 const SummarizeCareLogOutputSchema = z.object({
-  summary: z.string().describe('The summarized care log.'),
+  summary: z.string().describe('Le journal de soins résumé.'),
 });
 
 export type SummarizeCareLogOutput = z.infer<typeof SummarizeCareLogOutputSchema>;
@@ -31,11 +31,11 @@ const summarizeCareLogPrompt = ai.definePrompt({
   name: 'summarizeCareLogPrompt',
   input: {schema: SummarizeCareLogInputSchema},
   output: {schema: SummarizeCareLogOutputSchema},
-  prompt: `You are an experienced caregiver summarizing care logs.
+  prompt: `Vous êtes un soignant expérimenté qui résume les journaux de soins.
 
-  Please summarize the following care log, extracting the key activities and observations:
+  Veuillez résumer le journal de soins suivant, en extrayant les activités et observations clés :
 
-  Care Log:
+  Journal de Soins :
   {{careLog}}`,
 });
 

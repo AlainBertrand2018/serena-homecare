@@ -17,13 +17,17 @@ export type Client = {
   carePlan: string;
 };
 
+export type CaregiverStatus = 'Disponible' | 'En mission' | 'Indisponible';
+
 export type Caregiver = {
   id: string;
   name: string;
   avatarUrl: string;
-  status: 'Available' | 'On Assignment' | 'Unavailable';
+  status: CaregiverStatus;
   skills: string[];
 };
+
+export type VisitStatus = 'À venir' | 'Terminée' | 'En cours' | 'Annulée';
 
 export type Visit = {
   id: string;
@@ -35,16 +39,19 @@ export type Visit = {
   caregiverName: string;
   date: string;
   time: string;
-  status: 'Upcoming' | 'Completed' | 'In Progress' | 'Cancelled';
+  status: VisitStatus;
   tasks: string[];
 };
+
+export type TransactionStatus = 'Payée' | 'En attente' | 'Envoyée' | 'En retard';
+export type TransactionType = 'Facture' | 'Paie';
 
 export type Transaction = {
     id: string;
     name: string;
     description: string;
-    type: 'Invoice' | 'Payroll';
-    status: 'Paid' | 'Pending' | 'Sent' | 'Overdue';
+    type: TransactionType;
+    status: TransactionStatus;
     date: string;
     amount: string;
 }
@@ -58,17 +65,17 @@ export const clients: Client[] = [
     emergencyContact: {
       name: 'Abdoulah MOOTTEE',
       phone: '555-0101',
-      relationship: 'Son',
+      relationship: 'Fils',
     },
     medicalInfo: {
-        allergies: ['Penicillin'],
-        conditions: ['Hypertension', 'Arthritis'],
+        allergies: ['Pénicilline'],
+        conditions: ['Hypertension', 'Arthrite'],
         medications: [
-            { name: 'Lisinopril', dosage: '10mg', frequency: 'Once a day' },
-            { name: 'Ibuprofen', dosage: '200mg', frequency: 'As needed for pain' },
+            { name: 'Lisinopril', dosage: '10mg', frequency: 'Une fois par jour' },
+            { name: 'Ibuprofène', dosage: '200mg', frequency: 'Au besoin pour la douleur' },
         ]
     },
-    carePlan: 'Loves classical music and has a cat named Whiskers. Prefers tea over coffee. Needs help with meal preparation and light housekeeping. Encourage fluid intake.',
+    carePlan: 'Aime la musique classique et a un chat nommé Moustaches. Préfère le thé au café. A besoin d\'aide pour la préparation des repas et les tâches ménagères légères. Encourager la consommation de liquides.',
   },
   {
     id: '2',
@@ -78,17 +85,17 @@ export const clients: Client[] = [
     emergencyContact: {
       name: 'Julie DINDAR',
       phone: '555-0102',
-      relationship: 'Daughter',
+      relationship: 'Fille',
     },
      medicalInfo: {
-        allergies: ['None'],
-        conditions: ['Type 2 Diabetes', 'Glaucoma'],
+        allergies: ['Aucune'],
+        conditions: ['Diabète de type 2', 'Glaucome'],
         medications: [
-            { name: 'Metformin', dosage: '500mg', frequency: 'Twice a day' },
-            { name: 'Latanoprost', dosage: '1 drop', frequency: 'Once a day in evening' },
+            { name: 'Metformine', dosage: '500mg', frequency: 'Deux fois par jour' },
+            { name: 'Latanoprost', dosage: '1 goutte', frequency: 'Une fois par jour le soir' },
         ]
     },
-    carePlan: 'Enjoys watching old movies, especially westerns. Needs assistance with mobility, uses a walker. Monitor blood sugar levels before meals.',
+    carePlan: 'Aime regarder de vieux films, surtout les westerns. A besoin d\'aide pour la mobilité, utilise un déambulateur. Surveiller la glycémie avant les repas.',
   },
    {
     id: '3',
@@ -98,17 +105,17 @@ export const clients: Client[] = [
     emergencyContact: {
       name: 'Anoop Azaghen',
       phone: '555-0103',
-      relationship: 'Son in Law',
+      relationship: 'Gendre',
     },
     medicalInfo: {
-      allergies: ['Sulfa Drugs'],
-      conditions: ['Congestive Heart Failure', 'COPD'],
+      allergies: ['Sulfamides'],
+      conditions: ['Insuffisance cardiaque congestive', 'MPOC'],
       medications: [
-        { name: 'Furosemide', dosage: '40mg', frequency: 'Once a day' },
-        { name: 'Albuterol Inhaler', dosage: '2 puffs', frequency: 'As needed' },
+        { name: 'Furosémide', dosage: '40mg', frequency: 'Une fois par jour' },
+        { name: 'Inhalateur d\'Albutérol', dosage: '2 bouffées', frequency: 'Au besoin' },
       ],
     },
-    carePlan: 'Requires assistance with oxygen tank. Enjoys gardening and reading. Keep apartment cool and well-ventilated.',
+    carePlan: 'Nécessite une assistance avec le réservoir d\'oxygène. Aime jardiner et lire. Garder l\'appartement frais et bien ventilé.',
   },
 ];
 
@@ -117,29 +124,29 @@ export const caregivers: Caregiver[] = [
     id: 'c1',
     name: 'Samantha RENÉ',
     avatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/caregivers/samantha.png',
-    status: 'Available',
-    skills: ['Personal Care', 'Dementia Care', 'Medication Management'],
+    status: 'Disponible',
+    skills: ['Soins personnels', 'Soins de la démence', 'Gestion des médicaments'],
   },
   {
     id: 'c2',
     name: 'David LELOUP',
     avatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/caregivers/david.png',
-    status: 'On Assignment',
-    skills: ['Companion Care', 'Meal Prep', 'Mobility Assistance'],
+    status: 'En mission',
+    skills: ['Accompagnement', 'Préparation de repas', 'Aide à la mobilité'],
   },
   {
     id: 'c3',
     name: 'Brenda CHONG',
     avatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/caregivers/brenda.png',
-    status: 'Available',
-    skills: ['Skilled Nursing', 'Wound Care', 'Post-operative Care'],
+    status: 'Disponible',
+    skills: ['Soins infirmiers qualifiés', 'Soins des plaies', 'Soins post-opératoires'],
   },
   {
     id: 'c4',
     name: 'Nathalie JEANPIERRE-RODRIGUEZ',
     avatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/caregivers/nathalie.png',
-    status: 'Unavailable',
-    skills: ['Personal Care', 'Hospice Care', 'Bilingual (Spanish)'],
+    status: 'Indisponible',
+    skills: ['Soins personnels', 'Soins palliatifs', 'Bilingue (espagnol)'],
   },
 ];
 
@@ -153,10 +160,10 @@ export const visits: Visit[] = [
     clientAddress: '456, Avenue des Longanes, Quatre Bornes',
     caregiverId: 'c1',
     caregiverName: 'Samantha RENÉ',
-    date: 'July 25, 2024',
-    time: '9:00 AM - 11:00 AM',
-    status: 'Upcoming',
-    tasks: ['Prepare breakfast', 'Administer morning medication', 'Light housekeeping'],
+    date: '25 juillet 2024',
+    time: '09:00 - 11:00',
+    status: 'À venir',
+    tasks: ['Préparer le petit-déjeuner', 'Administrer les médicaments du matin', 'Ménage léger'],
   },
   {
     id: 'v2',
@@ -166,10 +173,10 @@ export const visits: Visit[] = [
     clientAddress: '789, Rue des Pies, Port Louis',
     caregiverId: 'c2',
     caregiverName: 'David LELOUP',
-    date: 'July 26, 2024',
-    time: '1:00 PM - 3:00 PM',
-    status: 'Upcoming',
-    tasks: ['Assist with walk', 'Check blood sugar', 'Prepare lunch'],
+    date: '26 juillet 2024',
+    time: '13:00 - 15:00',
+    status: 'À venir',
+    tasks: ['Aide à la marche', 'Vérifier la glycémie', 'Préparer le déjeuner'],
   },
   {
     id: 'v3',
@@ -179,10 +186,10 @@ export const visits: Visit[] = [
     clientAddress: '456, Avenue des Longanes, Quatre Bornes',
     caregiverId: 'c1',
     caregiverName: 'Samantha RENÉ',
-    date: 'July 28, 2024',
-    time: '10:00 AM - 12:00 PM',
-    status: 'Upcoming',
-    tasks: ['Tidy up living room', 'Play a game of cards', 'Prepare a light snack'],
+    date: '28 juillet 2024',
+    time: '10:00 - 12:00',
+    status: 'À venir',
+    tasks: ['Ranger le salon', 'Jouer aux cartes', 'Préparer une collation légère'],
   },
   {
     id: 'v4',
@@ -192,10 +199,10 @@ export const visits: Visit[] = [
     clientAddress: '123, Rue des tulipes, Sodnac, Quatre Bornes',
     caregiverId: 'c3',
     caregiverName: 'Nathalie JEANPIERRE-RODRIGUEZ',
-    date: 'July 23, 2024',
-    time: '2:00 PM - 5:00 PM',
-    status: 'Completed',
-    tasks: ['Monitor oxygen levels', 'Administer afternoon medications', 'Assist with dinner prep'],
+    date: '23 juillet 2024',
+    time: '14:00 - 17:00',
+    status: 'Terminée',
+    tasks: ['Surveiller les niveaux d\'oxygène', 'Administrer les médicaments de l\'après-midi', 'Aide à la préparation du dîner'],
   },
   {
     id: 'v5',
@@ -205,19 +212,19 @@ export const visits: Visit[] = [
     clientAddress: '789, Rue des Pies, Port Louis',
     caregiverId: 'c2',
     caregiverName: 'David LELOUP',
-    date: 'July 24, 2024',
-    time: '11:00 AM - 1:00 PM',
-    status: 'In Progress',
-    tasks: ['Lunch preparation', 'Accompany to physical therapy appointment', 'Read newspaper aloud'],
+    date: '24 juillet 2024',
+    time: '11:00 - 13:00',
+    status: 'En cours',
+    tasks: ['Préparation du déjeuner', 'Accompagner au rendez-vous de physiothérapie', 'Lire le journal à haute voix'],
   },
 ];
 
 export const recentTransactions: Transaction[] = [
-    { id: 't1', name: 'Azizza MOOTTEE', description: 'Invoice #INV001', type: 'Invoice', status: 'Paid', date: 'July 20, 2024', amount: 'MUR4,200.00' },
-    { id: 't2', name: 'Samantha RENÉ', description: 'Payroll Payout', type: 'Payroll', status: 'Sent', date: 'July 15, 2024', amount: 'MUR8,500.00' },
-    { id: 't3', name: 'Mario DINDAR', description: 'Invoice #INV002', type: 'Invoice', status: 'Pending', date: 'July 22, 2024', amount: 'MUR3,000.00' },
-    { id: 't4', name: 'David LELOUP', description: 'Payroll Payout', type: 'Payroll', status: 'Sent', date: 'July 15, 2024', amount: 'MUR7,800.00' },
-    { id: 't5', name: 'Preety NAANKI', description: 'Invoice #INV003', type: 'Invoice', status: 'Overdue', date: 'July 18, 2024', amount: 'MUR5,500.00' },
+    { id: 't1', name: 'Azizza MOOTTEE', description: 'Facture #INV001', type: 'Facture', status: 'Payée', date: '20 juillet 2024', amount: 'MUR4,200.00' },
+    { id: 't2', name: 'Samantha RENÉ', description: 'Virement de paie', type: 'Paie', status: 'Envoyée', date: '15 juillet 2024', amount: 'MUR8,500.00' },
+    { id: 't3', name: 'Mario DINDAR', description: 'Facture #INV002', type: 'Facture', status: 'En attente', date: '22 juillet 2024', amount: 'MUR3,000.00' },
+    { id: 't4', name: 'David LELOUP', description: 'Virement de paie', type: 'Paie', status: 'Envoyée', date: '15 juillet 2024', amount: 'MUR7,800.00' },
+    { id: 't5', name: 'Preety NAANKI', description: 'Facture #INV003', type: 'Facture', status: 'En retard', date: '18 juillet 2024', amount: 'MUR5,500.00' },
 ];
 
 export const getClientById = (id: string): Client | undefined => {
