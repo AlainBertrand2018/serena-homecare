@@ -66,7 +66,7 @@ export function WelcomePopup() {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={handleClose}>Continuer</AlertDialogAction>
+          <AlertDialogAction onClick={handleClose}>Continuez votre visite d'Évaluation</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
