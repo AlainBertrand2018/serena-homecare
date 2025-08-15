@@ -1,10 +1,15 @@
 import { cn } from '@/lib/utils';
-import { Home, Plus } from 'lucide-react';
+import Image from 'next/image';
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-center justify-center bg-primary rounded-lg p-2 w-10 h-10", className)}>
-      <Home className="text-primary-foreground w-6 h-6" />
+    <div className={cn("relative w-10 h-10", className)}>
+      <Image 
+        src="/images/weblogo.webp" 
+        alt="SERENA Logo" 
+        fill 
+        className="object-contain"
+      />
     </div>
   );
 }
