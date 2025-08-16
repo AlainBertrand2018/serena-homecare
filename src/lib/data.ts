@@ -19,6 +19,8 @@ export type Client = {
 };
 
 export type CaregiverStatus = 'Disponible' | 'En mission' | 'Indisponible';
+export type EmploymentType = 'Salarié/e' | 'Temps Partiel' | 'Freelance';
+
 
 export type Caregiver = {
   id: string;
@@ -26,6 +28,7 @@ export type Caregiver = {
   avatarUrl: string;
   status: CaregiverStatus;
   skills: string[];
+  employmentType: EmploymentType;
 };
 
 export type VisitStatus = 'À venir' | 'Terminée' | 'En cours' | 'Annulée';
@@ -127,6 +130,7 @@ export const caregivers: Caregiver[] = [
     avatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/caregivers/samantha.png',
     status: 'Disponible',
     skills: ['Soins personnels', 'Soins de la démence', 'Gestion des médicaments'],
+    employmentType: 'Salarié/e',
   },
   {
     id: 'c2',
@@ -134,6 +138,7 @@ export const caregivers: Caregiver[] = [
     avatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/caregivers/david.png',
     status: 'En mission',
     skills: ['Accompagnement', 'Préparation de repas', 'Aide à la mobilité'],
+    employmentType: 'Temps Partiel',
   },
   {
     id: 'c3',
@@ -141,6 +146,7 @@ export const caregivers: Caregiver[] = [
     avatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/caregivers/brenda.png',
     status: 'Disponible',
     skills: ['Soins infirmiers qualifiés', 'Soins des plaies', 'Soins post-opératoires'],
+    employmentType: 'Salarié/e',
   },
   {
     id: 'c4',
@@ -148,6 +154,7 @@ export const caregivers: Caregiver[] = [
     avatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/caregivers/nathalie.png',
     status: 'Indisponible',
     skills: ['Soins personnels', 'Soins palliatifs', 'Bilingue (espagnol)'],
+    employmentType: 'Freelance',
   },
 ];
 

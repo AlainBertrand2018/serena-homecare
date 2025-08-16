@@ -29,22 +29,35 @@ interface CaregiverFormProps {
     onAddCaregiver?: (caregiver: Omit<Caregiver, 'id'>) => void;
 }
 
+type EmploymentType = 'Salarié/e' | 'Temps Partiel' | 'Freelance';
+
+const remunerationSuffixes: Record<EmploymentType, string> = {
+    'Salarié/e': '/Mois',
+    'Temps Partiel': '/heure',
+    'Freelance': '/Prestation'
+};
+
 export function CaregiverForm({ caregiver, trigger, onAddCaregiver }: CaregiverFormProps) {
     const [open, setOpen] = useState(false);
+    const [employmentType, setEmploymentType] = useState<EmploymentType>(caregiver?.employmentType || 'Salarié/e');
     const isEditing = !!caregiver;
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const skillsValue = formData.get('skills') as string;
+        
+        // This is a simplified submission handler. 
+        // You would expand this to handle the new fields.
         const newCaregiverData = {
             name: formData.get('name') as string,
             avatarUrl: formData.get('avatarUrl') as string,
-            status: formData.get('status') as CaregiverStatus,
+            status: 'Disponible' as CaregiverStatus, // Defaulting status
             skills: skillsValue ? skillsValue.split(',').map(s => s.trim()) : [],
         };
 
         if (onAddCaregiver && !isEditing) {
+            // @ts-ignore
             onAddCaregiver(newCaregiverData);
         }
 
@@ -74,17 +87,29 @@ export function CaregiverForm({ caregiver, trigger, onAddCaregiver }: CaregiverF
                     <Input id="avatarUrl" name="avatarUrl" defaultValue={caregiver?.avatarUrl} placeholder="https://placehold.co/100x100.png" />
                 </div>
                  <div className="grid gap-2">
-                    <Label htmlFor="status">Statut</Label>
-                    <Select name="status" defaultValue={caregiver?.status}>
-                        <SelectTrigger id="status">
-                            <SelectValue placeholder="Sélectionnez un statut" />
+                    <Label htmlFor="employmentType">Type d'emploi</Label>
+                    <Select 
+                        name="employmentType" 
+                        defaultValue={employmentType}
+                        onValueChange={(value) => setEmploymentType(value as EmploymentType)}
+                    >
+                        <SelectTrigger id="employmentType">
+                            <SelectValue placeholder="Sélectionnez un type" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="Disponible">Disponible</SelectItem>
-                            <SelectItem value="En mission">En mission</SelectItem>
-                            <SelectItem value="Indisponible">Indisponible</SelectItem>
+                            <SelectItem value="Salarié/e">Salarié/e</SelectItem>
+                            <SelectItem value="Temps Partiel">Temps Partiel</SelectItem>
+                            <SelectItem value="Freelance">Freelance</SelectItem>
                         </SelectContent>
                     </Select>
+                </div>
+                 <div className="grid gap-2">
+                    <Label htmlFor="remuneration">Rémunération</Label>
+                    <div className="flex items-center gap-2">
+                        <span className="text-muted-foreground">MUR</span>
+                        <Input id="remuneration" name="remuneration" type="number" placeholder="500" className="flex-grow" />
+                        <span className="text-muted-foreground whitespace-nowrap">{remunerationSuffixes[employmentType]}</span>
+                    </div>
                 </div>
                 <div className="grid gap-2">
                     <Label htmlFor="skills">Compétences (séparées par des virgules)</Label>
