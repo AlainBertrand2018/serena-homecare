@@ -29,6 +29,8 @@ import { Progress } from "@/components/ui/progress";
 import { cn } from '@/lib/utils';
 import { format } from "date-fns";
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { fr } from 'date-fns/locale';
+
 
 const totalSteps = 8;
 
@@ -89,8 +91,13 @@ export default function CaregiverOnboardingPage() {
   );
 }
 
-const DatePicker = ({label}: {label: string}) => {
+const DatePicker = ({label, isBirthdate = false }: {label: string, isBirthdate?: boolean}) => {
     const [date, setDate] = useState<Date>();
+
+    const today = new Date();
+    const toDate = isBirthdate ? new Date(today.getFullYear() - 17, today.getMonth(), today.getDate()) : today;
+    const fromYear = isBirthdate ? 1920 : today.getFullYear();
+    const toYear = toDate.getFullYear();
     
     return (
         <div className="grid gap-2">
@@ -105,7 +112,7 @@ const DatePicker = ({label}: {label: string}) => {
                         )}
                     >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {date ? format(date, "PPP") : <span>Choisir une date</span>}
+                        {date ? format(date, "PPP", { locale: fr }) : <span>Choisir une date</span>}
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0">
@@ -113,7 +120,13 @@ const DatePicker = ({label}: {label: string}) => {
                         mode="single"
                         selected={date}
                         onSelect={setDate}
+                        captionLayout={isBirthdate ? "dropdown-buttons" : "buttons"}
+                        fromYear={fromYear}
+                        toYear={toYear}
+                        toDate={isBirthdate ? toDate : undefined}
+                        disabled={isBirthdate ? { after: toDate } : undefined}
                         initialFocus
+                        locale={fr}
                     />
                 </PopoverContent>
             </Popover>
@@ -162,7 +175,7 @@ const Section1 = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="grid gap-2"><Label>Nom complet</Label><Input /></div>
         <div className="grid gap-2"><Label>Nom d'usage / Surnom</Label><Input /></div>
-        <DatePicker label="Date de naissance" />
+        <DatePicker label="Date de naissance" isBirthdate={true} />
         <div className="grid gap-2">
             <Label>Identité de genre</Label>
             <Select><SelectTrigger><SelectValue placeholder="Sélectionner..." /></SelectTrigger><SelectContent><SelectItem value="male">Homme</SelectItem><SelectItem value="female">Femme</SelectItem><SelectItem value="non-binary">Non-binaire</SelectItem><SelectItem value="prefer-not-to-say">Préfère ne pas répondre</SelectItem></SelectContent></Select>
