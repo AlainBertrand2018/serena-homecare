@@ -12,9 +12,6 @@ import { Analytics } from "@vercel/analytics/next"
 export const metadata: Metadata = {
   title: "SERENA",
   description: "Service de Soins à Domicile",
-  icons: {
-    icon: "/images/siteIcon.webp",
-  },
 };
 
 export default function RootLayout({
