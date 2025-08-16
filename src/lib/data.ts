@@ -37,7 +37,7 @@ export type Visit = {
   clientAddress: string;
   caregiverId: string;
   caregiverName: string;
-  date: string;
+  date: Date;
   time: string;
   status: VisitStatus;
   tasks: string[];
@@ -160,7 +160,7 @@ export const visits: Visit[] = [
     clientAddress: '456, Avenue des Longanes, Quatre Bornes',
     caregiverId: 'c1',
     caregiverName: 'Samantha RENÉ',
-    date: '25 juillet 2024',
+    date: new Date('2024-07-25T09:00:00'),
     time: '09:00 - 11:00',
     status: 'À venir',
     tasks: ['Préparer le petit-déjeuner', 'Administrer les médicaments du matin', 'Ménage léger'],
@@ -173,7 +173,7 @@ export const visits: Visit[] = [
     clientAddress: '789, Rue des Pies, Port Louis',
     caregiverId: 'c2',
     caregiverName: 'David LELOUP',
-    date: '26 juillet 2024',
+    date: new Date('2024-07-26T13:00:00'),
     time: '13:00 - 15:00',
     status: 'À venir',
     tasks: ['Aide à la marche', 'Vérifier la glycémie', 'Préparer le déjeuner'],
@@ -186,7 +186,7 @@ export const visits: Visit[] = [
     clientAddress: '456, Avenue des Longanes, Quatre Bornes',
     caregiverId: 'c1',
     caregiverName: 'Samantha RENÉ',
-    date: '28 juillet 2024',
+    date: new Date('2024-07-28T10:00:00'),
     time: '10:00 - 12:00',
     status: 'À venir',
     tasks: ['Ranger le salon', 'Jouer aux cartes', 'Préparer une collation légère'],
@@ -199,7 +199,7 @@ export const visits: Visit[] = [
     clientAddress: '123, Rue des tulipes, Sodnac, Quatre Bornes',
     caregiverId: 'c3',
     caregiverName: 'Nathalie JEANPIERRE-RODRIGUEZ',
-    date: '23 juillet 2024',
+    date: new Date('2024-07-23T14:00:00'),
     time: '14:00 - 17:00',
     status: 'Terminée',
     tasks: ['Surveiller les niveaux d\'oxygène', 'Administrer les médicaments de l\'après-midi', 'Aide à la préparation du dîner'],
@@ -212,10 +212,23 @@ export const visits: Visit[] = [
     clientAddress: '789, Rue des Pies, Port Louis',
     caregiverId: 'c2',
     caregiverName: 'David LELOUP',
-    date: '24 juillet 2024',
+    date: new Date('2024-07-24T11:00:00'),
     time: '11:00 - 13:00',
     status: 'En cours',
     tasks: ['Préparation du déjeuner', 'Accompagner au rendez-vous de physiothérapie', 'Lire le journal à haute voix'],
+  },
+  {
+    id: 'v6',
+    clientId: '1',
+    clientName: 'Azizza MOOTTEE',
+    clientAvatarUrl: 'https://9000-firebase-studio-1753869203732.cluster-bg6uurscprhn6qxr6xwtrhvkf6.cloudworkstations.dev/images/customers/aziza.png',
+    clientAddress: '456, Avenue des Longanes, Quatre Bornes',
+    caregiverId: 'c1',
+    caregiverName: 'Samantha RENÉ',
+    date: new Date('2024-07-24T09:00:00'),
+    time: '09:00 - 11:00',
+    status: 'À venir',
+    tasks: ['Préparer le petit-déjeuner', 'Administrer les médicaments du matin', 'Ménage léger'],
   },
 ];
 
