@@ -38,6 +38,8 @@ import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Link from "next/link";
 import { visits, clients, caregivers } from "@/lib/data";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 
 
 const lineChartData = [
@@ -167,7 +169,7 @@ export default function AdminDashboard() {
                         <div className="font-medium">{visit.caregiverName}</div>
                       </TableCell>
                       <TableCell>
-                        <div>{visit.date}</div>
+                        <div>{format(visit.date, "PPP", { locale: fr })}</div>
                         <div className="text-sm text-muted-foreground">{visit.time}</div>
                       </TableCell>
                        <TableCell>
