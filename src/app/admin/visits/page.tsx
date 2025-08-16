@@ -10,11 +10,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import { VisitForm } from "./_components/visit-form";
-import { VisitsCalendar } from "./_components/visits-calendar";
+import { MonthlyPlanner } from "./_components/monthly-planner";
+import { useState } from "react";
+import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 
 export default function AdminVisitsPage() {
+  const [currentDate, setCurrentDate] = useState(new Date());
+
+  const goToPreviousMonth = () => {
+    setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
+  };
+
+  const goToNextMonth = () => {
+    setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
+  };
+
+
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
@@ -32,7 +46,20 @@ export default function AdminVisitsPage() {
         } />
       </CardHeader>
       <CardContent>
-        <VisitsCalendar visits={visits} />
+        <div className="flex items-center justify-between mb-4">
+            <h2 className="text-xl font-semibold capitalize">
+                {format(currentDate, "MMMM yyyy", { locale: fr })}
+            </h2>
+            <div className="flex items-center gap-2">
+                <Button variant="outline" size="icon" onClick={goToPreviousMonth}>
+                    <ChevronLeft className="h-4 w-4" />
+                </Button>
+                <Button variant="outline" size="icon" onClick={goToNextMonth}>
+                    <ChevronRight className="h-4 w-4" />
+                </Button>
+            </div>
+        </div>
+        <MonthlyPlanner visits={visits} currentDate={currentDate} />
       </CardContent>
     </Card>
   );
