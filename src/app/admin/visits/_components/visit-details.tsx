@@ -13,12 +13,13 @@ import { Separator } from "@/components/ui/separator";
 import { User, Briefcase, Calendar, Clock, ListChecks } from "lucide-react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { cn } from "@/lib/utils";
 
 const statusVariants = {
-    'À venir': 'secondary',
-    'Terminée': 'default',
-    'En cours': 'outline',
-    'Annulée': 'destructive',
+    'À venir': 'bg-gray-500 hover:bg-gray-600',
+    'Terminée': 'bg-green-600 hover:bg-green-700',
+    'En cours': 'bg-orange-500 hover:bg-orange-600',
+    'Annulée': 'bg-red-600 hover:bg-red-700',
 } as const;
 
 
@@ -72,7 +73,7 @@ export function VisitDetails({ visit, isOpen, onOpenChange }: { visit: Visit, is
          <div className="py-4 space-y-4">
               <div className="flex items-center justify-between">
                 <h3 className="font-semibold flex items-center gap-2"><Calendar className="text-primary"/> Horaire</h3>
-                <Badge variant={statusVariants[visit.status]}>{visit.status}</Badge>
+                <Badge className={cn("text-white", statusVariants[visit.status])}>{visit.status}</Badge>
               </div>
                <div className="text-sm text-muted-foreground flex items-center gap-2">
                 <Clock className="h-4 w-4" />

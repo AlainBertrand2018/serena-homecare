@@ -20,10 +20,10 @@ import { fr } from 'date-fns/locale';
 import { VisitDetails } from './visit-details';
 
 const statusVariants = {
-    'À venir': 'secondary',
-    'Terminée': 'default',
-    'En cours': 'outline',
-    'Annulée': 'destructive',
+    'À venir': 'bg-gray-500 hover:bg-gray-600',
+    'Terminée': 'bg-green-600 hover:bg-green-700',
+    'En cours': 'bg-orange-500 hover:bg-orange-600',
+    'Annulée': 'bg-red-600 hover:bg-red-700',
 } as const;
 
 export function MonthlyPlanner({ visits, currentDate }: { visits: Visit[], currentDate: Date }) {
@@ -70,8 +70,7 @@ export function MonthlyPlanner({ visits, currentDate }: { visits: Visit[], curre
                   {visitsForDay.map(visit => (
                       <button key={visit.id} className="w-full text-left" onClick={() => setSelectedVisit(visit)}>
                           <Badge
-                              variant={statusVariants[visit.status]}
-                              className="w-full text-left justify-start truncate cursor-pointer"
+                              className={cn("w-full text-left justify-start truncate cursor-pointer text-white", statusVariants[visit.status])}
                           >
                             {visit.clientName}
                           </Badge>

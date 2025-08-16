@@ -17,12 +17,13 @@ import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
-const statusVariants: Record<VisitStatus, "default" | "secondary" | "destructive" | "outline"> = {
-    'À venir': 'secondary',
-    'Terminée': 'default',
-    'En cours': 'outline',
-    'Annulée': 'destructive',
+const statusVariants: Record<VisitStatus, string> = {
+    'À venir': 'bg-gray-500',
+    'Terminée': 'bg-green-600',
+    'En cours': 'bg-orange-500',
+    'Annulée': 'bg-red-600',
 } as const;
 
 export default function AdminVisitsPage() {
@@ -63,9 +64,9 @@ export default function AdminVisitsPage() {
         </div>
         <div className="flex flex-wrap gap-x-4 gap-y-2 items-center text-sm text-muted-foreground mt-4 border-t pt-4">
             <span className="font-medium">Légende:</span>
-            {Object.entries(statusVariants).map(([status, variant]) => (
+            {Object.entries(statusVariants).map(([status, className]) => (
                  <div key={status} className="flex items-center gap-2">
-                    <Badge variant={variant} className="w-20 justify-center">{status}</Badge>
+                    <Badge className={cn("w-20 justify-center text-white", className)}>{status}</Badge>
                 </div>
             ))}
         </div>

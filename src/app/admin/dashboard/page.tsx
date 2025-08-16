@@ -37,9 +37,10 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import Link from "next/link";
-import { visits, clients, caregivers } from "@/lib/data";
+import { visits, clients, caregivers, VisitStatus } from "@/lib/data";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { cn } from "@/lib/utils";
 
 
 const lineChartData = [
@@ -72,6 +73,13 @@ const barChartConfig = {
     nursing: { label: 'Soins Infirmiers', color: 'hsl(var(--chart-3))' },
     transport: { label: 'Transport', color: 'hsl(var(--chart-4))' },
 } satisfies ChartConfig
+
+const statusVariants: Record<VisitStatus, string> = {
+    'À venir': 'bg-gray-500',
+    'Terminée': 'bg-green-600',
+    'En cours': 'bg-orange-500',
+    'Annulée': 'bg-red-600',
+} as const;
 
 export default function AdminDashboard() {
   const upcomingVisits = visits.filter(v => v.status === 'À venir' || v.status === 'En cours').slice(0, 5);
@@ -173,7 +181,7 @@ export default function AdminDashboard() {
                         <div className="text-sm text-muted-foreground">{visit.time}</div>
                       </TableCell>
                        <TableCell>
-                        <Badge variant={visit.status === 'À venir' ? 'secondary' : 'outline'}>{visit.status}</Badge>
+                        <Badge className={cn("text-white", statusVariants[visit.status])}>{visit.status}</Badge>
                       </TableCell>
                     </TableRow>
                   ))}

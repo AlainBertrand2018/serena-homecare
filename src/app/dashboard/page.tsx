@@ -12,7 +12,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react";
-import { visits } from "@/lib/data";
+import { visits, VisitStatus } from "@/lib/data";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
+
+const statusVariants: Record<VisitStatus, string> = {
+    'À venir': 'bg-gray-500',
+    'Terminée': 'bg-green-600',
+    'En cours': 'bg-orange-500',
+    'Annulée': 'bg-red-600',
+} as const;
+
 
 export default function DashboardPage() {
   return (
@@ -34,7 +44,7 @@ export default function DashboardPage() {
                   <div>
                     <CardTitle>{visit.clientName}</CardTitle>
                     <div className="mt-1">
-                        <Badge variant={visit.status === 'À venir' ? 'secondary' : 'default'}>{visit.status}</Badge>
+                        <Badge className={cn("text-white", statusVariants[visit.status])}>{visit.status}</Badge>
                     </div>
                   </div>
                 </div>
@@ -42,7 +52,7 @@ export default function DashboardPage() {
               <CardContent className="flex-grow space-y-3">
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <Calendar className="h-4 w-4" />
-                  <span>{visit.date}</span>
+                  <span>{format(visit.date, "PPP")}</span>
                 </div>
                 <div className="flex items-center gap-3 text-sm text-muted-foreground">
                   <Clock className="h-4 w-4" />
