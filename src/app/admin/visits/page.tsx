@@ -1,7 +1,7 @@
 
 'use client';
 
-import { visits } from "@/lib/data";
+import { visits as initialVisits, type Visit } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,6 +19,7 @@ import { fr } from "date-fns/locale";
 
 export default function AdminVisitsPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [visits, setVisits] = useState<Visit[]>(initialVisits);
 
   const goToPreviousMonth = () => {
     setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
@@ -28,6 +29,9 @@ export default function AdminVisitsPage() {
     setCurrentDate(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
   };
 
+  const handleAddVisit = (newVisit: Visit) => {
+    setVisits(prev => [...prev, newVisit]);
+  };
 
   return (
     <Card>
@@ -38,12 +42,15 @@ export default function AdminVisitsPage() {
             Gérez et planifiez toutes les visites des clients.
             </CardDescription>
         </div>
-        <VisitForm trigger={
-            <Button>
-                <PlusCircle />
-                Planifier Nouvelle Visite
-            </Button>
-        } />
+        <VisitForm 
+            onAddVisit={handleAddVisit}
+            trigger={
+                <Button>
+                    <PlusCircle />
+                    Planifier Nouvelle Visite
+                </Button>
+            } 
+        />
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between mb-4">

@@ -27,7 +27,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Calendar as CalendarIcon, UserCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { format } from "date-fns";
-import { clients, caregivers, type Visit, type Caregiver } from "@/lib/data";
+import { clients, caregivers, type Visit, type Caregiver, getClientById } from "@/lib/data";
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 
@@ -86,9 +86,10 @@ function AssignCaregiverDialog({ onSelectCaregiver }: { onSelectCaregiver: (care
 interface VisitFormProps {
     visit?: Visit;
     trigger: React.ReactNode;
+    onAddVisit?: (newVisit: Visit) => void;
 }
 
-export function VisitForm({ visit, trigger }: VisitFormProps) {
+export function VisitForm({ visit, trigger, onAddVisit }: VisitFormProps) {
     const [open, setOpen] = useState(false);
     const [date, setDate] = useState<Date | undefined>(visit ? new Date(visit.date) : new Date());
     const [selectedCaregiver, setSelectedCaregiver] = useState<Caregiver | null>(
@@ -98,7 +99,35 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("Formulaire de visite soumis");
+        
+        if (onAddVisit && !isEditing) {
+            const formData = new FormData(e.currentTarget);
+            const client = getClientById(formData.get('client') as string);
+            
+            if (!client || !selectedCaregiver || !date) {
+                // Basic validation
+                console.error("Client, caregiver, or date is missing");
+                return;
+            }
+
+            const newVisit: Visit = {
+                id: `v${Math.random().toString(36).substring(7)}`,
+                clientId: client.id,
+                clientName: client.name,
+                clientAvatarUrl: client.avatarUrl,
+                clientAddress: client.address,
+                caregiverId: selectedCaregiver.id,
+                caregiverName: selectedCaregiver.name,
+                date: date,
+                time: formData.get('time') as string,
+                status: formData.get('status') as Visit['status'],
+                tasks: (formData.get('tasks') as string).split(',').map(s => s.trim()).filter(Boolean),
+            };
+            onAddVisit(newVisit);
+        }
+
+        // Logic for editing would go here
+        console.log("Visit form submitted");
         setOpen(false);
     }
 
@@ -121,7 +150,7 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="grid gap-2">
                         <Label htmlFor="client">Client</Label>
-                        <Select defaultValue={visit?.clientId}>
+                        <Select name="client" defaultValue={visit?.clientId}>
                             <SelectTrigger id="client">
                                 <SelectValue placeholder="Sélectionnez un client" />
                             </SelectTrigger>
@@ -177,12 +206,12 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                     </div>
                      <div className="grid gap-2">
                         <Label htmlFor="time">Heure</Label>
-                        <Input id="time" defaultValue={visit?.time} placeholder="ex: 09:00 - 11:00" />
+                        <Input id="time" name="time" defaultValue={visit?.time} placeholder="ex: 09:00 - 11:00" />
                     </div>
                 </div>
                  <div className="grid gap-2">
                     <Label htmlFor="status">Statut</Label>
-                    <Select defaultValue={visit?.status || 'À venir'}>
+                    <Select name="status" defaultValue={visit?.status || 'À venir'}>
                         <SelectTrigger id="status">
                             <SelectValue placeholder="Sélectionnez un statut" />
                         </SelectTrigger>
@@ -196,7 +225,7 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                 </div>
                  <div className="grid gap-2">
                     <Label htmlFor="tasks">Tâches (séparées par des virgules)</Label>
-                    <Textarea id="tasks" defaultValue={visit?.tasks.join(', ')} placeholder="Préparer le petit déjeuner, administrer les médicaments..." />
+                    <Textarea name="tasks" id="tasks" defaultValue={visit?.tasks.join(', ')} placeholder="Préparer le petit déjeuner, administrer les médicaments..." />
                 </div>
             </div>
             <DialogFooter>
