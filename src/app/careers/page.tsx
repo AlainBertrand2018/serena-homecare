@@ -95,8 +95,9 @@ const DatePicker = ({label, isBirthdate = false }: {label: string, isBirthdate?:
     const [date, setDate] = useState<Date>();
 
     const today = new Date();
+    const fromDate = isBirthdate ? new Date(today.getFullYear() - 45, today.getMonth(), today.getDate()) : undefined;
     const toDate = isBirthdate ? new Date(today.getFullYear() - 17, today.getMonth(), today.getDate()) : today;
-    const fromYear = isBirthdate ? 1920 : today.getFullYear();
+    const fromYear = fromDate?.getFullYear();
     const toYear = toDate.getFullYear();
     
     return (
@@ -121,10 +122,11 @@ const DatePicker = ({label, isBirthdate = false }: {label: string, isBirthdate?:
                         selected={date}
                         onSelect={setDate}
                         captionLayout={isBirthdate ? "dropdown-buttons" : "buttons"}
+                        fromDate={isBirthdate ? fromDate : undefined}
+                        toDate={isBirthdate ? toDate : undefined}
                         fromYear={fromYear}
                         toYear={toYear}
-                        toDate={isBirthdate ? toDate : undefined}
-                        disabled={isBirthdate ? { after: toDate } : undefined}
+                        disabled={isBirthdate ? { before: fromDate, after: toDate } : undefined}
                         initialFocus
                         locale={fr}
                     />
