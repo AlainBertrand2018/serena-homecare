@@ -173,6 +173,7 @@ export function VisitForm({ visit, trigger }: VisitFormProps) {
                                 />
                             </PopoverContent>
                         </Popover>
+                         <Input type="hidden" name="date" value={date ? date.toISOString() : ''} />
                     </div>
                      <div className="grid gap-2">
                         <Label htmlFor="time">Heure</Label>
