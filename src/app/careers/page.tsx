@@ -1,4 +1,5 @@
 
+
 'use client';
 
 import { useState } from 'react';
@@ -30,6 +31,7 @@ import { cn } from '@/lib/utils';
 import { format } from "date-fns";
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { fr } from 'date-fns/locale';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 
 const totalSteps = 8;
@@ -50,7 +52,7 @@ export default function CaregiverOnboardingPage() {
       </div>
       <Card className="max-w-4xl mx-auto">
         <CardHeader>
-          <CardTitle className='text-3xl'>Formulaire d'Intégration pour Soignant</CardTitle>
+          <CardTitle className='text-3xl'>Formulaire d'Intégration pour Soignants et Aides-Soignants</CardTitle>
           <CardDescription>
             À compléter par tous les soignants avant leur première affectation client.
             <br/>
@@ -126,7 +128,6 @@ const DatePicker = ({label, isBirthdate = false }: {label: string, isBirthdate?:
                         toDate={isBirthdate ? toDate : undefined}
                         fromYear={fromYear}
                         toYear={toYear}
-                        disabled={isBirthdate ? { before: fromDate, after: toDate } : undefined}
                         initialFocus
                         locale={fr}
                     />
@@ -136,10 +137,10 @@ const DatePicker = ({label, isBirthdate = false }: {label: string, isBirthdate?:
     )
 }
 
-const YesNoRadio = ({label, id}: {label: string, id: string}) => (
+const YesNoRadio = ({label, id, onValueChange}: {label: string, id: string, onValueChange?: (value: string) => void}) => (
     <div className="space-y-2">
         <Label>{label}</Label>
-        <RadioGroup className="flex gap-4">
+        <RadioGroup className="flex gap-4" onValueChange={onValueChange}>
             <div className="flex items-center space-x-2">
                 <RadioGroupItem value="yes" id={`${id}-yes`} />
                 <Label htmlFor={`${id}-yes`}>Oui</Label>
@@ -238,27 +239,33 @@ const Section2 = () => (
 const Section3 = () => (
     <div className="space-y-6">
         <h3 className="text-xl font-bold">SECTION 3 – QUALIFICATIONS & FORMATION</h3>
-        <div className="grid gap-2">
-            <Label>Plus haut niveau d'études</Label>
-            <div className="flex flex-wrap gap-4">
-                <div className="flex items-center space-x-2"><Checkbox id="edu_primary" /><Label htmlFor="edu_primary">Primaire</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="edu_secondary" /><Label htmlFor="edu_secondary">Secondaire</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="edu_tertiary" /><Label htmlFor="edu_tertiary">Supérieur</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="edu_other" /><Label htmlFor="edu_other">Autre</Label></div>
-                <Input placeholder="Si autre, veuillez préciser" className="max-w-xs"/>
+        <div className="grid gap-4">
+            <div className="grid gap-2">
+                <Label>Plus haut niveau d'études</Label>
+                <div className="flex flex-wrap gap-4">
+                    <div className="flex items-center space-x-2"><Checkbox id="edu_primary" /><Label htmlFor="edu_primary">Primaire</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="edu_secondary" /><Label htmlFor="edu_secondary">Secondaire</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="edu_tertiary" /><Label htmlFor="edu_tertiary">Supérieur</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="edu_other" /><Label htmlFor="edu_other">Autre</Label></div>
+                    <Input placeholder="Si autre, veuillez préciser" className="max-w-xs"/>
+                </div>
             </div>
+            <FileUpload label="Télécharger Certificats" id="edu-certs" />
         </div>
-        <div className="grid gap-2">
-            <Label>Qualifications professionnelles</Label>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                <div className="flex items-center space-x-2"><Checkbox id="qual_hca" /><Label htmlFor="qual_hca">Certificat d'aide-soignant</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="qual_first_aid" /><Label htmlFor="qual_first_aid">Premiers secours / RCR</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="qual_dementia" /><Label htmlFor="qual_dementia">Soins aux personnes âgées/démence</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="qual_disability" /><Label htmlFor="qual_disability">Soutien aux personnes handicapées</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="qual_nursing" /><Label htmlFor="qual_nursing">Diplôme / Licence en soins infirmiers</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="qual_other" /><Label htmlFor="qual_other">Autre</Label></div>
+        <div className="grid gap-4">
+            <div className="grid gap-2">
+                <Label>Qualifications professionnelles</Label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                    <div className="flex items-center space-x-2"><Checkbox id="qual_hca" /><Label htmlFor="qual_hca">Certificat d'aide-soignant</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="qual_first_aid" /><Label htmlFor="qual_first_aid">Premiers secours / RCR</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="qual_dementia" /><Label htmlFor="qual_dementia">Soins aux personnes âgées/démence</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="qual_disability" /><Label htmlFor="qual_disability">Soutien aux personnes handicapées</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="qual_nursing" /><Label htmlFor="qual_nursing">Diplôme / Licence en soins infirmiers</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="qual_other" /><Label htmlFor="qual_other">Autre</Label></div>
+                </div>
+                <Input placeholder="Si autre, veuillez préciser"/>
             </div>
-            <Input placeholder="Si autre, veuillez préciser"/>
+            <FileUpload label="Télécharger Certificats" id="prof-certs" />
         </div>
          <div className="grid gap-2">
             <Label>Langues parlées</Label>
@@ -303,16 +310,49 @@ const Section4 = () => (
     </div>
 );
 
-const Section5 = () => (
+const Section5 = () => {
+    const [hasLicense, setHasLicense] = useState(false);
+
+    return (
     <div className="space-y-6">
         <h3 className="text-xl font-bold">SECTION 5 – DISPONIBILITÉ & AFFECTATIONS</h3>
-        <div className="grid gap-2">
-            <Label>Horaire de travail préféré</Label>
-            <div className="flex flex-wrap gap-4">
-                <div className="flex items-center space-x-2"><Checkbox id="sched_full" /><Label htmlFor="sched_full">Temps plein</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="sched_part" /><Label htmlFor="sched_part">Temps partiel</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="sched_weekends" /><Label htmlFor="sched_weekends">Week-ends</Label></div>
-                <div className="flex items-center space-x-2"><Checkbox id="sched_overnight" /><Label htmlFor="sched_overnight">Nuit</Label></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid gap-2">
+                <Label>Type d'Emploi Recherché</Label>
+                 <TooltipProvider>
+                    <Select>
+                        <SelectTrigger><SelectValue placeholder="Sélectionner..." /></SelectTrigger>
+                        <SelectContent>
+                             <SelectItem value="salaried">
+                                <Tooltip delayDuration={0}>
+                                    <TooltipTrigger asChild><span>Salarié/e</span></TooltipTrigger>
+                                    <TooltipContent><p>Rémunération mensuelle</p></TooltipContent>
+                                </Tooltip>
+                             </SelectItem>
+                             <SelectItem value="part-time">
+                                <Tooltip delayDuration={0}>
+                                    <TooltipTrigger asChild><span>Temps Partiel</span></TooltipTrigger>
+                                    <TooltipContent><p>Rémunération horaire</p></TooltipContent>
+                                </Tooltip>
+                            </SelectItem>
+                             <SelectItem value="freelance">
+                                <Tooltip delayDuration={0}>
+                                    <TooltipTrigger asChild><span>Freelance</span></TooltipTrigger>
+                                    <TooltipContent><p>Rémunération par Prestation</p></TooltipContent>
+                                </Tooltip>
+                            </SelectItem>
+                        </SelectContent>
+                    </Select>
+                </TooltipProvider>
+            </div>
+             <div className="grid gap-2">
+                <Label>Horaire de travail préféré</Label>
+                <div className="flex flex-wrap gap-4 pt-2">
+                    <div className="flex items-center space-x-2"><Checkbox id="sched_full" /><Label htmlFor="sched_full">Temps plein</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="sched_part" /><Label htmlFor="sched_part">Temps partiel</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="sched_weekends" /><Label htmlFor="sched_weekends">Week-ends</Label></div>
+                    <div className="flex items-center space-x-2"><Checkbox id="sched_overnight" /><Label htmlFor="sched_overnight">Nuit</Label></div>
+                </div>
             </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -329,9 +369,17 @@ const Section5 = () => (
             </div>
         </div>
         <YesNoRadio label="Pouvez-vous fournir des soins à domicile (live-in) si nécessaire ?" id="live-in"/>
-        <YesNoRadio label="Avez-vous un permis de conduire valide ?" id="drivers-license"/>
+        <div className="space-y-4">
+            <YesNoRadio label="Avez-vous un permis de conduire valide ?" id="drivers-license" onValueChange={(value) => setHasLicense(value === 'yes')} />
+            {hasLicense && (
+                <div className="pl-6">
+                    <FileUpload label="Télécharger une copie du permis" id="license-upload" />
+                </div>
+            )}
+        </div>
     </div>
-);
+    )
+};
 
 const Section6 = () => (
     <div className="space-y-6">
