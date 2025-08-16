@@ -1,7 +1,7 @@
 
 'use client';
 
-import { visits as initialVisits, type Visit } from "@/lib/data";
+import { visits as initialVisits, type Visit, type VisitStatus } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,6 +16,14 @@ import { MonthlyPlanner } from "./_components/monthly-planner";
 import { useState } from "react";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
+import { Badge } from "@/components/ui/badge";
+
+const statusVariants: Record<VisitStatus, "default" | "secondary" | "destructive" | "outline"> = {
+    'À venir': 'secondary',
+    'Terminée': 'default',
+    'En cours': 'outline',
+    'Annulée': 'destructive',
+} as const;
 
 export default function AdminVisitsPage() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -35,22 +43,32 @@ export default function AdminVisitsPage() {
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <div>
-            <CardTitle>Visites Planifiées</CardTitle>
-            <CardDescription>
-            Gérez et planifiez toutes les visites des clients.
-            </CardDescription>
+      <CardHeader>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+                <CardTitle>Visites Planifiées</CardTitle>
+                <CardDescription>
+                Gérez et planifiez toutes les visites des clients.
+                </CardDescription>
+            </div>
+            <VisitForm 
+                onAddVisit={handleAddVisit}
+                trigger={
+                    <Button>
+                        <PlusCircle />
+                        Planifier Nouvelle Visite
+                    </Button>
+                } 
+            />
         </div>
-        <VisitForm 
-            onAddVisit={handleAddVisit}
-            trigger={
-                <Button>
-                    <PlusCircle />
-                    Planifier Nouvelle Visite
-                </Button>
-            } 
-        />
+        <div className="flex flex-wrap gap-x-4 gap-y-2 items-center text-sm text-muted-foreground mt-4 border-t pt-4">
+            <span className="font-medium">Légende:</span>
+            {Object.entries(statusVariants).map(([status, variant]) => (
+                 <div key={status} className="flex items-center gap-2">
+                    <Badge variant={variant} className="w-20 justify-center">{status}</Badge>
+                </div>
+            ))}
+        </div>
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between mb-4">

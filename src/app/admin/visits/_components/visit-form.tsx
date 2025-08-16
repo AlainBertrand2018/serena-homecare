@@ -120,7 +120,7 @@ export function VisitForm({ visit, trigger, onAddVisit }: VisitFormProps) {
                 caregiverName: selectedCaregiver.name,
                 date: date,
                 time: formData.get('time') as string,
-                status: formData.get('status') as Visit['status'],
+                status: 'À venir',
                 tasks: (formData.get('tasks') as string).split(',').map(s => s.trim()).filter(Boolean),
             };
             onAddVisit(newVisit);
@@ -208,20 +208,6 @@ export function VisitForm({ visit, trigger, onAddVisit }: VisitFormProps) {
                         <Label htmlFor="time">Heure</Label>
                         <Input id="time" name="time" defaultValue={visit?.time} placeholder="ex: 09:00 - 11:00" />
                     </div>
-                </div>
-                 <div className="grid gap-2">
-                    <Label htmlFor="status">Statut</Label>
-                    <Select name="status" defaultValue={visit?.status || 'À venir'}>
-                        <SelectTrigger id="status">
-                            <SelectValue placeholder="Sélectionnez un statut" />
-                        </SelectTrigger>
-                        <SelectContent>
-                             <SelectItem value="À venir">À venir</SelectItem>
-                             <SelectItem value="En cours">En cours</SelectItem>
-                             <SelectItem value="Terminée">Terminée</SelectItem>
-                             <SelectItem value="Annulée">Annulée</SelectItem>
-                        </SelectContent>
-                    </Select>
                 </div>
                  <div className="grid gap-2">
                     <Label htmlFor="tasks">Tâches (séparées par des virgules)</Label>
