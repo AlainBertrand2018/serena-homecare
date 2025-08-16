@@ -2,7 +2,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { type Visit, getClientById, getCaregiverById } from '@/lib/data';
+import { type Visit } from '@/lib/data';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import {
