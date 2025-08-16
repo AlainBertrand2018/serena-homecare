@@ -226,15 +226,16 @@ export default function AdminDashboard() {
                 </CardHeader>
                 <CardContent>
                      <ChartContainer config={barChartConfig} className="w-full h-[300px]">
-                        <BarChart data={barChartData} layout="vertical" margin={{ left: 20, right: 20 }}>
+                        <BarChart data={barChartData} layout="vertical" margin={{ left: 0, right: 30 }}>
                             <XAxis type="number" dataKey="hours" hide />
                             <YAxis 
                                 dataKey="name" 
                                 type="category"
                                 tickLine={false}
                                 axisLine={false}
-                                tickMargin={10}
-                                width={100}
+                                tickMargin={5}
+                                width={0}
+                                tick={{fontSize: 12}}
                              />
                             <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="line" />} />
                             <Bar dataKey="hours" radius={5}>
