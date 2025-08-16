@@ -56,6 +56,7 @@ function WelcomePopupClient() {
                 Concentrez vous sur votre coeur de métier, le service à la personne. Optimisez vos opérations, assurez la qualité et la rentabilité de votre service avec un suivi intelligent en temps réel.
               </p>
               <ul className="list-disc list-inside space-y-1 text-left">
+                  <li>Page d'accueil gratuitement personalisable pour votre entreprise</li>
                   <li>Tableau de bord pour une vue d'ensemble : Comptabilité, Calendriers, Clients, Personnels</li>
                   <li>Recrutement et gestion des aides-soignants</li>
                   <li>Intégration clients simplifiée</li>
