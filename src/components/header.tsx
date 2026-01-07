@@ -4,7 +4,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import { LogoWithName } from "./logo";
 import { useState } from "react";
@@ -68,6 +68,9 @@ export function Header() {
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
+           <SheetHeader>
+            <SheetTitle className="sr-only">Menu de Navigation</SheetTitle>
+          </SheetHeader>
           <nav className="grid gap-6 text-lg font-medium">
              <Link href="/" onClick={() => setSheetOpen(false)} className="flex items-center gap-2 text-lg font-semibold">
                 <LogoWithName />
