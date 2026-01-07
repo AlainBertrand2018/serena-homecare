@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useFormState, useFormStatus } from 'react-dom';
@@ -142,3 +143,5 @@ export function ChatbotWidget() {
     </Popover>
   );
 }
+
+export default ChatbotWidget;
